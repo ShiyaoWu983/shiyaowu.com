@@ -602,3 +602,13 @@ document.getElementById('replayIntro').addEventListener('click', () => {
   run(); addEventListener('load', run);
 })();
 </script>
+<script>
+// Email link: the label stays "Email"; clicking it shows (and copies) the address and opens a new email
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="mailto:"]'); if (!a) return;
+  const addr = a.getAttribute('href').slice(7);
+  const t = [...a.childNodes].find(n => n.nodeType === 3 && /Email/.test(n.textContent));
+  if (t) t.textContent = t.textContent.replace('Email', addr);
+  try { navigator.clipboard && navigator.clipboard.writeText(addr); } catch (_) {}
+});
+</script>
