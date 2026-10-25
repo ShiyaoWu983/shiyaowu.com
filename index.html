@@ -1,0 +1,562 @@
+<title>Shiyao Wu — Direction 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Newsreader:opsz,wght@6..72,400&display=swap">
+<style>
+/* No single word left alone on the last line of a paragraph */
+p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta span { text-wrap: pretty; }
+</style>
+<style>
+/* Direction 3 — studio-style one-pager, modeled on the serious.business framework:
+   full-width wordmark → mixed-type hero + expanding reel → stat ticker + statement →
+   stacked service bands (accordion) → 2-up project grid → recognition list → CTA footer.
+   24px frame. Mixed titles = sans line + serif line. All content is placeholder. */
+:root {
+  --bg: #F3F3F3;
+  --fg: #000000;
+  --muted: #8C8C8C;
+  --ph: #C4C4C4;
+  --ph-ink: #9A9A9A;
+  --pill: #FFFFFF;
+  /* service bands — placeholder colors, swap for the brand palette later */
+  --band-1: #DCDCDC;
+  --band-2: #FFFFFF;
+  --band-3: #C4C4C4;
+  --band-4: #1E1E1E;
+  --band-4-ink: #F3F3F3;
+
+  --sans: 'Inter', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --serif: 'Newsreader', 'Times New Roman', Georgia, serif;
+
+  --fs-xs: 11px;
+  --fs-s: 13px;
+  --fs-m: clamp(17px, 1.67vw, 23px);     /* hero / section subtitles */
+  --fs-l: clamp(31px, 5vw, 71px);        /* statements */
+  --fs-xl: clamp(43px, 7.3vw, 104px);    /* service band titles */
+
+  --frame: 24px;
+  --gap: 16px;
+  --radius: 6px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: var(--fs-s);
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+p, h1, h2, h3, h4 { margin: 0; font-weight: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+
+.frame { padding-inline: var(--frame); }
+
+/* ---------- Shared bits ---------- */
+.mixed { display: flex; flex-direction: column; align-items: center; text-align: center; line-height: 1; text-wrap: balance; }
+.mixed .main { font-family: var(--sans); font-weight: 500; letter-spacing: -0.01em; }
+.mixed .sub { font-family: var(--serif); font-weight: 400; }
+
+.pill {
+  display: inline-flex; align-items: center; height: 39px;
+  font-size: 15px; font-weight: 500;   /* same size as header + project text */
+}
+@media (max-width: 640px) { .pill, .replay { font-size: 13px; } }
+.pill .label { background: var(--pill); border-radius: 20px; padding: 0 18px; height: 100%; display: flex; align-items: center; }
+.pill .dot {
+  width: 39px; height: 39px; border-radius: 50%; background: var(--pill);
+  display: grid; place-items: center; transition: transform .25s ease;
+}
+.pill:hover .dot { transform: rotate(-45deg); }
+.pill:hover .label { background: var(--fg); color: var(--bg); }
+.pill .label, .pill .dot { transition: background .2s, color .2s, transform .25s; }
+
+.ph { position: relative; background: var(--ph); border-radius: var(--radius); overflow: hidden; }
+.ph-label { position: absolute; left: 12px; bottom: 10px; font-size: var(--fs-xs); color: var(--ph-ink); font-variant-numeric: tabular-nums; }
+.ph img, .ph video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.section-label { font-size: var(--fs-s); font-weight: 500; }
+
+/* ---------- Fixed nav (pills) ---------- */
+.nav {
+  position: fixed; z-index: 20; left: 0; right: 0;
+  top: calc(env(safe-area-inset-top, 0px) + 16px);
+  display: flex; justify-content: space-between;
+  padding-inline: var(--frame);
+  pointer-events: none;
+  opacity: 0; transform: translateY(-8px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.nav.is-on { opacity: 1; transform: none; }
+.nav .pill { pointer-events: auto; }
+
+/* ---------- Menu overlay ---------- */
+.menu {
+  position: fixed; inset: 0; z-index: 30;
+  background: var(--fg); color: var(--bg);
+  padding: calc(env(safe-area-inset-top, 0px) + 24px) var(--frame) 24px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+[hidden] { display: none !important; }
+.menu .menu-close { align-self: flex-end; font-size: var(--fs-s); font-weight: 500; border: 1px solid currentColor; border-radius: 20px; height: 39px; padding: 0 18px; }
+.menu nav { display: flex; flex-direction: column; }
+.menu nav a { font-size: var(--fs-xl); font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; }
+.menu nav a:hover { font-family: var(--serif); font-weight: 400; }
+.menu .menu-foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: var(--fs-s); }
+
+/* ---------- Hero ---------- */
+.hero { padding-block: var(--bar-h, 69px) 0; position: relative; }   /* exactly the header's height, so the gap to the first images equals the side margin */
+.wordmark { display: block; width: 100%; height: auto; }
+.wordmark text { font-family: var(--sans); font-weight: 800; fill: var(--fg); }
+/* Title line sits on top of the reel. White + difference blend = the opposite color of what's behind it. */
+.hero-name {
+  position: absolute; z-index: 5; top: 0; left: var(--frame); right: var(--frame);
+  padding-top: 80px;   /* just below the header bar */
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+.hero-role { color: #FFFFFF; font-size: var(--fs-m); font-weight: 500; margin: 0; }
+/* Reel scrolls with the page; the project gallery follows right after it */
+.reel { padding-top: var(--frame); }
+/* Dark placeholder so the name's color flip is visible before real footage goes in */
+.reel .ph { background: var(--band-4); }
+.reel .ph-label { color: #6E6E6E; }
+.reel .ph { height: min(calc((100vw - 2 * var(--frame)) * 9 / 16), calc(100vh - 2 * var(--frame))); border-radius: var(--radius); }
+.reel-play {
+  position: absolute; right: 16px; bottom: 12px;
+  font-size: var(--fs-xs); font-weight: 500;
+  background: var(--pill); border-radius: 20px; padding: 8px 14px;
+}
+
+/* ---------- Facts ---------- */
+.facts { padding-block: 160px 0; }
+.ticker { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.ticker-track { display: flex; gap: 24px; width: max-content; animation: tick 28s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.stat { width: 200px; display: flex; flex-direction: column; gap: 6px; }
+.stat .num { font-size: 39px; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.stat .cap { font-size: var(--fs-xs); color: var(--muted); }
+@keyframes tick { to { transform: translateX(-50%); } }
+.statement { display: flex; flex-direction: column; gap: 28px; align-items: flex-start; }
+.statement h2 { font-size: var(--fs-l); line-height: 1; letter-spacing: -0.02em; font-weight: 500; text-wrap: balance; max-width: 18ch; }
+.statement h2 em { font-family: var(--serif); font-style: normal; font-weight: 400; }
+
+/* ---------- Services (stacked bands) ---------- */
+.services { padding-top: 200px; }
+.services .section-label { padding-inline: var(--frame); margin-bottom: 12px; display: block; }
+.band { background: var(--c); color: var(--ink, var(--fg)); }
+.band:nth-child(1) { --c: var(--band-1); }
+.band:nth-child(2) { --c: var(--band-2); }
+.band:nth-child(3) { --c: var(--band-3); }
+.band:nth-child(4) { --c: var(--band-4); --ink: var(--band-4-ink); }
+.band-head {
+  width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center;
+  padding: 0 var(--frame); min-height: 1.4em;
+  font-size: var(--fs-xl); font-weight: 500; letter-spacing: -0.03em; line-height: 1;
+}
+.band-head .plus { font-size: 0.4em; font-weight: 400; transition: transform .3s ease; }
+.band.is-open .band-head .plus { transform: rotate(45deg); }
+.band-body {
+  display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s ease;
+}
+.band.is-open .band-body { grid-template-rows: 1fr; }
+.band-body > div { overflow: hidden; }
+.band-inner {
+  display: grid; grid-template-columns: 2fr 1fr 3fr; gap: 24px var(--gap);
+  padding: 8px var(--frame) 32px;
+}
+/* Horizontal image strip inside each discipline — bleeds to the right edge */
+.band-strip {
+  grid-column: 1 / -1;
+  display: flex; gap: var(--gap);
+  margin-right: calc(-1 * var(--frame)); padding-right: var(--frame);
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory; scrollbar-width: none;
+  cursor: grab;
+}
+.band-strip::-webkit-scrollbar { display: none; }
+.band-strip.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.band-strip:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.band-strip .ph { flex: 0 0 auto; height: clamp(220px, 26vw, 380px); scroll-snap-align: start; }
+.band-strip .ph--wide { aspect-ratio: 3 / 2; }
+.band-strip .ph--tall { aspect-ratio: 4 / 5; }
+.strip-hint { grid-column: 1 / -1; display: flex; justify-content: space-between; font-size: var(--fs-xs); opacity: .6; margin-top: -12px; }
+.band-inner p { font-size: var(--fs-m); line-height: 1.15; max-width: 26ch; }
+.band-inner ul { list-style: none; margin: 0; padding: 0; font-size: var(--fs-xs); line-height: 1.5; }
+
+/* ---------- Work ---------- */
+.work { padding-block: var(--frame) 0; }   /* gallery starts one margin below the header */
+.work .mixed { font-size: var(--fs-l); margin-bottom: 64px; }
+.work .mixed .main { font-weight: 500; letter-spacing: -0.02em; }
+.work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--frame); }   /* same as the site's outer margin */
+.card { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.card--reel { grid-column: 1 / -1; }
+.card--reel .ph { aspect-ratio: 16 / 9; }
+.card--reel .ph-label { color: #6E6E6E; }
+.card .ph { aspect-ratio: 5 / 3;   /* between the old 3:2 and 16:9 */ max-width: 100%; transition: border-radius .3s ease; background: transparent; }
+.card .ph-media { position: absolute; inset: 0; background: var(--ph); }
+/* Scroll effect (after kaaka.co.jp): each project slowly fades in while rising a little,
+   one after another, as it comes into view. Plays once per project. */
+.js-fade .card {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 1.4s cubic-bezier(.25,.46,.45,.94), transform 1.4s cubic-bezier(.25,.46,.45,.94);
+  transition-delay: var(--d, 0s);
+}
+.js-fade .card .ph-media { opacity: 0; transition: opacity 1.2s ease; transition-delay: calc(var(--d, 0s) + .25s); }
+.js-fade .card.is-in { opacity: 1; transform: none; }
+.js-fade .card.is-in .ph-media { opacity: 1; }
+.card--reel .ph-media { background: var(--band-4); }
+
+.card:hover .ph { border-radius: 24px; }
+.card-meta { display: flex; flex-direction: column; gap: 2px; font-size: 15px; line-height: 1.3; }   /* same size as the header */
+@media (max-width: 640px) { .card-meta { font-size: 13px; } }
+.card-title { font-size: inherit; font-weight: 500; }
+.card-title span { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .3s ease; }
+.card-tags { font-size: inherit; color: var(--muted); }
+.work-more { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; margin-bottom: 56px; }   /* centered between the last projects and the city + time (56px above and below) */
+
+/* ---------- Recognition ---------- */
+.recog { padding-block: 200px 0; }
+.recog .mixed { font-size: var(--fs-l); margin-bottom: 48px; }
+.recog-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px var(--gap); align-items: start; }
+.recog-col h3 { font-size: var(--fs-s); font-weight: 500; margin-bottom: 12px; }
+.recog-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--fg); }
+.recog-list li {
+  display: grid; grid-template-columns: 1fr auto; gap: 4px var(--gap); align-items: baseline;
+  padding: 18px 0; border-bottom: 1px solid var(--fg); font-size: var(--fs-m);
+}
+.recog-list .what { grid-column: 1 / -1; grid-row: 2; font-size: var(--fs-s); color: var(--muted); }
+.recog-list .yr { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+.recog-list li:hover { padding-left: 12px; }
+.recog-list li { transition: padding .25s ease; }
+
+/* ---------- Footer ---------- */
+.footer { padding-block: 56px 24px; }
+.cta { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+.cta .mixed { font-size: var(--fs-l); }
+.foot-cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); margin-top: 180px; }
+.foot-cols h4 { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 10px; font-weight: 500; }
+.foot-cols a { display: block; font-size: var(--fs-m); line-height: 1.2; }
+.foot-cols a:hover { font-family: var(--serif); }
+.foot-bottom {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: var(--gap); margin-top: 0;
+  font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.04em;
+}
+.foot-bottom > :last-child { justify-self: end; }
+.footer .wordmark { margin-top: 24px; }
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1000px) {
+  .facts { grid-template-columns: 1fr; padding-top: 120px; gap: 48px; }
+  .band-inner { grid-template-columns: 1fr 1fr; }
+  .foot-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; }
+  .footer { padding-top: 80px; }
+}
+/* ---------- Phone ---------- */
+@media (max-width: 640px) {
+  :root { --frame: 16px; }
+  .work-grid { grid-template-columns: 1fr; }
+  .band-inner { grid-template-columns: 1fr; }
+  .recog-cols { grid-template-columns: 1fr; }
+  .foot-bottom { grid-template-columns: 1fr; }
+  .foot-bottom > :last-child { justify-self: start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
+
+/* ---------- Header (after yimao.design): pinned flat bar + intro block that scrolls ---------- */
+.site-bar {
+  position: fixed; z-index: 30; top: 0; left: 0; right: 0;
+  padding: calc(env(safe-area-inset-top, 0px) + 16px) var(--frame) 14px;
+  background: var(--bg);
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: var(--frame); align-items: baseline;   /* after zefengd.com: name spans the left half; links take the 3 columns of the right half, which lines up with the gallery's right column */
+  font-size: 18px; font-weight: 700; line-height: 1.3; color: var(--fg);   /* one size for every header item */
+}
+.site-bar a { transition: opacity .2s; }
+.site-bar .bar-id { grid-column: span 3; display: flex; flex-direction: column; align-items: flex-start; }   /* name with a short intro underneath */
+.site-bar .bar-last { grid-column: 6; justify-self: end; }   /* About Me on the right edge */
+.site-bar .bar-intro { margin: 20px 0 0; font-size: 15px; font-weight: 400; color: var(--fg); }   /* short intro under the name */
+/* homepage only: contact links under Archive, same grey line as the intro */
+.site-bar .bar-col { display: flex; flex-direction: column; align-items: flex-start; }
+.site-bar .bar-contact { margin: 20px 0 0; font-size: 15px; font-weight: 400; color: var(--fg); display: flex; flex-wrap: nowrap; white-space: nowrap; gap: 16px; }
+.bar-contact .ic { width: 1em; height: 1em; vertical-align: -0.14em; margin-right: 0.35em; flex: none; }
+
+.site-bar .bar-contact a:hover { opacity: 1; color: var(--fg); }
+.bar-contact a { display: inline-flex; align-items: center; }
+.bar-contact .ic-f { display: none; }
+.bar-contact a:hover .ic-o { display: none; }
+.bar-contact a:hover .ic-f { display: inline-block; }
+.site-bar { align-items: start; }
+.site-bar a:hover, .site-bar a[aria-current="page"] { opacity: .45; }
+.intro { padding-top: calc(env(safe-area-inset-top, 0px) + 50px); font-size: 12px; font-weight: 500; line-height: 1.3; }
+.intro hr { border: 0; border-top: 1px solid var(--fg); margin: 0; }
+.intro-row { display: grid; grid-template-columns: 34% 34% 1fr; gap: 0; padding-block: 20px 22px; }
+.intro-row > div { padding-right: var(--frame); max-width: 62ch; }
+.intro-row .lbl { display: block; }
+.intro-ticker { overflow: hidden; white-space: nowrap; padding-block: 7px; }
+.intro-ticker .track { display: inline-flex; gap: 4em; animation: intro-tick 40s linear infinite; }
+.intro-ticker:hover .track { animation-play-state: paused; }
+@keyframes intro-tick { to { transform: translateX(-50%); } }
+@media (max-width: 900px) {
+  .site-bar { grid-template-columns: 1fr auto auto auto; gap: 0 16px; font-size: 15px; }
+  .site-bar .bar-intro, .site-bar .bar-contact { display: none; }
+  .site-bar .bar-id { grid-column: auto; }
+  .site-bar .bar-last { grid-column: auto; }
+  .intro-row { grid-template-columns: 1fr; gap: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .intro-ticker .track { animation: none; } }
+
+
+/* ---------- Opening preloader (after the Skiper UI / Dennis Snellenberg words preloader) ----------
+   Dark screen, your name fixed in the center, highlight images from each project cutting behind it.
+   Then the whole screen lifts away with a curved bottom edge that flattens as it goes. */
+.splash {
+  position: fixed; inset: 0; z-index: 200;
+  background: #141414; color: #FFFFFF;
+  will-change: transform;
+}
+.splash-curve { position: absolute; left: 0; top: 100%; width: 100%; height: 22vh; overflow: visible; pointer-events: none; }
+.splash-curve path { fill: #141414; }
+.splash-stage {
+  position: absolute; inset: 0;   /* images fill the whole screen (full bleed) */
+  opacity: 0; transition: opacity .4s ease;
+}
+.splash.is-on .splash-stage { opacity: 1; }
+.splash .sf::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.38); pointer-events: none; }   /* dims the images so the name stands out */
+.splash .sf { position: absolute; inset: 0; opacity: 0; display: flex; align-items: flex-end; padding: var(--frame); }
+.splash .sf img, .splash .sf video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.splash .sf:last-child { bottom: -22vh; }   /* only the last image runs down into the curved edge */
+.splash .sf:last-child img { object-position: 50% 41%; }
+.splash-curve { display: none; }
+.splash .sf.on { opacity: 1; }
+.splash .sf span { font-size: 10px; color: rgba(255,255,255,.55); mix-blend-mode: difference; }
+.splash .sf:nth-child(1) { background: #4A4A4A; }
+.splash .sf:nth-child(2) { background: #B9B9B9; }
+.splash .sf:nth-child(3) { background: #6E6E6E; }
+.splash .sf:nth-child(4) { background: #D6D6D6; }
+.splash .sf:nth-child(5) { background: #333333; }
+.splash .sf:nth-child(6) { background: #9A9A9A; }
+.splash-name {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  font-size: clamp(39px, 9vw, 159px); font-weight: 700; letter-spacing: -0.02em; line-height: 1; text-transform: uppercase; white-space: nowrap;
+  color: #FFFFFF; z-index: 2; text-shadow: 0 2px 24px rgba(0,0,0,.25);   /* solid white, readable on every image */
+  display: flex; align-items: center; gap: .35em;
+  opacity: 0; transition: opacity .4s ease;
+}
+.splash.is-on .splash-name { opacity: 1; }
+
+/* After the logo, the page settles in: header first, then the cards one by one */
+.is-intro .site-bar { opacity: 0; transform: translateY(10px); }
+.is-revealed .site-bar { opacity: 1; transform: none; transition: opacity .6s ease, transform .6s ease; }
+.foot-time { font-variant-numeric: tabular-nums; margin-left: .4em; }
+
+/* Replay-intro button: on the left, on the same line as See all projects */
+.replay {
+  justify-self: start;
+  height: 39px; padding: 0 18px; border-radius: 20px;
+  background: var(--pill);
+  font-size: 15px; font-weight: 500; color: var(--fg);
+  transition: background .2s, color .2s;
+}
+.replay:hover { background: var(--fg); color: var(--bg); }
+
+/* Footer always sits at the bottom of the screen, even on short pages */
+body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
+body > footer.footer { margin-top: auto; }
+
+/* Tags under a title: one step smaller than the title (13px, 12px on phone) */
+.card .card-tags, .tile-meta .cats, .more-meta .cats { font-size: 13px; }
+@media (max-width: 640px) { .card .card-tags, .tile-meta .cats, .more-meta .cats { font-size: 12px; } }
+</style>
+
+<header class="site-bar">
+  <div class="bar-id"><a class="bar-name" href="#top">SHIYAO WU</a><p class="bar-intro">Graphic Designer based in Los Angeles, working across brand identity, packaging, type and editorial design.</p></div>
+  <div class="bar-col"><a href="archive.html">Archive</a>
+    <p class="bar-contact"><a href="#"><svg class="ic ic-o" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 6.5 12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><svg class="ic ic-f" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.5 4h15A2.5 2.5 0 0 1 22 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 17.5v-11A2.5 2.5 0 0 1 4.5 4Z"/><path d="M3.5 6.5 12 13l8.5-6.5" fill="none" stroke="var(--bg)" stroke-width="2" stroke-linejoin="round"/></svg>Email</a><a href="https://www.instagram.com/shiyao.design/" target="_blank" rel="noopener"><svg class="ic ic-o" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></svg><svg class="ic ic-f" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M8 3h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5Zm4 4.8a4.2 4.2 0 1 0 0 8.4 4.2 4.2 0 0 0 0-8.4Zm0 2a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4Z"/><circle cx="17.3" cy="6.7" r="1.3" fill="var(--bg)"/></svg>Instagram</a><a href="https://www.linkedin.com/in/shiyao-wu-design/" target="_blank" rel="noopener"><svg class="ic ic-o" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M7.2 10.4h2.2V17H7.2zM8.3 6.9a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6ZM11.2 10.4h2.1v.9c.4-.6 1.1-1.1 2.2-1.1 1.6 0 2.5 1 2.5 3V17h-2.2v-3.4c0-1-.3-1.6-1.2-1.6s-1.3.7-1.3 1.6V17h-2.1z"/></svg><svg class="ic ic-f" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm1.6 7.4V18h2.6v-7.6H6.6Zm1.3-4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm3.3 4V18h2.6v-4.1c0-1.1.4-1.9 1.5-1.9s1.4.9 1.4 2V18h2.6v-4.6c0-2.4-1.2-3.2-2.9-3.2-1.3 0-2.1.6-2.5 1.3v-1.1h-2.7Z"/></svg>LinkedIn</a></p></div>
+  <a href="playground.html">Playground</a>
+  <a class="bar-last" href="about.html">Info</a>
+</header>
+
+
+
+
+<!-- Opening preloader: name in the center, project highlight images cutting behind it, then a curved lift-off. Once per visit. -->
+<div class="splash" id="splash" aria-hidden="true">
+  <div class="splash-stage"><div class="sf on"><img src="images/project-02/cover.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-04/04-arttrail-kiosk-2.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-06/02-tomato-1.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-02/09-sl-cover.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-06/01-cover-1.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-01/01-cover-1.jpg" alt="" decoding="async"></div></div>
+  <div class="splash-name">Shiyao Wu</div>
+  <svg class="splash-curve" id="splashCurve" viewBox="0 0 1000 200" preserveAspectRatio="none"><path id="splashPath" d="M0 0 L1000 0 Q500 200 0 0 Z"/></svg>
+</div>
+<script>
+  window.__splashHTML = document.getElementById('splash').outerHTML;   // kept for the replay button
+  // Add #intro to the address to replay the opening any time
+  try { if ((sessionStorage.getItem('sw-splash-seen') === '1' && location.hash !== '#intro') || matchMedia('(prefers-reduced-motion: reduce)').matches) document.getElementById('splash').remove(); else document.documentElement.classList.add('is-intro'); } catch (e) { document.documentElement.classList.add('is-intro'); }
+</script>
+
+<!-- ============ Hero ============ -->
+<div class="hero frame" id="top"></div>
+
+
+<!-- ============ Work ============ -->
+<section class="work frame" id="work" aria-label="Selected work">
+  <div class="work-grid" id="grid"></div>
+</section>
+
+<!-- ============ Footer ============ -->
+<footer class="footer frame" id="contact">
+  <div class="work-more"><button class="replay" id="replayIntro" type="button" aria-label="Replay opening">↺ Replay intro</button></div>
+  <div class="foot-bottom">
+    <span>© 2026 Shiyao Wu</span>
+    <span>Los Angeles <span id="footClock" class="foot-time">--:--:--</span></span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+// ---------- Content (all placeholder; edit these lists) ----------
+const TAGS = ['Packaging Design - Brand Identity - 3D Motion', 'Brand Identity - Interaction Design - Editorial Design', 'Packaging Design - Brand Identity - 3D Motion', 'Brand Identity - UI/UX Design - Experience Design', 'Type Design - AI Design - Editorial Design', 'Editorial Design - Bookmaking'];
+const TITLES = ['FÖRSTA', 'New Museum', 'REMOVA', 'Art Trail', 'CARGOS', 'Bento of Memories: Four Years, Four Ingredients'];
+const COVERS = ['images/project-01/01-cover-2.jpg', 'images/project-02/02-brand-identity.mp4', 'images/project-03/01-cover-2.jpg', 'images/project-04/01-cover.jpg', 'images/project-05/01-cover.jpg', 'images/project-06/01-cover-1.jpg'];   // .jpg = image, .mp4 = looping video   // cover image per card ('' = grey placeholder)
+const PROJECTS = TAGS.map((tags, i) => ({
+  title: TITLES[i], tags, img: COVERS[i],
+  href: 'project-' + String(i + 1).padStart(2, '0') + '.html'   // one page per project
+}));
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+
+
+// Work grid
+$('grid').innerHTML = PROJECTS.map((p, i) => {
+  const n = String(i + 1).padStart(2, '0');
+  return `<a class="card" href="${esc(p.href)}">
+    <div class="ph"><div class="ph-media">${!p.img ? `<span class="ph-label">${n} — Cover image (hover video optional)</span>` : p.img.endsWith('.mp4') ? `<video src="${esc(p.img)}" poster="${esc(p.img.replace('.mp4', '-poster.jpg'))}" autoplay muted loop playsinline aria-label="${esc(p.title)}"></video>` : `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy">`}</div></div>
+    <div class="card-meta">
+      <h3 class="card-title"><span>${esc(p.title)}</span></h3>
+      <p class="card-tags">${esc(p.tags)}</p>
+    </div></a>`;
+}).join('');
+
+
+
+
+// ---------- Scroll effect: projects slowly fade in, one by one, as they enter the screen ----------
+let revealStarted = false;
+function startReveal() {
+  if (revealStarted) return; revealStarted = true;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js-fade');
+  const cards = [...document.querySelectorAll('.card')];
+  const io = new IntersectionObserver(entries => {
+    const entering = entries.filter(e => e.isIntersecting).sort((a, b) => (a.boundingClientRect.top - b.boundingClientRect.top) || (a.boundingClientRect.left - b.boundingClientRect.left));
+    entering.forEach((e, k) => {
+      e.target.style.setProperty('--d', (k * 0.18) + 's');   // one after another
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+  // Projects already on screen when the page opens just show; the fade only plays for ones you scroll to
+  const vh = innerHeight;
+  cards.forEach(c => {
+    if (c.getBoundingClientRect().top < vh) {
+      c.style.transition = 'none'; c.querySelector('.ph-media').style.transition = 'none';
+      c.classList.add('is-in');
+      requestAnimationFrame(() => requestAnimationFrame(() => { c.style.transition = ''; c.querySelector('.ph-media').style.transition = ''; }));
+    } else io.observe(c);
+  });
+}
+
+// ---------- Opening preloader, then reveal (also used by the replay button) ----------
+function playSplash(splash, first) {
+  const root = document.documentElement;
+  const frames = [...splash.querySelectorAll('.sf')];
+  const path = splash.querySelector('path');
+  const STEP = 260;                       // ms per highlight image
+  let i = 0, timer, done = false;
+  root.style.overflow = 'hidden';
+  requestAnimationFrame(() => splash.classList.add('is-on'));
+  // wait (max 1.5s) for the highlight images so each one is ready before it flashes
+  const ready = Promise.race([Promise.all([...splash.querySelectorAll('img')].map(im => im.decode().catch(() => {}))), new Promise(r => setTimeout(r, 1500))]);
+  ready.then(() => setTimeout(() => {
+    timer = setInterval(() => {
+      if (i >= frames.length - 1) { clearInterval(timer); setTimeout(finish, 380); return; }
+      frames[i].classList.remove('on'); i++; frames[i].classList.add('on');
+    }, STEP);
+  }, 350));
+  function finish() {
+    if (done) return; done = true; clearInterval(timer);
+    try { sessionStorage.setItem('sw-splash-seen', '1'); } catch (e) {}
+    root.style.overflow = '';
+    if (first) { root.classList.add('is-revealed'); startReveal(); }
+    // lift the screen up; the curved bottom edge flattens on the way
+    // the screen plus a curved bottom edge; the last image shows through the curve too
+    const clip = e => { const W = innerWidth, H = innerHeight, c = H * 0.22 * (1 - e);
+      splash.style.clipPath = `path('M0 0 L${W} 0 L${W} ${H} Q${W / 2} ${H + 2 * c} 0 ${H} Z')`; };
+    clip(0);
+    const D = 900, ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const t0 = performance.now();
+    (function step(now) {
+      const t = Math.min(1, (now - t0) / D), e = ease(t);
+      splash.style.transform = `translateY(${-e * 122}vh)`;
+      clip(e);
+      if (t < 1) requestAnimationFrame(step);
+      else { splash.remove(); if (first) root.classList.remove('is-intro', 'is-revealed'); }
+    })(t0);
+  }
+  splash.addEventListener('click', finish);   // click to skip
+}
+(function () {
+  const splash = document.getElementById('splash');
+  if (!splash) { startReveal(); return; }
+  playSplash(splash, true);
+})();
+// Replay button (bottom-left corner)
+document.getElementById('replayIntro').addEventListener('click', () => {
+  if (document.getElementById('splash') || !window.__splashHTML) return;
+  const wrap = document.createElement('div');
+  wrap.innerHTML = window.__splashHTML;
+  const el = wrap.firstElementChild;
+  el.querySelectorAll('.sf').forEach((f, k) => f.classList.toggle('on', k === 0));
+  document.body.appendChild(el);
+  playSplash(el, false);
+});
+
+// Footer: current city + live local time
+(function () {
+  const el = document.getElementById('footClock');
+  if (!el) return;
+  const fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'America/Los_Angeles' });
+  const tick = () => { el.textContent = fmt.format(new Date()); };
+  tick(); setInterval(tick, 1000);
+})();
+
+// Keep --bar-h equal to the header's real height (it changes with screen size)
+(function () {
+  const bar = document.querySelector('.site-bar');
+  const set = () => document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+  set(); addEventListener('resize', set);
+  if ('ResizeObserver' in window) new ResizeObserver(set).observe(bar);
+})();
+</script>
+<script>
+// No single word alone on a paragraph's last line: tie the last two words together
+// (backup for browsers without text-wrap: pretty)
+(function () {
+  const sel = 'p, h1, h2, h3, dd, li, .tile-meta span, .more-meta span, .card-title span';
+  const fix = el => {
+    const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    let last = null; while (walk.nextNode()) if (walk.currentNode.nodeValue.trim()) last = walk.currentNode;
+    if (!last || el.textContent.trim().split(/\s+/).length < 4) return;
+    last.nodeValue = last.nodeValue.replace(/\s+(\S+)\s*$/, '\u00A0$1');
+  };
+  const run = () => document.querySelectorAll(sel).forEach(fix);
+  run(); addEventListener('load', run);
+})();
+</script>

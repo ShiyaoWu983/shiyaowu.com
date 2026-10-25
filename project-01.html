@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FÖRSTA — Shiyao Wu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Newsreader:opsz,wght@6..72,400&display=swap">
+<style>html.sw-hold body { opacity: 0; } body { transition: opacity .25s ease; }
+/* Project title: click to go back up to the cover */
+.proj-title a { color: inherit; transition: opacity .2s; }
+.proj-title a:hover { opacity: .45; }
+</style>
+<script>document.documentElement.classList.add('sw-hold'); setTimeout(() => document.documentElement.classList.remove('sw-hold'), 2500);</script>
+<style>
+/* Direction 3 — studio-style one-pager, modeled on the serious.business framework:
+   full-width wordmark → mixed-type hero + expanding reel → stat ticker + statement →
+   stacked service bands (accordion) → 2-up project grid → recognition list → CTA footer.
+   24px frame. Mixed titles = sans line + serif line. All content is placeholder. */
+:root {
+  --bg: #F3F3F3;
+  --fg: #000000;
+  --muted: #8C8C8C;
+  --ph: #C4C4C4;
+  --ph-ink: #9A9A9A;
+  --pill: #FFFFFF;
+  /* service bands — placeholder colors, swap for the brand palette later */
+  --band-1: #DCDCDC;
+  --band-2: #FFFFFF;
+  --band-3: #C4C4C4;
+  --band-4: #1E1E1E;
+  --band-4-ink: #F3F3F3;
+
+  --sans: 'Inter', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --serif: 'Newsreader', 'Times New Roman', Georgia, serif;
+
+  --fs-xs: 11px;
+  --fs-s: 13px;
+  --fs-m: clamp(17px, 1.67vw, 23px);     /* hero / section subtitles */
+  --fs-l: clamp(31px, 5vw, 71px);        /* statements */
+  --fs-xl: clamp(43px, 7.3vw, 104px);    /* service band titles */
+
+  --frame: 24px;
+  --gap: 16px;
+  --radius: 6px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+img { max-width: 100%; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: var(--fs-s);
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+p, h1, h2, h3, h4 { margin: 0; font-weight: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+
+.frame { padding-inline: var(--frame); }
+
+/* ---------- Shared bits ---------- */
+.mixed { display: flex; flex-direction: column; align-items: center; text-align: center; line-height: 1; text-wrap: balance; }
+.mixed .main { font-family: var(--sans); font-weight: 500; letter-spacing: -0.01em; }
+.mixed .sub { font-family: var(--serif); font-weight: 400; }
+
+.pill {
+  display: inline-flex; align-items: center; height: 39px;
+  font-size: 15px; font-weight: 500;   /* same size as header + project text */
+}
+@media (max-width: 640px) { .pill, .replay { font-size: 13px; } }
+.pill .label { background: var(--pill); border-radius: 20px; padding: 0 18px; height: 100%; display: flex; align-items: center; }
+.pill .dot {
+  width: 39px; height: 39px; border-radius: 50%; background: var(--pill);
+  display: grid; place-items: center; transition: transform .25s ease;
+}
+.pill:hover .dot { transform: rotate(-45deg); }
+.pill:hover .label { background: var(--fg); color: var(--bg); }
+.pill .label, .pill .dot { transition: background .2s, color .2s, transform .25s; }
+
+.ph { position: relative; background: var(--ph); border-radius: var(--radius); overflow: hidden; }
+.ph-label { position: absolute; left: 12px; bottom: 10px; font-size: var(--fs-xs); color: var(--ph-ink); font-variant-numeric: tabular-nums; }
+.ph img, .ph video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.section-label { font-size: var(--fs-s); font-weight: 500; }
+
+/* ---------- Fixed nav (pills) ---------- */
+.nav {
+  position: fixed; z-index: 20; left: 0; right: 0;
+  top: calc(env(safe-area-inset-top, 0px) + 16px);
+  display: flex; justify-content: space-between;
+  padding-inline: var(--frame);
+  pointer-events: none;
+  opacity: 0; transform: translateY(-8px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.nav.is-on { opacity: 1; transform: none; }
+.nav .pill { pointer-events: auto; }
+
+/* ---------- Menu overlay ---------- */
+.menu {
+  position: fixed; inset: 0; z-index: 30;
+  background: var(--fg); color: var(--bg);
+  padding: calc(env(safe-area-inset-top, 0px) + 24px) var(--frame) 24px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+[hidden] { display: none !important; }
+.menu .menu-close { align-self: flex-end; font-size: var(--fs-s); font-weight: 500; border: 1px solid currentColor; border-radius: 20px; height: 39px; padding: 0 18px; }
+.menu nav { display: flex; flex-direction: column; }
+.menu nav a { font-size: var(--fs-xl); font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; }
+.menu nav a:hover { font-family: var(--serif); font-weight: 400; }
+.menu .menu-foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: var(--fs-s); }
+
+/* ---------- Hero ---------- */
+.hero { padding-block: 0; position: relative; }
+.wordmark { display: block; width: 100%; height: auto; }
+.wordmark text { font-family: var(--sans); font-weight: 800; fill: var(--fg); }
+/* Name sits over the reel. White + difference blend = black on the light page,
+   and the opposite color of whatever is behind it (the reel, images, dark bands). */
+.hero-name {
+  position: relative; z-index: 5;
+  padding-top: 72px;   /* clears the Contact / Menu pills */
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+.hero-name .wordmark text { fill: #FFFFFF; }
+.hero-role { color: #FFFFFF; font-size: var(--fs-m); font-weight: 500; margin-top: 12px; }
+.reel-stage { position: relative; }   /* spacer: height set in JS so content starts below the reel */
+/* Reel slides up behind the name, pins, then shrinks into the bottom-left corner as you keep scrolling */
+/* Reel is fixed behind the name; on scroll it shrinks into the bottom-left corner until it's gone,
+   floating over the content that scrolls up beneath it */
+.reel {
+  position: fixed; z-index: 4;
+  top: calc(env(safe-area-inset-top, 0px) + var(--frame));
+  left: var(--frame); right: var(--frame);
+  transform-origin: 0 100%; will-change: transform, opacity;
+}
+.reel.is-gone { visibility: hidden; }
+.reel.is-passive { pointer-events: none; }
+/* Dark placeholder so the name's color flip is visible before real footage goes in */
+.reel .ph { background: var(--band-4); }
+.reel .ph-label { color: #6E6E6E; }
+.reel .ph { height: min(calc((100vw - 2 * var(--frame)) * 9 / 16), calc(100vh - 2 * var(--frame))); border-radius: var(--radius); }
+.reel-play {
+  position: absolute; right: 16px; bottom: 12px;
+  font-size: var(--fs-xs); font-weight: 500;
+  background: var(--pill); border-radius: 20px; padding: 8px 14px;
+}
+
+/* ---------- Facts ---------- */
+.facts { padding-block: 160px 0; }
+.ticker { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.ticker-track { display: flex; gap: 24px; width: max-content; animation: tick 28s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.stat { width: 200px; display: flex; flex-direction: column; gap: 6px; }
+.stat .num { font-size: 39px; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.stat .cap { font-size: var(--fs-xs); color: var(--muted); }
+@keyframes tick { to { transform: translateX(-50%); } }
+.statement { display: flex; flex-direction: column; gap: 28px; align-items: flex-start; }
+.statement h2 { font-size: var(--fs-l); line-height: 1; letter-spacing: -0.02em; font-weight: 500; text-wrap: balance; max-width: 18ch; }
+.statement h2 em { font-family: var(--serif); font-style: normal; font-weight: 400; }
+
+/* ---------- Services (stacked bands) ---------- */
+.services { padding-top: 200px; }
+.services .section-label { padding-inline: var(--frame); margin-bottom: 12px; display: block; }
+.band { background: var(--c); color: var(--ink, var(--fg)); }
+.band:nth-child(1) { --c: var(--band-1); }
+.band:nth-child(2) { --c: var(--band-2); }
+.band:nth-child(3) { --c: var(--band-3); }
+.band:nth-child(4) { --c: var(--band-4); --ink: var(--band-4-ink); }
+.band-head {
+  width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center;
+  padding: 0 var(--frame); min-height: 1.4em;
+  font-size: var(--fs-xl); font-weight: 500; letter-spacing: -0.03em; line-height: 1;
+}
+.band-head .plus { font-size: 0.4em; font-weight: 400; transition: transform .3s ease; }
+.band.is-open .band-head .plus { transform: rotate(45deg); }
+.band-body {
+  display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s ease;
+}
+.band.is-open .band-body { grid-template-rows: 1fr; }
+.band-body > div { overflow: hidden; }
+.band-inner {
+  display: grid; grid-template-columns: 2fr 1fr 3fr; gap: 24px var(--gap);
+  padding: 8px var(--frame) 32px;
+}
+/* Horizontal image strip inside each discipline — bleeds to the right edge */
+.band-strip {
+  grid-column: 1 / -1;
+  display: flex; gap: var(--gap);
+  margin-right: calc(-1 * var(--frame)); padding-right: var(--frame);
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory; scrollbar-width: none;
+  cursor: grab;
+}
+.band-strip::-webkit-scrollbar { display: none; }
+.band-strip.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.band-strip:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.band-strip .ph { flex: 0 0 auto; height: clamp(220px, 26vw, 380px); scroll-snap-align: start; }
+.band-strip .ph--wide { aspect-ratio: 3 / 2; }
+.band-strip .ph--tall { aspect-ratio: 4 / 5; }
+.strip-hint { grid-column: 1 / -1; display: flex; justify-content: space-between; font-size: var(--fs-xs); opacity: .6; margin-top: -12px; }
+.band-inner p { font-size: var(--fs-m); line-height: 1.15; max-width: 26ch; }
+.band-inner ul { list-style: none; margin: 0; padding: 0; font-size: var(--fs-xs); line-height: 1.5; }
+
+/* ---------- Work ---------- */
+.work { padding-block: 200px 0; }
+.work .mixed { font-size: var(--fs-l); margin-bottom: 64px; }
+.work .mixed .main { font-weight: 500; letter-spacing: -0.02em; }
+.work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--frame); }   /* same as the site's outer margin */
+.card { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.card .ph { aspect-ratio: 689 / 460; max-width: 100%; transition: border-radius .3s ease; }
+.card:hover .ph { border-radius: 24px; }
+.card-meta { display: flex; flex-direction: column; gap: 4px; }
+.card-title { font-size: 17px; font-weight: 500; }
+.card-title span { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .3s ease; }
+.card-tags { font-size: var(--fs-xs); color: var(--muted); }
+.work-more { display: flex; justify-content: center; margin-top: var(--frame); }
+
+/* ---------- Recognition ---------- */
+.recog { padding-block: 200px 0; }
+.recog .mixed { font-size: var(--fs-l); margin-bottom: 48px; }
+.recog-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px var(--gap); align-items: start; }
+.recog-col h3 { font-size: var(--fs-s); font-weight: 500; margin-bottom: 12px; }
+.recog-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--fg); }
+.recog-list li {
+  display: grid; grid-template-columns: 1fr auto; gap: 4px var(--gap); align-items: baseline;
+  padding: 18px 0; border-bottom: 1px solid var(--fg); font-size: var(--fs-m);
+}
+.recog-list .what { grid-column: 1 / -1; grid-row: 2; font-size: var(--fs-s); color: var(--muted); }
+.recog-list .yr { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+.recog-list li:hover { padding-left: 12px; }
+.recog-list li { transition: padding .25s ease; }
+
+/* ---------- Footer ---------- */
+.footer { padding-block: 120px 24px; }
+.cta { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+.cta .mixed { font-size: var(--fs-l); }
+.foot-cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); margin-top: 180px; }
+.foot-cols h4 { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 10px; font-weight: 500; }
+.foot-cols a { display: block; font-size: var(--fs-m); line-height: 1.2; }
+.foot-cols a:hover { font-family: var(--serif); }
+.foot-bottom {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: var(--gap); margin-top: 0;
+  font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.04em;
+}
+.foot-bottom > :last-child { justify-self: end; }
+.footer .wordmark { margin-top: 24px; }
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1000px) {
+  .facts { grid-template-columns: 1fr; padding-top: 120px; gap: 48px; }
+  .band-inner { grid-template-columns: 1fr 1fr; }
+  .foot-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; }
+  .services, .work, .recog, .footer { padding-top: 140px; }
+}
+/* ---------- Phone ---------- */
+@media (max-width: 640px) {
+  :root { --frame: 16px; }
+  .work-grid { grid-template-columns: 1fr; }
+  .band-inner { grid-template-columns: 1fr; }
+  .recog-cols { grid-template-columns: 1fr; }
+  .foot-bottom { grid-template-columns: 1fr; }
+  .foot-bottom > :last-child { justify-self: start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reel { position: absolute; }   /* no shrink: reel just scrolls with the page */
+  *, *::before, *::after { transition: none !important; }
+}
+
+/* ---------- Header (after yimao.design): pinned flat bar + intro block that scrolls ---------- */
+.site-bar {
+  position: fixed; z-index: 30; top: 0; left: 0; right: 0;
+  padding: calc(env(safe-area-inset-top, 0px) + 16px) var(--frame) 14px;
+  background: var(--bg);
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: var(--frame); align-items: baseline;   /* after zefengd.com: name spans the left half; links take the 3 columns of the right half, which lines up with the gallery's right column */
+  font-size: 18px; font-weight: 700; line-height: 1.3; color: var(--fg);   /* one size for every header item */
+}
+.site-bar a { transition: opacity .2s; }
+.site-bar .bar-id { grid-column: span 3; display: flex; flex-direction: column; align-items: flex-start; }   /* name with a short intro underneath */
+.site-bar .bar-last { grid-column: 6; justify-self: end; }   /* About Me on the right edge */
+.site-bar .bar-intro { margin: 0; font-weight: 500; color: var(--muted); }   /* short intro under the name */
+.site-bar { align-items: start; }
+.site-bar a:hover, .site-bar a[aria-current="page"] { opacity: .45; }
+.intro { padding-top: calc(env(safe-area-inset-top, 0px) + 50px); font-size: 12px; font-weight: 500; line-height: 1.3; }
+.intro hr { border: 0; border-top: 1px solid var(--fg); margin: 0; }
+.intro-row { display: grid; grid-template-columns: 34% 34% 1fr; gap: 0; padding-block: 20px 22px; }
+.intro-row > div { padding-right: var(--frame); max-width: 62ch; }
+.intro-row .lbl { display: block; }
+.intro-ticker { overflow: hidden; white-space: nowrap; padding-block: 7px; }
+.intro-ticker .track { display: inline-flex; gap: 4em; animation: intro-tick 40s linear infinite; }
+.intro-ticker:hover .track { animation-play-state: paused; }
+@keyframes intro-tick { to { transform: translateX(-50%); } }
+@media (max-width: 900px) {
+  .site-bar { grid-template-columns: 1fr auto auto auto; gap: 0 16px; font-size: 15px; }
+  .site-bar .bar-intro { display: none; }
+  .site-bar .bar-id { grid-column: auto; }
+  .site-bar .bar-last { grid-column: auto; }
+  .intro-row { grid-template-columns: 1fr; gap: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .intro-ticker .track { animation: none; } }
+.foot-time { font-variant-numeric: tabular-nums; margin-left: .4em; }
+
+/* Footer always sits at the bottom of the screen, even on short pages */
+body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
+body > footer.footer { margin-top: auto; }
+</style>
+<style>
+/* ---------- Project page (after koto.com/projects/adobe) ----------
+   Left: sticky column with title, intro, tags and a section index.
+   Right (3 of 4 columns): media + text blocks. Text blocks split into a small label and the copy. */
+.proj { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--frame);
+        padding: var(--bar-h, 69px) var(--frame) 0; align-items: start; }   /* content starts right under the header, no gap */
+.proj-side { position: sticky; top: var(--bar-h, 69px); display: flex; flex-direction: column; gap: 28px; min-width: 0;
+             height: calc(100vh - var(--bar-h, 69px) - var(--frame)); }
+.proj-back { margin-top: auto; font-size: 15px; font-weight: 500; display: flex; flex-direction: column; gap: 6px; }
+.proj-back a { color: var(--fg); transition: opacity .2s; }
+.proj-back a:hover { opacity: .45; }
+.proj-title { margin: 0; font-size: 15px; font-weight: 700; line-height: 1.3; }
+.proj-lede { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.3; color: var(--muted); }
+.proj-facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; font-size: 15px; font-weight: 500; margin: 0; }
+.proj-facts dt { color: var(--muted); }
+.proj-facts dd { margin: 0; }
+.proj-tags { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.3; }   /* tags, no label */
+.proj-toc { list-style: none; margin: 0; padding: 0; font-size: 15px; font-weight: 500; display: flex; flex-direction: column; gap: 6px; }
+.proj-toc a { color: var(--muted); transition: color .2s; }
+.proj-toc a:hover, .proj-toc a.is-active { color: var(--fg); }
+
+.proj-main { grid-column: 2 / -1; display: flex; flex-direction: column; gap: calc(var(--frame) / 2); min-width: 0; }   /* image ↔ image: half the margin */
+.media { position: relative; background: var(--ph); border-radius: var(--radius); overflow: hidden; display: flex; align-items: flex-end; padding: 10px 12px; }
+.media span { font-size: 12px; color: var(--ph-ink); }
+.media img, .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }   /* real media fills its slot */
+.media iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.row { display: flex; gap: calc(var(--frame) / 2); }   /* items keep their shape and share one height */
+.row > .media { min-width: 0; }
+.proj-main > .media { flex: none !important; }
+@media (max-width: 640px) { .row { flex-direction: column; } .row > .media { flex: none !important; width: 100%; } }
+.media--wide { aspect-ratio: 16 / 9; }
+.media--tall { aspect-ratio: 4 / 5; }
+.media--square { aspect-ratio: 1 / 1; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(var(--frame) / 2); }
+
+/* text block: label on the left third, copy on the right two thirds.
+   Spacing: text ↔ image = 2 × margin (12px gap + 36px margin), image ↔ image = ½ × margin. */
+.block { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));   /* after koto.com: label on the left half, text on the right half */ column-gap: var(--frame); padding: 0; margin-block: calc(var(--frame) * 1.5); scroll-margin-top: calc(var(--bar-h, 69px) + var(--frame)); }
+.block-label { grid-column: 1; font-size: 15px; font-weight: 500; color: var(--muted); }
+.block-copy { grid-column: 2 / -1; display: flex; flex-direction: column; gap: 16px; }
+.block-copy h2 { margin: 0; font-size: 15px; font-weight: 700; line-height: 1.3; }
+.block-copy p { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.5; }
+
+.quote { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--frame); align-items: end; margin-block: calc(var(--frame) * 1.5); }
+.quote + .block, .block + .block, .block + .quote { margin-top: 0; }   /* two text pieces in a row: still 2 × margin apart */
+.quote blockquote { grid-column: 1 / span 2; margin: 0; padding-right: 15%; display: flex; flex-direction: column; gap: 16px; }
+.quote blockquote p { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.5; }
+.quote cite { font-style: normal; font-size: 15px; font-weight: 500; color: var(--muted); }
+.quote .media { grid-column: 3; }
+
+.credits { display: grid; grid-template-columns: auto 1fr; gap: 6px 24px; margin: 0; font-size: 15px; font-weight: 500; }
+.credits dt { color: var(--muted); }
+.credits dd { margin: 0; }
+
+/* more projects (after serious.business project pages): three other projects in a row */
+.more { margin-top: 96px; padding: 24px var(--frame) 0; border-top: 1px solid var(--fg); }
+.more-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; font-size: 15px; font-weight: 700; }
+.more-head a { font-weight: 500; color: var(--muted); transition: color .2s; }
+.more-head a:hover { color: var(--fg); }
+.more-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--frame); }
+.more-card { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.more-card .media { aspect-ratio: 5 / 3; transition: border-radius .3s ease; }
+.more-card:hover .media { border-radius: 24px; }
+.more-meta { display: flex; flex-direction: column; gap: 2px; font-size: 15px; font-weight: 500; line-height: 1.3; }
+.more-meta .cats { color: var(--muted); }
+
+@media (max-width: 900px) {
+  .proj { grid-template-columns: 1fr; row-gap: 40px; }
+  .proj-side { position: static; height: auto; }
+  .proj-back { margin-top: 0; }
+  .proj-toc { display: none; }
+  .proj-main { grid-column: 1; }
+  .block, .quote { grid-template-columns: 1fr; row-gap: 14px; }
+  .block-copy, .quote blockquote, .quote .media { grid-column: 1; }
+  .more-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .more-card:nth-child(3) { display: none; }
+  .quote blockquote { padding-right: 0; }
+}
+@media (max-width: 640px) {
+  .proj-title, .proj-lede, .proj-tags, .block-copy h2, .quote blockquote p, .proj-facts, .proj-toc, .block-label, .block-copy p, .credits, .quote cite, .proj-back, .more-head, .more-meta { font-size: 13px; }
+  .more-grid { grid-template-columns: 1fr; }
+  .more-card:nth-child(3) { display: flex; }
+  .pair { grid-template-columns: 1fr; }
+}
+</style>
+<style>
+/* No single word left alone on the last line of a paragraph */
+p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta span { text-wrap: pretty; }
+
+/* Tags under a title: one step smaller than the title (13px, 12px on phone) */
+.card .card-tags, .tile-meta .cats, .more-meta .cats, .proj-side .proj-tags { font-size: 13px; }
+@media (max-width: 640px) { .card .card-tags, .tile-meta .cats, .more-meta .cats, .proj-side .proj-tags { font-size: 12px; } }
+
+/* Section title + text sit slightly in from the image edges (after koto.com), so the page breathes */
+.block { padding-inline: var(--frame); }
+</style>
+</head>
+<body>
+
+<header class="site-bar">
+  <div class="bar-id"><a class="bar-name" href="index.html">SHIYAO WU</a></div>
+  <a href="archive.html">Archive</a>
+  <a href="playground.html">Playground</a>
+  <a class="bar-last" href="about.html">Info</a>
+</header>
+
+<main class="proj" id="top">
+  <aside class="proj-side">
+    <h1 class="proj-title"><a href="#top" class="to-cover">FÖRSTA</a></h1>
+    <p class="proj-lede">A home-care system that makes everyday living simpler for young adults setting up their first home.</p>
+    <p class="proj-tags">Packaging Design - Brand Identity - 3D Motion</p>
+    <ol class="proj-toc" id="toc">
+      <li><a href="#packaging-concept">Brand Concept</a></li>
+      <li><a href="#product-line">Product System</a></li>
+      <li><a href="#brand-identity">Brand Identity</a></li>
+      <li><a href="#product-lineup">Product Lineup</a></li>
+      <li><a href="#pop-display">Point-of-Purchase Display</a></li>
+      <li><a href="#advertising">Ad Campaign</a></li>
+      <li><a href="#assembly-instruction">Assembly Instructions</a></li>
+      <li><a href="#website">Website</a></li>
+    </ol>
+    <nav class="proj-back" aria-label="Back">
+      <a href="index.html">← Back to homepage</a>
+    </nav>
+  </aside>
+
+  <div class="proj-main">
+    <div class="media" style="aspect-ratio: 16 / 9; flex: 1.7778 1 0"><img src="images/project-01/01-cover-1.jpg" alt="FÖRSTA"></div>
+    <section class="block" id="packaging-concept">
+      <span class="block-label">Brand Concept</span>
+      <div class="block-copy"><p>Many first-time movers struggle to carry household supplies, remember which cleaning products they need, and understand how to look after a new home.</p><p>IKEA helps people furnish a home; FÖRSTA helps them learn how to live in it.</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 16 / 9"><iframe src="https://player.vimeo.com/video/1219026152?badge=0&amp;autopause=0&amp;loop=1#t=5s" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="FÖRSTA | IKEA | Shiyao Wu" loading="lazy"></iframe></div>   <!-- Vimeo: starts at 0:05 -->
+    <section class="block" id="product-line">
+      <span class="block-label">Product System</span>
+      <div class="block-copy"><p>Six essentials in one kit: liquid dish soap, foam hand soap, multi-surface cleaner, 3-in-1 laundry pods, refill tablets and a microfiber cleaning cloth.</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2400 / 1350; flex: 1.7778 1 0"><img src="images/project-01/01-cover-2.jpg" alt="FÖRSTA product line" loading="lazy"></div>
+    <section class="block" id="brand-identity">
+      <span class="block-label">Brand Identity</span>
+      <div class="block-copy"><p>The logo borrows the visual language of the IKEA wordmark, and the name comes from Swedish — <em>första</em> means “first.” A small house sits within the letterforms, setting a friendly, practical tone.</p><p>The colour palette is drawn directly from IKEA’s products, keeping the brand warm and approachable for its audience of college students and young professionals.</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/project-01/03-brand-identity-1.jpg" alt="FÖRSTA brand identity" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/project-01/03-brand-identity-2.jpg" alt="FÖRSTA brand identity" loading="lazy"></div>
+    <section class="block" id="product-lineup">
+      <span class="block-label">Product Lineup</span>
+      <div class="block-copy"><p>Every product comes with its own refill tablet, so bottles are reused rather than replaced.</p><p>The familiar figure from IKEA’s instruction manuals appears on each product, customised into a different pose that shows how it is used.</p></div>
+    </section>
+    <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-1.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-5.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
+    <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-2.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-3.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
+    <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-4.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-6.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-7.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
+    <div class="row"><div class="media" style="aspect-ratio: 3 / 2; flex: 1.5000 1 0"><img src="images/project-01/04-product-lineup-8.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 3 / 2; flex: 1.5000 1 0"><img src="images/project-01/04-product-lineup-9.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
+    <section class="block" id="pop-display">
+      <span class="block-label">Point-of-Purchase Display</span>
+      <div class="block-copy"><p>The display simulates how the shelf would appear in a real IKEA store, presenting the full kit and its refills just as shoppers would encounter them.</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2400 / 1350; flex: 1.7778 1 0"><img src="images/project-01/05-pop-display-1.jpg" alt="FÖRSTA point-of-purchase display" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 2400 / 1351; flex: 1.7765 1 0"><img src="images/project-01/05-pop-display-2.jpg" alt="FÖRSTA point-of-purchase display in store" loading="lazy"></div>
+    <section class="block" id="advertising">
+      <span class="block-label">Ad Campaign</span>
+      <div class="block-copy"><p>A series of six posters follows the first days in a new home, pairing each product with a moment: “First Dinner. Then Dishes.” “First Load? Easy.” “Keep the Bottle. Refill the Rest.”</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-01/06-advertising-1.jpg" alt="FÖRSTA advertising" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-01/06-advertising-2.jpg" alt="FÖRSTA billboard" loading="lazy"></div>
+    <section class="block" id="assembly-instruction">
+      <span class="block-label">Assembly Instructions</span>
+      <div class="block-copy"><p>Drawn in the style of IKEA’s instruction manuals, the booklet shows what comes in the kit, how to fit each pump and nozzle, and where to use each product around the home.</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2400 / 1767; flex: 1.3582 1 0"><img src="images/project-01/07-assembly-instruction-1.jpg" alt="FÖRSTA assembly instruction" loading="lazy"></div>
+    <section class="block" id="website">
+      <span class="block-label">Website</span>
+      <div class="block-copy"><p>FÖRSTA launches on IKEA’s website as a new collection, with a dedicated page where visitors can buy the Home Essentials Kit and its refill tablets — start with the kit, refill what you use.</p></div>
+    </section>
+    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1606; flex: 1.4944 1 0"><img src="images/project-01/08-website-1.jpg" alt="FÖRSTA website" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1606; flex: 1.4944 1 0"><img src="images/project-01/08-website-2.jpg" alt="FÖRSTA website" loading="lazy"></div></div>
+  </div>
+</main>
+
+<section class="more" aria-label="More projects">
+  <div class="more-head"><span>More projects</span><a href="archive.html">See all in Archive →</a></div>
+  <div class="more-grid">
+    <a class="more-card" href="project-02.html">
+      <div class="media"><img src="images/project-02/cover.jpg" alt="New Museum" loading="lazy"></div>
+      <div class="more-meta"><span>New Museum</span><span class="cats">Brand Identity - Interaction Design - Editorial Design</span></div>
+    </a>
+    <a class="more-card" href="project-03.html">
+      <div class="media"><img src="images/project-03/01-cover-2.jpg" alt="REMOVA" loading="lazy"></div>
+      <div class="more-meta"><span>REMOVA</span><span class="cats">Packaging Design - Brand Identity - 3D Motion</span></div>
+    </a>
+    <a class="more-card" href="project-04.html">
+      <div class="media"><img src="images/project-04/01-cover.jpg" alt="Art Trail" loading="lazy"></div>
+      <div class="more-meta"><span>Art Trail</span><span class="cats">Brand Identity - UI/UX Design - Experience Design</span></div>
+    </a>
+  </div>
+</section>
+
+<footer class="footer frame" id="contact">
+  <div class="foot-bottom">
+    <span>© 2026 Shiyao Wu</span>
+    <span>Los Angeles <span id="footClock" class="foot-time">--:--:--</span></span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+// Header height → layout offsets
+(function () {
+  const bar = document.querySelector('.site-bar');
+  const set = () => document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+  set(); addEventListener('resize', set);
+  if ('ResizeObserver' in window) new ResizeObserver(set).observe(bar);
+})();
+// Section index: highlight the section you're reading
+(function () {
+  const links = [...document.querySelectorAll('#toc a')];
+  const secs = links.map(a => document.querySelector(a.getAttribute('href')));
+  function update() {
+    const y = innerHeight * 0.35;
+    let cur = 0;
+    secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top < y) cur = i; });
+    links.forEach((a, i) => a.classList.toggle('is-active', i === cur));
+  }
+  addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+  update();
+})();
+// Footer: current city + live local time
+(function () {
+  const el = document.getElementById('footClock');
+  if (!el) return;
+  const fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'America/Los_Angeles' });
+  const tick = () => { el.textContent = fmt.format(new Date()); };
+  tick(); setInterval(tick, 1000);
+})();
+</script>
+<script>
+// Title → back up to the cover, smoothly, without adding #top to the address
+document.querySelectorAll('.to-cover').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' });
+}));
+// Always open a page at its top, so the cover is the first thing you see —
+// even when you arrive from a page that was scrolled down (e.g. the bottom of the Archive).
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+(function () {
+  const show = () => document.documentElement.classList.remove('sw-hold');
+  if (location.hash) { show(); return; }
+  const toTop = () => { window.scrollTo(0, 0); document.documentElement.scrollIntoView({ block: 'start' }); };
+  toTop();
+  // stay hidden until the page (and the cover) has loaded and sits at the top, then fade in
+  addEventListener('load', () => { toTop(); setTimeout(() => { toTop(); requestAnimationFrame(show); }, 60); });
+})();
+</script>
+<script>
+// No single word alone on a paragraph's last line: tie the last two words together
+// (backup for browsers without text-wrap: pretty)
+(function () {
+  const sel = 'p, h1, h2, h3, dd, li, .tile-meta span, .more-meta span, .card-title span';
+  const fix = el => {
+    const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    let last = null; while (walk.nextNode()) if (walk.currentNode.nodeValue.trim()) last = walk.currentNode;
+    if (!last || el.textContent.trim().split(/\s+/).length < 4) return;
+    last.nodeValue = last.nodeValue.replace(/\s+(\S+)\s*$/, '\u00A0$1');
+  };
+  const run = () => document.querySelectorAll(sel).forEach(fix);
+  run(); addEventListener('load', run);
+})();
+</script>
+
+<style id="lb-style">
+.proj-main .media:has(img) { cursor: zoom-in; }
+.lb { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center;
+  background: var(--bg); opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+.lb.is-open { opacity: 1; pointer-events: auto; }
+.lb img { max-width: calc(100vw - 160px); max-height: calc(100vh - 120px); object-fit: contain; cursor: zoom-out; display: block; }
+.lb button { position: absolute; background: none; border: 0; padding: 8px; font: inherit; font-size: 13px; font-weight: 500; color: var(--fg); cursor: pointer; }
+.lb-close { top: 16px; right: 16px; }
+.lb-prev, .lb-next { font-size: 20px !important; line-height: 1; }
+.lb-prev { left: 16px; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 16px; top: 50%; transform: translateY(-50%); }
+.lb-count { position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; font-size: 13px; color: var(--fg); }
+@media (max-width: 640px) {
+  .lb img { max-width: calc(100vw - 32px); max-height: calc(100vh - 140px); }
+  .lb-prev, .lb-next { top: auto; bottom: 12px; transform: none; }
+}
+</style>
+<div class="lb" id="lb" aria-hidden="true"><img alt=""><button class="lb-close" type="button">Close</button><button class="lb-prev" type="button" aria-label="Previous image">&larr;</button><button class="lb-next" type="button" aria-label="Next image">&rarr;</button><div class="lb-count"></div></div>
+<script>
+(() => {
+  const imgs = [...document.querySelectorAll('.proj-main .media img')];
+  if (!imgs.length) return;
+  const lb = document.getElementById('lb'), big = lb.querySelector('img'), count = lb.querySelector('.lb-count');
+  let i = 0;
+  const show = n => { i = (n + imgs.length) % imgs.length; big.src = imgs[i].currentSrc || imgs[i].src; big.alt = imgs[i].alt; count.textContent = (i + 1) + ' / ' + imgs.length; };
+  const open = n => { show(n); lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false'); document.documentElement.style.overflow = 'hidden'; };
+  const close = () => { lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true'); document.documentElement.style.overflow = ''; };
+  document.querySelectorAll('.proj-main .media').forEach(box => {
+    if (!box.querySelector('img')) return;
+    box.addEventListener('click', () => { const im = box.querySelector('img.is-on') || box.querySelector('img'); open(imgs.indexOf(im)); });
+  });
+  lb.querySelector('.lb-prev').onclick = e => { e.stopPropagation(); show(i - 1); };
+  lb.querySelector('.lb-next').onclick = e => { e.stopPropagation(); show(i + 1); };
+  lb.addEventListener('click', close);
+  addEventListener('keydown', e => { if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close(); if (e.key === 'ArrowLeft') show(i - 1); if (e.key === 'ArrowRight') show(i + 1); });
+  if (imgs.length < 2) lb.querySelectorAll('.lb-prev,.lb-next,.lb-count').forEach(b => b.hidden = true);
+})();
+</script>
+</body>
+</html>
