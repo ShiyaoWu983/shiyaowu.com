@@ -356,9 +356,12 @@ body > footer.footer { margin-top: auto; }
 .w4 .ab-list li { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--frame); }
 .w4 .ab-list li .g { grid-column: 3 / -1; }
 .aw-link { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; transition: text-decoration-color .2s; }
-.aw-link:hover { text-decoration-color: currentColor; }
+.aw-link:hover, .has-link:hover .aw-link { text-decoration-color: currentColor; }
+.has-link { cursor: pointer; }
+.ab-list .aw-detail { color: var(--muted); transition: color .2s; }
+.ab-list .has-link:hover a { opacity: .45; }
 .aw-arr { display: inline-block; color: var(--muted); transition: transform .2s ease, color .2s; }
-.aw-link:hover .aw-arr { transform: translate(2px,-2px); color: var(--fg); }
+.has-link:hover .aw-arr, .aw-link:hover .aw-arr { transform: translate(2px,-2px); color: var(--fg); }
 
 @media (max-width: 1100px) {
   .ab { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -486,7 +489,7 @@ const entry = r => `<li><span class="when">${esc(r[0])}</span><span class="st">$
 const label = r => `<li><span class="when">${esc(r[0])}</span><span>${esc(r[1])}</span></li>`;
 // Recognitions list: year (first row of each year) · award · result
 const award = (r, i, a) => { const first = !i || a[i - 1][0] !== r[0];
-  return `<li class="${first && i ? 'yr-gap' : ''}"><span class="when">${first ? esc(r[0]) : ''}</span>${r[3] ? `<a class="aw-link" href="${esc(r[3])}" target="_blank" rel="noopener">${esc(r[1])} <span class="aw-arr">↗</span></a>` : `<span>${esc(r[1])}</span>`}<span class="g">${esc(r[2])}</span></li>`; };
+  return `<li class="${first && i ? 'yr-gap' : ''}${r[3] ? ' has-link' : ''}"><span class="when">${first ? esc(r[0]) : ''}</span>${r[3] ? `<a class="aw-link" href="${esc(r[3])}" target="_blank" rel="noopener">${esc(r[1])} <span class="aw-arr">↗</span></a>` : `<span>${esc(r[1])}</span>`}${r[3] ? `<a class="g aw-detail" href="${esc(r[3])}" target="_blank" rel="noopener">${esc(r[2])}</a>` : `<span class="g">${esc(r[2])}</span>`}</li>`; };
 // 1-column sections
 const stack = r => `<li class="st">${two([0, r[1], r[0]])}</li>`;
 const lang = r => `<li><span>${esc(r[0])} (${esc(r[1])})</span></li>`;
@@ -496,6 +499,8 @@ $('exp').innerHTML = EXP.map(entry).join('');
 $('edu').innerHTML = EDU.map(entry).join('');
 $('shows').innerHTML = SHOWS.map(entry).join('');
 $('awards').innerHTML = AWARDS.map(award).join('');
+// The whole row opens the award page (not only the name)
+$('awards').addEventListener('click', e => { const li = e.target.closest('.has-link'); if (!li || e.target.closest('a')) return; li.querySelector('a').click(); });
 $('skills').innerHTML = SKILLS.map(label).join('');
 $('press').innerHTML = PRESS.map(entry).join('');
 $('langs').innerHTML = LANGS.map(lang).join('');
