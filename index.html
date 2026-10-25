@@ -378,6 +378,26 @@ body > footer.footer { margin-top: auto; }
 /* Tags under a title: one step smaller than the title (13px, 12px on phone) */
 .card .card-tags, .tile-meta .cats, .more-meta .cats { font-size: 13px; }
 @media (max-width: 640px) { .card .card-tags, .tile-meta .cats, .more-meta .cats { font-size: 12px; } }
+
+/* Subtitle under the name in the opening */
+.splash-sub {
+  position: absolute; left: 50%; top: 50%; z-index: 2; white-space: nowrap;
+  transform: translate(-50%, calc(clamp(39px, 9vw, 159px) * 0.5 + clamp(12px, 1.6vw, 26px)));
+  font-size: clamp(17px, 1.7vw, 26px); font-weight: 500; letter-spacing: 0.01em; color: #FFFFFF;
+  text-shadow: 0 2px 16px rgba(0,0,0,.25); opacity: 0; transition: opacity .4s ease .15s;
+}
+.splash.is-on .splash-sub { opacity: 1; }
+
+/* Phones/tablets: the intro line and contact links move out of the fixed header, into the top of the page */
+.m-intro { display: none; }
+@media (max-width: 900px) {
+  .m-intro { display: block; padding-top: 12px; font-size: 13px; line-height: 1.4; }
+  .m-intro p { margin: 0; max-width: 46ch; }
+  .m-intro .bar-contact { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 10px; color: var(--fg); }
+  .m-intro .bar-contact a { display: inline-flex; align-items: center; color: var(--fg); }
+  .m-intro .ic { width: 1em; height: 1em; margin-right: .35em; }
+  .m-intro .ic-f { display: none; }
+}
 </style>
 
 <header class="site-bar">
@@ -395,6 +415,7 @@ body > footer.footer { margin-top: auto; }
 <div class="splash" id="splash" aria-hidden="true">
   <div class="splash-stage"><div class="sf on"><img src="images/project-02/cover.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-04/04-arttrail-kiosk-2.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-06/02-tomato-1.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-02/09-sl-cover.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-06/01-cover-1.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-01/01-cover-1.jpg" alt="" decoding="async"></div></div>
   <div class="splash-name">Shiyao Wu</div>
+  <div class="splash-sub">Graphic Designer</div>
   <svg class="splash-curve" id="splashCurve" viewBox="0 0 1000 200" preserveAspectRatio="none"><path id="splashPath" d="M0 0 L1000 0 Q500 200 0 0 Z"/></svg>
 </div>
 <script>
@@ -404,7 +425,7 @@ body > footer.footer { margin-top: auto; }
 </script>
 
 <!-- ============ Hero ============ -->
-<div class="hero frame" id="top"></div>
+<div class="hero frame" id="top"><div class="m-intro" id="mIntro"></div></div>
 
 
 <!-- ============ Work ============ -->
@@ -541,6 +562,14 @@ document.getElementById('replayIntro').addEventListener('click', () => {
   tick(); setInterval(tick, 1000);
 })();
 
+
+// Phones: copy the intro line and contact links from the header into the top of the page
+(function () {
+  const box = document.getElementById('mIntro'); if (!box) return;
+  const intro = document.querySelector('.site-bar .bar-intro'), contact = document.querySelector('.site-bar .bar-contact');
+  if (intro) box.insertAdjacentHTML('beforeend', '<p>' + intro.innerHTML + '</p>');
+  if (contact) box.appendChild(contact.cloneNode(true));
+})();
 // Keep --bar-h equal to the header's real height (it changes with screen size)
 (function () {
   const bar = document.querySelector('.site-bar');
