@@ -643,6 +643,15 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   .lb img { max-width: calc(100vw - 32px); max-height: calc(100vh - 140px); }
   .lb-prev, .lb-next { top: auto; bottom: 12px; transform: none; }
 }
+
+/* Phones: stacked images keep their own shape (the inline flex values are only for side-by-side rows);
+   rows of 3+ stay side by side; rows of 4 become 2 × 2 */
+@media (max-width: 640px) {
+  .row:not(:has(> .media:nth-child(3))) > .media { flex: none !important; width: 100%; }   /* pairs stack, each at its own shape */
+  .row:has(> .media:nth-child(3)) { flex-direction: row; }                                 /* rows of 3 or 5 stay side by side, smaller */
+  .row:has(> .media:nth-child(3)) > .media { width: auto; }
+  .row:has(> .media:nth-child(4):last-child) { display: grid; grid-template-columns: 1fr 1fr; }   /* rows of 4 become 2 × 2 */
+}
 </style>
 <div class="lb" id="lb" aria-hidden="true"><img alt=""><button class="lb-close" type="button">Close</button><button class="lb-prev" type="button" aria-label="Previous image">&larr;</button><button class="lb-next" type="button" aria-label="Next image">&rarr;</button><div class="lb-count"></div></div>
 <script>
