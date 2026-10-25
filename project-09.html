@@ -216,7 +216,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--frame); }   /* same as the site's outer margin */
 .card { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .card .ph { aspect-ratio: 689 / 460; max-width: 100%; transition: border-radius .3s ease; }
-.card:hover .ph { border-radius: 24px; }
+@media (hover: hover) { .card:hover .ph { border-radius: 24px; } }   /* no corner change on touch screens */
 .card-meta { display: flex; flex-direction: column; gap: 4px; }
 .card-title { font-size: 17px; font-weight: 500; }
 .card-title span { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .3s ease; }
@@ -378,7 +378,7 @@ body > footer.footer { margin-top: auto; }
 .more-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--frame); }
 .more-card { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .more-card .media { aspect-ratio: 5 / 3; transition: border-radius .3s ease; }
-.more-card:hover .media { border-radius: 24px; }
+@media (hover: hover) { .more-card:hover .media { border-radius: 24px; } }   /* no corner change on touch screens */
 .more-meta { display: flex; flex-direction: column; gap: 2px; font-size: 15px; font-weight: 500; line-height: 1.3; }
 .more-meta .cats { color: var(--muted); }
 

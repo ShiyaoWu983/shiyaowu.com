@@ -212,7 +212,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--frame); }   /* same as the site's outer margin */
 .card { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .card .ph { aspect-ratio: 689 / 460; max-width: 100%; transition: border-radius .3s ease; }
-.card:hover .ph { border-radius: 24px; }
+@media (hover: hover) { .card:hover .ph { border-radius: 24px; } }   /* no corner change on touch screens */
 .card-meta { display: flex; flex-direction: column; gap: 4px; }
 .card-title { font-size: 17px; font-weight: 500; }
 .card-title span { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .3s ease; }
@@ -328,7 +328,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 .pg-grid { columns: 4; column-gap: calc(var(--frame) / 2); }
 .pg-item { display: block; width: 100%; margin: 0 0 calc(var(--frame) / 2); padding: 0; border: 0; background: none; cursor: zoom-in; break-inside: avoid; text-align: left; font: inherit; color: inherit; }
 .pg-item .pg-media { position: relative; overflow: hidden; border-radius: var(--radius, 4px); background: var(--ph, #E4E4E4); transition: border-radius .3s ease; }
-.pg-item:hover .pg-media, .pg-item:focus-visible .pg-media { border-radius: 24px; }
+@media (hover: hover) { .pg-item:hover .pg-media, .pg-item:focus-visible .pg-media { border-radius: 24px; } }   /* no corner change on touch screens */
 .pg-item img, .pg-item video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .pg-item .pg-ph { position: absolute; inset: 0; display: grid; place-items: center; font-size: 12px; color: var(--ph-ink, #8C8C8C); }
 @media (max-width: 1000px) { .pg-grid { columns: 3; } }
@@ -368,6 +368,18 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 .pv.is-dark { --bg: #000000; --fg: #F3F3F3; --muted: #8C8C8C; background: #000000; }
 .pv-stage video { width: 100%; height: calc(100vh - 96px); object-fit: contain; }   /* small loops (e.g. a GIF) scale up to fill the stage */
 @media (max-width: 800px) { .pv-stage video { height: auto; max-height: calc(100vh - 260px); } }
+
+/* Grid built as real columns (JS below), so every column starts exactly at the top */
+.pg-grid { columns: auto; display: flex; align-items: flex-start; gap: calc(var(--frame) / 2); }
+.pg-col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: calc(var(--frame) / 2); }
+.pg-col .pg-item { margin: 0; }
+/* Phones: the image takes the space that is left; the text below never gets covered */
+@media (max-width: 800px) {
+  .pv { height: 100dvh; }
+  .pv-stage { overflow: hidden; }
+  .pv-stage img, .pv-stage video { max-width: 100%; max-height: 100%; width: auto; height: auto; }
+  .pv-info { max-height: 40vh; overflow-y: auto; }
+}
 </style>
 </head>
 <body>
@@ -429,6 +441,17 @@ const PLAY = [
   const grid = document.getElementById('pgGrid');
   grid.innerHTML = PLAY.map((p, i) => { const list = srcs(p);
     return `<button class="pg-item" type="button" data-i="${i}" aria-label="${esc(p.title)}"><div class="pg-media" style="aspect-ratio: ${p.w} / ${p.h}">${tag(list[0], p.title, true)}${list.length > 1 ? `<span class="pg-count">${list.length}</span>` : ''}</div></button>`; }).join('');
+  // spread the pieces over real columns (shortest column first) so the tops line up
+  const items = [...grid.children];
+  const layout = () => {
+    const n = innerWidth <= 640 ? 2 : innerWidth <= 1000 ? 3 : 4;
+    if (grid.dataset.n == n) return; grid.dataset.n = n;
+    const cols = Array.from({ length: n }, () => { const c = document.createElement('div'); c.className = 'pg-col'; return c; });
+    const h = new Array(n).fill(0);
+    items.forEach(el => { const p = PLAY[+el.dataset.i]; const k = h.indexOf(Math.min(...h)); cols[k].appendChild(el); h[k] += p.h / p.w + 0.05; });
+    grid.replaceChildren(...cols);
+  };
+  layout(); addEventListener('resize', layout);
   const pv = document.getElementById('pv'), stage = document.getElementById('pvStage'), thumbs = document.getElementById('pvThumbs');
   let i = 0, j = 0;
   const showImg = k => { const p = PLAY[i], list = srcs(p); j = (k + list.length) % list.length;
