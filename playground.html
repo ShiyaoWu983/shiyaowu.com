@@ -212,7 +212,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--frame); }   /* same as the site's outer margin */
 .card { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .card .ph { aspect-ratio: 689 / 460; max-width: 100%; transition: border-radius .3s ease; }
-@media (hover: hover) { .card:hover .ph { border-radius: 24px; } }   /* no corner change on touch screens */
+@media (hover: hover) and (pointer: fine) and (min-width: 901px) { .card:hover .ph { border-radius: 24px; } }   /* no corner change on phones, tablets or touch screens */
 .card-meta { display: flex; flex-direction: column; gap: 4px; }
 .card-title { font-size: 17px; font-weight: 500; }
 .card-title span { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .3s ease; }
@@ -328,7 +328,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 .pg-grid { columns: 4; column-gap: calc(var(--frame) / 2); }
 .pg-item { display: block; width: 100%; margin: 0 0 calc(var(--frame) / 2); padding: 0; border: 0; background: none; cursor: zoom-in; break-inside: avoid; text-align: left; font: inherit; color: inherit; }
 .pg-item .pg-media { position: relative; overflow: hidden; border-radius: var(--radius, 4px); background: var(--ph, #E4E4E4); transition: border-radius .3s ease; }
-@media (hover: hover) { .pg-item:hover .pg-media, .pg-item:focus-visible .pg-media { border-radius: 24px; } }   /* no corner change on touch screens */
+@media (hover: hover) and (pointer: fine) and (min-width: 901px) { .pg-item:hover .pg-media, .pg-item:focus-visible .pg-media { border-radius: 24px; } }   /* no corner change on phones, tablets or touch screens */
 .pg-item img, .pg-item video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .pg-item .pg-ph { position: absolute; inset: 0; display: grid; place-items: center; font-size: 12px; color: var(--ph-ink, #8C8C8C); }
 @media (max-width: 1000px) { .pg-grid { columns: 3; } }
