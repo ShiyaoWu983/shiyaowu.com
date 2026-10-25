@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>CARGOS — Shiyao Wu</title>
+<title>Bento of Memories: Four Years, Four Ingredients — Shiyao Wu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Newsreader:opsz,wght@6..72,400&display=swap">
@@ -312,6 +312,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
 body > footer.footer { margin-top: auto; }
 
+/* Bento of Memories: colours flipped — dark page to match the photography */
+:root { --bg: #000000; --fg: #F3F3F3; --muted: #8C8C8C; --ph: #1E1E1E; --ph-ink: #6E6E6E; color-scheme: dark; }
 </style>
 <style>
 /* ---------- Project page (after koto.com/projects/adobe) ----------
@@ -425,15 +427,14 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 
 <main class="proj" id="top">
   <aside class="proj-side">
-    <h1 class="proj-title"><a href="#top" class="to-cover">CARGOS</a></h1>
-    <p class="proj-lede">A display typeface inspired by the structural language of airline cargo containers.</p>
-    <p class="proj-tags">Type Design - AI Design - Editorial Design</p>
+    <h1 class="proj-title"><a href="#top" class="to-cover">Bento of Memories:<br>Four Years, Four Ingredients</a></h1>
+    <p class="proj-tags">Editorial Design - Bookmaking</p>
     <ol class="proj-toc" id="toc">
       <li><a href="#overview">Overview</a></li>
-      <li><a href="#ai-exploration">3D Exploration</a></li>
-      <li><a href="#ai-generated">AI-Rendered 3D Letterforms</a></li>
-      <li><a href="#specimen">Type Specimen</a></li>
-      <li><a href="#printed">3D-Printed Letterforms</a></li>
+      <li><a href="#tomato">Tomato</a></li>
+      <li><a href="#maitake">Maitake</a></li>
+      <li><a href="#truffle">Truffle</a></li>
+      <li><a href="#salmon">Salmon</a></li>
     </ol>
     <nav class="proj-back" aria-label="Back">
       <a href="index.html">← Back to homepage</a>
@@ -441,52 +442,48 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   </aside>
 
   <div class="proj-main">
-    <div class="media" style="aspect-ratio: 16 / 9"><img src="images/project-05/01-cover.jpg" alt="CARGOS"></div>
+    <div class="media" style="aspect-ratio: 16 / 9"><img src="images/project-06/01-cover-2.jpg" alt="Bento of Memories"></div>
     <section class="block" id="overview">
       <span class="block-label">Overview</span>
-      <div class="block-copy"><p>CARGOS translates the structural language of airline cargo containers into type. Each glyph borrows the cut-out geometry of container construction, turning industrial precision into a cohesive display typeface that balances functional rigour with formal clarity.</p><p class="note">[3D process with AI available upon request.]</p></div>
+      <div class="block-copy"><p>Bento of Memories is a set of four handmade books, each built around an ingredient and a year of my life. Together they pair personal stories with recipes — from farewells in 2020 to a family reunion in 2023.</p></div>
     </section>
-    <section class="block" id="ai-exploration">
-      <span class="block-label">3D Exploration</span>
-      <div class="block-copy"><p>A motion study testing how the letterforms behave as three-dimensional objects, with AI assisting the move from flat glyph to rendered form.</p></div>
+    <section class="block" id="tomato">
+      <span class="block-label">Tomato</span>
+      <div class="block-copy"><p>Tomato reflects on 2020 — another year abroad, full of farewells and longing for family. The book’s deckled edges recall the skin of a real tomato, and its pages pair memories with the recipes that brought me closer to home.</p></div>
     </section>
-    <div class="media" style="aspect-ratio: 16 / 9"><iframe src="https://player.vimeo.com/video/1187936467?h=18efb614cc&amp;badge=0&amp;autopause=0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="CARGOS | Shiyao Wu" loading="lazy"></iframe></div>
-    <section class="block" id="ai-generated">
-      <span class="block-label">AI-Rendered 3D Letterforms</span>
-      <div class="block-copy"><p>Each letter was drawn in 2D, then rendered with AI as a full-scale cargo container — complete with doors, panels and pallet base — placing the typeface back in the world that inspired it.</p></div>
+    <div class="row slide-row"><div class="media slides is-single" style="aspect-ratio: 3 / 2"><img src="images/project-06/02-tomato-1.jpg" alt="Tomato book" loading="lazy" class=is-on></div><div class="media slides" style="aspect-ratio: 3 / 2"><img src="images/project-06/02-tomato-2.jpg" alt="Tomato book" loading="lazy" class=is-on><img src="images/project-06/02-tomato-3.jpg" alt="Tomato book" loading="lazy"><img src="images/project-06/02-tomato-4.jpg" alt="Tomato book" loading="lazy"><img src="images/project-06/02-tomato-5.jpg" alt="Tomato book" loading="lazy"></div></div>
+    <section class="block" id="maitake">
+      <span class="block-label">Maitake</span>
+      <div class="block-copy"><p>Maitake recalls a summer 2021 omakase dinner where I was the only guest. A plate of tempura maitake opened a story about Japan’s quiet forests, and the book is designed to carry readers into the place where these mushrooms grow.</p></div>
     </section>
-    <div class="row"><div class="media" style="aspect-ratio: 1374 / 1375; flex: 0.9993 1 0"><img src="images/project-05/03-3d-typeface-1.jpg" alt="CARGOS 3D letterform" loading="lazy"></div><div class="media" style="aspect-ratio: 1374 / 1375; flex: 0.9993 1 0"><img src="images/project-05/03-3d-typeface-2.jpg" alt="CARGOS 3D letterform" loading="lazy"></div><div class="media" style="aspect-ratio: 1374 / 1375; flex: 0.9993 1 0"><img src="images/project-05/03-3d-typeface-3.jpg" alt="CARGOS 3D letterform" loading="lazy"></div></div>
-    <div class="row"><div class="media" style="aspect-ratio: 1374 / 1375; flex: 0.9993 1 0"><img src="images/project-05/03-3d-typeface-4.jpg" alt="CARGOS 3D letterform" loading="lazy"></div><div class="media" style="aspect-ratio: 1374 / 1375; flex: 0.9993 1 0"><img src="images/project-05/03-3d-typeface-5.jpg" alt="CARGOS 3D letterform" loading="lazy"></div><div class="media" style="aspect-ratio: 1374 / 1375; flex: 0.9993 1 0"><img src="images/project-05/03-3d-typeface-6.jpg" alt="CARGOS 3D letterform" loading="lazy"></div></div>
-    <section class="block" id="specimen">
-      <span class="block-label">Type Specimen</span>
-      <div class="block-copy"><p>A specimen book presenting the full alphabet, numerals and large display settings, photographed on diamond-plate steel that recalls the cargo hold.</p></div>
+    <div class="row slide-row"><div class="media slides" style="aspect-ratio: 3 / 2"><img src="images/project-06/03-maitake-1.jpg" alt="Maitake book" loading="lazy" class=is-on><img src="images/project-06/03-maitake-2.jpg" alt="Maitake book" loading="lazy"><img src="images/project-06/03-maitake-3.jpg" alt="Maitake book" loading="lazy"></div><div class="media slides" style="aspect-ratio: 3 / 2"><img src="images/project-06/03-maitake-4.jpg" alt="Maitake book" loading="lazy" class=is-on><img src="images/project-06/03-maitake-5.jpg" alt="Maitake book" loading="lazy"><img src="images/project-06/03-maitake-6.jpg" alt="Maitake book" loading="lazy"><img src="images/project-06/03-maitake-7.jpg" alt="Maitake book" loading="lazy"><img src="images/project-06/03-maitake-8.jpg" alt="Maitake book" loading="lazy"><img src="images/project-06/03-maitake-9.jpg" alt="Maitake book" loading="lazy"><img src="images/project-06/03-maitake-10.jpg" alt="Maitake book" loading="lazy"></div></div>
+    <section class="block" id="truffle">
+      <span class="block-label">Truffle</span>
+      <div class="block-copy"><p>Truffle marks my 22nd birthday dinner in 2022. The semi-handmade book mimics the texture of a truffle and includes the recipe for the evening’s centrepiece dish, so readers experience it by touch as well as sight.</p></div>
     </section>
-    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-1.jpg" alt="CARGOS typeface specimen" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-2.jpg" alt="CARGOS typeface specimen" loading="lazy"></div></div>
-    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-3.jpg" alt="CARGOS typeface specimen" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-4.jpg" alt="CARGOS typeface specimen" loading="lazy"></div></div>
-    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-5.jpg" alt="CARGOS typeface specimen" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-6.jpg" alt="CARGOS typeface specimen" loading="lazy"></div></div>
-    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-7.jpg" alt="CARGOS typeface specimen" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-8.jpg" alt="CARGOS typeface specimen" loading="lazy"></div></div>
-    <section class="block" id="printed">
-      <span class="block-label">3D-Printed Letterforms</span>
-      <div class="block-copy"><p>The container letterforms were 3D-printed as physical models, taking CARGOS off the screen and into real space.</p></div>
+    <div class="row slide-row"><div class="media slides" style="aspect-ratio: 3 / 2"><img src="images/project-06/04-truffle-1.jpg" alt="Truffle book" loading="lazy" class=is-on><img src="images/project-06/04-truffle-2.jpg" alt="Truffle book" loading="lazy"><img src="images/project-06/04-truffle-3.jpg" alt="Truffle book" loading="lazy"></div><div class="media slides" style="aspect-ratio: 3 / 2"><img src="images/project-06/04-truffle-4.jpg" alt="Truffle book" loading="lazy" class=is-on><img src="images/project-06/04-truffle-5.jpg" alt="Truffle book" loading="lazy"><img src="images/project-06/04-truffle-6.jpg" alt="Truffle book" loading="lazy"><img src="images/project-06/04-truffle-7.jpg" alt="Truffle book" loading="lazy"><img src="images/project-06/04-truffle-8.jpg" alt="Truffle book" loading="lazy"><img src="images/project-06/04-truffle-9.jpg" alt="Truffle book" loading="lazy"><img src="images/project-06/04-truffle-10.jpg" alt="Truffle book" loading="lazy"></div></div>
+    <section class="block" id="salmon">
+      <span class="block-label">Salmon</span>
+      <div class="block-copy"><p>Salmon is a scroll-shaped book about reunion, capturing 2023, when I saw my family again after four years apart. Short stories unfold alongside a recipe for a salmon poke bowl.</p></div>
     </section>
-    <div class="media" style="aspect-ratio: 2295 / 1721"><img src="images/project-05/05-3d-printed.jpg" alt="CARGOS 3D-printed letterforms" loading="lazy"></div>
+    <div class="row slide-row"><div class="media slides is-single" style="aspect-ratio: 3 / 2"><img src="images/project-06/05-salmon-1.jpg" alt="Salmon book" loading="lazy" class=is-on></div><div class="media slides" style="aspect-ratio: 3 / 2"><img src="images/project-06/05-salmon-2.jpg" alt="Salmon book" loading="lazy" class=is-on><img src="images/project-06/05-salmon-3.jpg" alt="Salmon book" loading="lazy"><img src="images/project-06/05-salmon-4.jpg" alt="Salmon book" loading="lazy"></div></div>
   </div>
 </main>
 
 <section class="more" aria-label="More projects">
   <div class="more-head"><span>More projects</span><a href="archive.html">See all in Archive →</a></div>
   <div class="more-grid">
-    <a class="more-card" href="project-06.html">
-      <div class="media"><img src="images/project-06/01-cover-1.jpg" alt="Bento of Memories" loading="lazy"></div>
-      <div class="more-meta"><span>Bento of Memories: Four Years, Four Ingredients</span><span class="cats">Editorial Design - Bookmaking</span></div>
-    </a>
-    <a class="more-card" href="project-01.html">
+    <a class="more-card" href="forsta.html">
       <div class="media"><img src="images/project-01/01-cover-2.jpg" alt="FÖRSTA" loading="lazy"></div>
       <div class="more-meta"><span>FÖRSTA</span><span class="cats">Packaging Design - Brand Identity - 3D Motion</span></div>
     </a>
-    <a class="more-card" href="project-02.html">
+    <a class="more-card" href="new-museum.html">
       <div class="media"><img src="images/project-02/cover.jpg" alt="New Museum" loading="lazy"></div>
       <div class="more-meta"><span>New Museum</span><span class="cats">Brand Identity - Interaction Design - Editorial Design</span></div>
+    </a>
+    <a class="more-card" href="remova.html">
+      <div class="media"><img src="images/project-03/01-cover-2.jpg" alt="REMOVA" loading="lazy"></div>
+      <div class="more-meta"><span>REMOVA</span><span class="cats">Packaging Design - Brand Identity - 3D Motion</span></div>
     </a>
   </div>
 </section>
@@ -592,9 +589,6 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   .lb img { max-width: calc(100vw - 32px); max-height: calc(100vh - 140px); }
   .lb-prev, .lb-next { top: auto; bottom: 12px; transform: none; }
 }
-.block-copy p.note { font-size: 13px; color: var(--muted); }
-@media (max-width: 640px) { .block-copy p.note { font-size: 12px; } }
-.media iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 /* Phones: stacked images keep their own shape (the inline flex values are only for side-by-side rows);
    rows of 3+ stay side by side; rows of 4 become 2 × 2 */

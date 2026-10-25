@@ -450,7 +450,7 @@ const TITLES = ['FÖRSTA', 'New Museum', 'REMOVA', 'Art Trail', 'CARGOS', 'Bento
 const COVERS = ['images/project-01/01-cover-2.jpg', 'images/project-02/02-brand-identity.mp4', 'images/project-03/01-cover-2.jpg', 'images/project-04/01-cover.jpg', 'images/project-05/01-cover.jpg', 'images/project-06/01-cover-1.jpg'];   // .jpg = image, .mp4 = looping video   // cover image per card ('' = grey placeholder)
 const PROJECTS = TAGS.map((tags, i) => ({
   title: TITLES[i], tags, img: COVERS[i],
-  href: 'project-' + String(i + 1).padStart(2, '0') + '.html'   // one page per project
+  href: ['forsta.html', 'new-museum.html', 'remova.html', 'art-trail.html', 'cargos.html', 'bento-of-memories.html', 'hockneye.html', 'citrus-time.html', 'be-drunk.html'][i]   // one page per project
 }));
 
 const $ = id => document.getElementById(id);

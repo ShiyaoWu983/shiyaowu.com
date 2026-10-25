@@ -391,7 +391,7 @@ const ALL = [
   { title: 'Hockneye', cats: ['Exhibition Design', 'Typography', '3D Motion'], img: 'images/project-07/01-cover.jpg' },
   { title: 'Citrus Time', cats: ['Packaging Design', 'Brand Identity', 'AI Design'], img: 'images/project-08/01-cover-2.jpg' },
   { title: 'Be Drunk', cats: ['Editorial Design', 'Publication Design'], img: 'images/project-09/cover.jpg' }
-].map((p, i) => ({ href: 'project-' + String(i + 1).padStart(2, '0') + '.html', ...p }));   // one page per project
+].map((p, i) => ({ href: ['forsta.html', 'new-museum.html', 'remova.html', 'art-trail.html', 'cargos.html', 'bento-of-memories.html', 'hockneye.html', 'citrus-time.html', 'be-drunk.html'][i], ...p }));   // one page per project
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));

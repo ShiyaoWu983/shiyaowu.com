@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hockneye — Shiyao Wu</title>
+<title>Art Trail — Shiyao Wu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Newsreader:opsz,wght@6..72,400&display=swap">
@@ -311,7 +311,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* Footer always sits at the bottom of the screen, even on short pages */
 body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
 body > footer.footer { margin-top: auto; }
-
 </style>
 <style>
 /* ---------- Project page (after koto.com/projects/adobe) ----------
@@ -338,6 +337,10 @@ body > footer.footer { margin-top: auto; }
 .media { position: relative; background: var(--ph); border-radius: var(--radius); overflow: hidden; display: flex; align-items: flex-end; padding: 10px 12px; }
 .media span { font-size: 12px; color: var(--ph-ink); }
 .media img, .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }   /* real media fills its slot */
+.row { display: flex; gap: calc(var(--frame) / 2); }   /* items keep their shape and share one height */
+.row > .media { min-width: 0; }
+.proj-main > .media { flex: none !important; }
+@media (max-width: 640px) { .row { flex-direction: column; } .row > .media { flex: none !important; width: 100%; } }
 .media--wide { aspect-ratio: 16 / 9; }
 .media--tall { aspect-ratio: 4 / 5; }
 .media--square { aspect-ratio: 1 / 1; }
@@ -403,15 +406,6 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 
 /* Section title + text sit slightly in from the image edges (after koto.com), so the page breathes */
 .block { padding-inline: var(--frame); }
-
-/* Two slideshows side by side: each fades through its images on its own */
-.row { display: flex; gap: calc(var(--frame) / 2); }
-.row > .media { min-width: 0; flex: 1 1 0; }
-.proj-main > .media { flex: none !important; }
-.media img, .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.slides img { opacity: 0; transition: opacity 1s ease; }
-.slides img.is-on { opacity: 1; }
-@media (max-width: 640px) { .row { flex-direction: column; } .row > .media { flex: none; width: 100%; } }
 </style>
 </head>
 <body>
@@ -425,14 +419,18 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 
 <main class="proj" id="top">
   <aside class="proj-side">
-    <h1 class="proj-title"><a href="#top" class="to-cover">Hockneye</a></h1>
-    <p class="proj-lede">An exhibition identity built on David Hockney’s idea that vision is constructed, not given.</p>
-    <p class="proj-tags">Exhibition Design - Typography - 3D Motion</p>
+    <h1 class="proj-title"><a href="#top" class="to-cover">Art Trail</a></h1>
+    <p class="proj-lede">Your personalized guide to art, where exploration meets effortless discovery.</p>
+    <p class="proj-tags">Brand Identity - UI/UX Design - Experience Design</p>
     <ol class="proj-toc" id="toc">
       <li><a href="#brand-concept">Brand Concept</a></li>
-      <li><a href="#poster-series">Poster Series</a></li>
-      <li><a href="#motion">Motion</a></li>
-      <li><a href="#spatial-application">Spatial Application</a></li>
+      <li><a href="#business-strategy">Research &amp; Strategy</a></li>
+      <li><a href="#app-website">App &amp; Website</a></li>
+      <li><a href="#kiosk">Kiosk</a></li>
+      <li><a href="#advertising-campaigns">Ad Campaign</a></li>
+      <li><a href="#merchandise">Merchandise</a></li>
+      <li><a href="#ar-notebook">AR Notebook</a></li>
+      <li><a href="#stationery">Stationery</a></li>
     </ol>
     <nav class="proj-back" aria-label="Back">
       <a href="index.html">← Back to homepage</a>
@@ -440,44 +438,71 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   </aside>
 
   <div class="proj-main">
-    <div class="media" style="aspect-ratio: 16 / 9"><img src="images/project-07/01-cover.jpg" alt="Hockneye"></div>
+    <div class="media" style="aspect-ratio: 16 / 9; flex: 1.7778 1 0"><img src="images/project-04/01-cover.jpg" alt="Art Trail" loading="lazy"></div>
     <section class="block" id="brand-concept">
       <span class="block-label">Brand Concept</span>
-      <div class="block-copy"><p>Hockneye is an exhibition identity and immersive installation exploring the convergence of art and science. It draws on David Hockney’s ideas about perception — his multi-perspective Joiners collages, his theory that Renaissance painters relied on optical devices, and his embrace of the iPad and digital drawing — to argue that seeing is never neutral.</p><p>From concave mirrors and the camera obscura to AI and computational vision, the exhibition traces how tools have shaped what we see, inviting visitors to question their own perception.</p></div>
+      <div class="block-copy"><p>Art Trail is an art intelligence platform that reimagines how people discover, plan and engage with exhibitions. Built for art lovers, students and professionals, it offers curated journeys, personalised recommendations and one-stop planning — from local galleries to citywide explorations.</p></div>
     </section>
-    <section class="block" id="poster-series">
-      <span class="block-label">Poster Series</span>
-      <div class="block-copy"><p>A typographic series of ten posters. Headlines such as “The Constructed Eye,” “Fragments of Vision” and “Beyond the Frame” are broken apart and layered across multiple viewpoints, echoing the fractured perspective of Hockney’s Joiners.</p></div>
+    <div class="media" style="aspect-ratio: 16 / 9"><iframe src="https://www.youtube-nocookie.com/embed/F9OuJZbXU7g?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Art Trail | Shiyao Wu" loading="lazy"></iframe></div>
+    <section class="block" id="business-strategy">
+      <span class="block-label">Research &amp; Strategy</span>
+      <div class="block-copy"><p>71% of Gen Z and Millennials say cultural experiences are their top reason to travel, prioritising museums and galleries over traditional sightseeing.</p><p>Yet art discovery is overwhelming: information is scattered, the experience feels impersonal, and visitors struggle to connect with exhibitions.</p></div>
     </section>
-    <div class="row"><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-01.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-02.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-03.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-04.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-05.jpg" alt="Hockneye poster" loading="lazy"></div></div>
-    <div class="row"><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-06.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-07.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-08.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-09.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-10.jpg" alt="Hockneye poster" loading="lazy"></div></div>
-    <section class="block" id="motion">
-      <span class="block-label">Motion</span>
-      <div class="block-copy"><p>Animated versions of the posters explore how machines see: images dissolve into pixels and fragments, then reassemble, setting computational vision against human perception.</p></div>
+    <div class="media" style="aspect-ratio: 2000 / 1125; flex: 1.7778 1 0"><img src="images/project-04/02-business-strategy.jpg" alt="Art Trail business strategy" loading="lazy"></div>
+    <section class="block" id="app-website">
+      <span class="block-label">App &amp; Website</span>
+      <div class="block-copy"><p>Art Trail guides users through every step of their journey. They <strong>discover</strong> exhibitions through AI-powered recommendations and curated trails, <strong>plan</strong> visits with seamless ticketing, personalised itineraries and interactive maps, and <strong>engage</strong> beyond the gallery walls through reviews, reflections and community.</p></div>
     </section>
-    <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><video src="images/project-07/04-motion-1.mp4" poster="images/project-07/04-motion-1-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Hockneye motion poster"></video></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><video src="images/project-07/04-motion-2.mp4" poster="images/project-07/04-motion-2-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Hockneye motion poster"></video></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><video src="images/project-07/04-motion-3.mp4" poster="images/project-07/04-motion-3-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Hockneye motion poster"></video></div></div>
-    <section class="block" id="spatial-application">
-      <span class="block-label">Spatial Application</span>
-      <div class="block-copy"><p>In the gallery, the identity scales up to wall graphics and large-format posters, surrounding visitors with layered, multi-perspective views that turn looking into an active experience.</p></div>
+    <div class="media" style="aspect-ratio: 2000 / 1125; flex: 1.7778 1 0"><img src="images/project-04/03-app-website-1.jpg" alt="Art Trail app and website" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 2000 / 1125; flex: 1.7778 1 0"><img src="images/project-04/03-app-website-2.jpg" alt="Art Trail app and website" loading="lazy"></div>
+    <section class="block" id="kiosk">
+      <span class="block-label">Kiosk</span>
+      <div class="block-copy"><p>Developed with museums and galleries, the Art Trail kiosk is a physical touchpoint that connects visitors to the platform — exploring curated journeys, accessing exhibition information and sharing reviews on site. It bridges digital and physical experiences to deepen engagement with art.</p></div>
     </section>
-    <div class="media" style="aspect-ratio: 16 / 9"><img src="images/project-07/05-spatial.jpg" alt="Hockneye exhibition space" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 2000 / 1125; flex: 1.7778 1 0"><img src="images/project-04/04-arttrail-kiosk-1.jpg" alt="Art Trail kiosk" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 2000 / 1125; flex: 1.7778 1 0"><img src="images/project-04/04-arttrail-kiosk-2.jpg" alt="Art Trail kiosk" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 2000 / 1125; flex: 1.7778 1 0"><img src="images/project-04/04-arttrail-kiosk-3.jpg" alt="Art Trail kiosk" loading="lazy"></div>
+    <section class="block" id="advertising-campaigns">
+      <span class="block-label">Ad Campaign</span>
+      <div class="block-copy"><p>Billboards and city-wide ads invite people to “Follow the Trail,” using the orange line-drawn skyline to turn the city itself into an art map.</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2000 / 1125; flex: 1.7778 1 0"><img src="images/project-04/05-advertising-campaigns-1.jpg" alt="Art Trail advertising campaign" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 2000 / 1125; flex: 1.7778 1 0"><img src="images/project-04/05-advertising-campaigns-2.jpg" alt="Art Trail advertising campaign" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 2000 / 1125; flex: 1.7778 1 0"><img src="images/project-04/05-advertising-campaigns-3.jpg" alt="Art Trail advertising campaign" loading="lazy"></div>
+    <section class="block" id="merchandise">
+      <span class="block-label">Merchandise</span>
+      <div class="block-copy"><p>Hoodies, socks and tote bags carry the trail line and skyline illustrations, letting the brand travel with its community.</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2000 / 1125; flex: 1.7778 1 0"><img src="images/project-04/06-merchandise-1.jpg" alt="Art Trail merchandise" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 2000 / 1125; flex: 1.7778 1 0"><img src="images/project-04/06-merchandise-2.jpg" alt="Art Trail merchandise" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 2000 / 1125; flex: 1.7778 1 0"><img src="images/project-04/06-merchandise-3.jpg" alt="Art Trail merchandise" loading="lazy"></div>
+    <section class="block" id="ar-notebook">
+      <span class="block-label">AR Notebook</span>
+      <div class="block-copy"><p>A notebook for taking notes during exhibition visits. Scanning a page lets AI summarise the visit, learn what each visitor responds to, and save it to their profile to shape future recommendations.</p></div>
+    </section>
+    <div class="row"><div class="media" style="aspect-ratio: 1500 / 1000; flex: 1.5000 1 0"><img src="images/project-04/07-interactivebook-1.jpg" alt="AR interactive notebook" loading="lazy"></div><div class="media" style="aspect-ratio: 700 / 1050; flex: 0.6667 1 0"><img src="images/project-04/07-interactivebook-2.jpg" alt="AR interactive notebook" loading="lazy"></div></div>
+    <section class="block" id="stationery">
+      <span class="block-label">Stationery</span>
+      <div class="block-copy"><p>Letterhead, envelopes and business cards extend the orange trail line and skyline across every printed touchpoint.</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2000 / 1125; flex: 1.7778 1 0"><img src="images/project-04/08-stationery.jpg" alt="Art Trail stationery" loading="lazy"></div>
   </div>
 </main>
 
 <section class="more" aria-label="More projects">
   <div class="more-head"><span>More projects</span><a href="archive.html">See all in Archive →</a></div>
   <div class="more-grid">
-    <a class="more-card" href="project-01.html">
+    <a class="more-card" href="cargos.html">
+      <div class="media"><img src="images/project-05/01-cover.jpg" alt="CARGOS" loading="lazy"></div>
+      <div class="more-meta"><span>CARGOS</span><span class="cats">Type Design - AI Design - Editorial Design</span></div>
+    </a>
+    <a class="more-card" href="bento-of-memories.html">
+      <div class="media"><img src="images/project-06/01-cover-1.jpg" alt="Bento of Memories" loading="lazy"></div>
+      <div class="more-meta"><span>Bento of Memories: Four Years, Four Ingredients</span><span class="cats">Editorial Design - Bookmaking</span></div>
+    </a>
+    <a class="more-card" href="forsta.html">
       <div class="media"><img src="images/project-01/01-cover-2.jpg" alt="FÖRSTA" loading="lazy"></div>
       <div class="more-meta"><span>FÖRSTA</span><span class="cats">Packaging Design - Brand Identity - 3D Motion</span></div>
-    </a>
-    <a class="more-card" href="project-02.html">
-      <div class="media"><img src="images/project-02/cover.jpg" alt="New Museum" loading="lazy"></div>
-      <div class="more-meta"><span>New Museum</span><span class="cats">Brand Identity - Interaction Design - Editorial Design</span></div>
-    </a>
-    <a class="more-card" href="project-03.html">
-      <div class="media"><img src="images/project-03/01-cover-2.jpg" alt="REMOVA" loading="lazy"></div>
-      <div class="more-meta"><span>REMOVA</span><span class="cats">Packaging Design - Brand Identity - 3D Motion</span></div>
     </a>
   </div>
 </section>
@@ -538,20 +563,6 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 })();
 </script>
 <script>
-// Slideshows: each one fades to its next image every few seconds; the right side runs offset from the left
-(function () {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('.slides:not(.is-single)').forEach((box, n) => {
-    const imgs = [...box.querySelectorAll('img')];
-    imgs.slice(1).forEach(im => { im.loading = 'eager'; });
-    if (reduce || imgs.length < 2) return;
-    let i = 0;
-    const step = () => { imgs[i].classList.remove('is-on'); i = (i + 1) % imgs.length; imgs[i].classList.add('is-on'); };
-    setTimeout(() => setInterval(step, 3200), (n % 2) * 1600);
-  });
-})();
-</script>
-<script>
 // No single word alone on a paragraph's last line: tie the last two words together
 // (backup for browsers without text-wrap: pretty)
 (function () {
@@ -583,8 +594,6 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   .lb img { max-width: calc(100vw - 32px); max-height: calc(100vh - 140px); }
   .lb-prev, .lb-next { top: auto; bottom: 12px; transform: none; }
 }
-.block-copy p.note { font-size: 13px; color: var(--muted); }
-@media (max-width: 640px) { .block-copy p.note { font-size: 12px; } }
 .media iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 /* Phones: stacked images keep their own shape (the inline flex values are only for side-by-side rows);

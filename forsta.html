@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Citrus Time — Shiyao Wu</title>
+<title>FÖRSTA — Shiyao Wu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Newsreader:opsz,wght@6..72,400&display=swap">
@@ -311,7 +311,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* Footer always sits at the bottom of the screen, even on short pages */
 body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
 body > footer.footer { margin-top: auto; }
-
 </style>
 <style>
 /* ---------- Project page (after koto.com/projects/adobe) ----------
@@ -338,6 +337,11 @@ body > footer.footer { margin-top: auto; }
 .media { position: relative; background: var(--ph); border-radius: var(--radius); overflow: hidden; display: flex; align-items: flex-end; padding: 10px 12px; }
 .media span { font-size: 12px; color: var(--ph-ink); }
 .media img, .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }   /* real media fills its slot */
+.media iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.row { display: flex; gap: calc(var(--frame) / 2); }   /* items keep their shape and share one height */
+.row > .media { min-width: 0; }
+.proj-main > .media { flex: none !important; }
+@media (max-width: 640px) { .row { flex-direction: column; } .row > .media { flex: none !important; width: 100%; } }
 .media--wide { aspect-ratio: 16 / 9; }
 .media--tall { aspect-ratio: 4 / 5; }
 .media--square { aspect-ratio: 1 / 1; }
@@ -403,15 +407,6 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 
 /* Section title + text sit slightly in from the image edges (after koto.com), so the page breathes */
 .block { padding-inline: var(--frame); }
-
-/* Two slideshows side by side: each fades through its images on its own */
-.row { display: flex; gap: calc(var(--frame) / 2); }
-.row > .media { min-width: 0; flex: 1 1 0; }
-.proj-main > .media { flex: none !important; }
-.media img, .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.slides img { opacity: 0; transition: opacity 1s ease; }
-.slides img.is-on { opacity: 1; }
-@media (max-width: 640px) { .row { flex-direction: column; } .row > .media { flex: none; width: 100%; } }
 </style>
 </head>
 <body>
@@ -425,14 +420,18 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 
 <main class="proj" id="top">
   <aside class="proj-side">
-    <h1 class="proj-title"><a href="#top" class="to-cover">Citrus Time</a></h1>
-    <p class="proj-lede">A botanical sparkling water that turns everyday hydration into a moment of quiet refreshment.</p>
-    <p class="proj-tags">Packaging Design - Brand Identity - AI Design</p>
+    <h1 class="proj-title"><a href="#top" class="to-cover">FÖRSTA</a></h1>
+    <p class="proj-lede">A home-care system that makes everyday living simpler for young adults setting up their first home.</p>
+    <p class="proj-tags">Packaging Design - Brand Identity - 3D Motion</p>
     <ol class="proj-toc" id="toc">
-      <li><a href="#brand-concept">Brand Concept</a></li>
+      <li><a href="#packaging-concept">Brand Concept</a></li>
+      <li><a href="#product-line">Product System</a></li>
       <li><a href="#brand-identity">Brand Identity</a></li>
-      <li><a href="#photography">Photography</a></li>
-      <li><a href="#working-with-ai">AI Imagery</a></li>
+      <li><a href="#product-lineup">Product Lineup</a></li>
+      <li><a href="#pop-display">Point-of-Purchase Display</a></li>
+      <li><a href="#advertising">Ad Campaign</a></li>
+      <li><a href="#assembly-instruction">Assembly Instructions</a></li>
+      <li><a href="#website">Website</a></li>
     </ol>
     <nav class="proj-back" aria-label="Back">
       <a href="index.html">← Back to homepage</a>
@@ -440,47 +439,70 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   </aside>
 
   <div class="proj-main">
-    <div class="media" style="aspect-ratio: 16 / 9"><img src="images/project-08/01-cover-1.jpg" alt="Citrus Time"></div>
-    <section class="block" id="brand-concept">
+    <div class="media" style="aspect-ratio: 16 / 9; flex: 1.7778 1 0"><img src="images/project-01/01-cover-1.jpg" alt="FÖRSTA"></div>
+    <section class="block" id="packaging-concept">
       <span class="block-label">Brand Concept</span>
-      <div class="block-copy"><p>Citrus Time is a botanical sparkling water rooted in the clarity of Japanese citrus and layered with plant-based ingredients. Each bottle is made not only to quench, but to soothe — a small pause in the day.</p><p>The identity pairs minimalist calm with natural warmth, sitting between natural purity and everyday elegance for people who value simplicity with depth.</p><p class="note">[Design process and AI workflow available upon request.]</p></div>
+      <div class="block-copy"><p>Many first-time movers struggle to carry household supplies, remember which cleaning products they need, and understand how to look after a new home.</p><p>IKEA helps people furnish a home; FÖRSTA helps them learn how to live in it.</p></div>
     </section>
+    <div class="media" style="aspect-ratio: 16 / 9"><iframe src="https://player.vimeo.com/video/1219026152?badge=0&amp;autopause=0&amp;loop=1#t=5s" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="FÖRSTA | IKEA | Shiyao Wu" loading="lazy"></iframe></div>   <!-- Vimeo: starts at 0:05 -->
+    <section class="block" id="product-line">
+      <span class="block-label">Product System</span>
+      <div class="block-copy"><p>Six essentials in one kit: liquid dish soap, foam hand soap, multi-surface cleaner, 3-in-1 laundry pods, refill tablets and a microfiber cleaning cloth.</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2400 / 1350; flex: 1.7778 1 0"><img src="images/project-01/01-cover-2.jpg" alt="FÖRSTA product line" loading="lazy"></div>
     <section class="block" id="brand-identity">
       <span class="block-label">Brand Identity</span>
-      <div class="block-copy"><p>A soft, rounded wordmark in olive green is paired with a palette drawn from citrus: yuzu yellow, orange and cream. The yuzu label combines botanical illustration with clean typography, guided by five values: purity, botanical, fresh, tactile and sensory.</p></div>
+      <div class="block-copy"><p>The logo borrows the visual language of the IKEA wordmark, and the name comes from Swedish — <em>första</em> means “first.” A small house sits within the letterforms, setting a friendly, practical tone.</p><p>The colour palette is drawn directly from IKEA’s products, keeping the brand warm and approachable for its audience of college students and young professionals.</p></div>
     </section>
-    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1543; flex: 1.5554 1 0"><img src="images/project-08/02-brand-identity-1.jpg" alt="Citrus Time brand identity" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1543; flex: 1.5554 1 0"><img src="images/project-08/02-brand-identity-2.jpg" alt="Citrus Time brand identity" loading="lazy"></div></div>
-    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1543; flex: 1.5554 1 0"><img src="images/project-08/02-brand-identity-3.jpg" alt="Citrus Time brand identity" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1543; flex: 1.5554 1 0"><img src="images/project-08/02-brand-identity-4.jpg" alt="Citrus Time brand identity" loading="lazy"></div></div>
-    <section class="block" id="photography">
-      <span class="block-label">Photography</span>
-      <div class="block-copy"><p>Studio still lifes with citrus and calla lilies, alongside a poolside series in bright summer light, place the bottle in calm, sunlit moments.</p></div>
+    <div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/project-01/03-brand-identity-1.jpg" alt="FÖRSTA brand identity" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/project-01/03-brand-identity-2.jpg" alt="FÖRSTA brand identity" loading="lazy"></div>
+    <section class="block" id="product-lineup">
+      <span class="block-label">Product Lineup</span>
+      <div class="block-copy"><p>Every product comes with its own refill tablet, so bottles are reused rather than replaced.</p><p>The familiar figure from IKEA’s instruction manuals appears on each product, customised into a different pose that shows how it is used.</p></div>
     </section>
-    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-08/03-photography-1.jpg" alt="Citrus Time photography" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1601; flex: 1.4991 1 0"><img src="images/project-08/03-photography-2.jpg" alt="Citrus Time photography" loading="lazy"></div></div>
-    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-08/03-photography-3.jpg" alt="Citrus Time photography" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-08/03-photography-4.jpg" alt="Citrus Time photography" loading="lazy"></div></div>
-    <section class="block" id="working-with-ai">
-      <span class="block-label">AI Imagery</span>
-      <div class="block-copy"><p>AI-generated lifestyle scenes — a picnic, a poolside afternoon, a stocked fridge — carry the brand into social media, showing the drink in everyday moments.</p></div>
+    <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-1.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-5.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
+    <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-2.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-3.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
+    <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-4.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-6.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-7.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
+    <div class="row"><div class="media" style="aspect-ratio: 3 / 2; flex: 1.5000 1 0"><img src="images/project-01/04-product-lineup-8.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 3 / 2; flex: 1.5000 1 0"><img src="images/project-01/04-product-lineup-9.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
+    <section class="block" id="pop-display">
+      <span class="block-label">Point-of-Purchase Display</span>
+      <div class="block-copy"><p>The display simulates how the shelf would appear in a real IKEA store, presenting the full kit and its refills just as shoppers would encounter them.</p></div>
     </section>
-    <div class="row"><div class="media" style="aspect-ratio: 1536 / 1024; flex: 1.5000 1 0"><img src="images/project-08/04-ai-1.jpg" alt="Citrus Time AI imagery" loading="lazy"></div><div class="media" style="aspect-ratio: 1024 / 1536; flex: 0.6667 1 0"><img src="images/project-08/04-ai-2.jpg" alt="Citrus Time AI imagery" loading="lazy"></div></div>
-    <div class="row"><div class="media" style="aspect-ratio: 1024 / 1536; flex: 0.6667 1 0"><img src="images/project-08/04-ai-3.jpg" alt="Citrus Time AI imagery" loading="lazy"></div><div class="media" style="aspect-ratio: 848 / 1264; flex: 0.6709 1 0"><img src="images/project-08/04-ai-4.jpg" alt="Citrus Time AI imagery" loading="lazy"></div><div class="media" style="aspect-ratio: 928 / 1232; flex: 0.7532 1 0"><img src="images/project-08/04-ai-5.jpg" alt="Citrus Time AI imagery" loading="lazy"></div><div class="media" style="aspect-ratio: 928 / 1232; flex: 0.7532 1 0"><img src="images/project-08/04-ai-6.jpg" alt="Citrus Time AI imagery" loading="lazy"></div></div>
-    <div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/project-08/04-ai-7.jpg" alt="Citrus Time social media" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 2400 / 1350; flex: 1.7778 1 0"><img src="images/project-01/05-pop-display-1.jpg" alt="FÖRSTA point-of-purchase display" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 2400 / 1351; flex: 1.7765 1 0"><img src="images/project-01/05-pop-display-2.jpg" alt="FÖRSTA point-of-purchase display in store" loading="lazy"></div>
+    <section class="block" id="advertising">
+      <span class="block-label">Ad Campaign</span>
+      <div class="block-copy"><p>A series of six posters follows the first days in a new home, pairing each product with a moment: “First Dinner. Then Dishes.” “First Load? Easy.” “Keep the Bottle. Refill the Rest.”</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-01/06-advertising-1.jpg" alt="FÖRSTA advertising" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-01/06-advertising-2.jpg" alt="FÖRSTA billboard" loading="lazy"></div>
+    <section class="block" id="assembly-instruction">
+      <span class="block-label">Assembly Instructions</span>
+      <div class="block-copy"><p>Drawn in the style of IKEA’s instruction manuals, the booklet shows what comes in the kit, how to fit each pump and nozzle, and where to use each product around the home.</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2400 / 1767; flex: 1.3582 1 0"><img src="images/project-01/07-assembly-instruction-1.jpg" alt="FÖRSTA assembly instruction" loading="lazy"></div>
+    <section class="block" id="website">
+      <span class="block-label">Website</span>
+      <div class="block-copy"><p>FÖRSTA launches on IKEA’s website as a new collection, with a dedicated page where visitors can buy the Home Essentials Kit and its refill tablets — start with the kit, refill what you use.</p></div>
+    </section>
+    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1606; flex: 1.4944 1 0"><img src="images/project-01/08-website-1.jpg" alt="FÖRSTA website" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1606; flex: 1.4944 1 0"><img src="images/project-01/08-website-2.jpg" alt="FÖRSTA website" loading="lazy"></div></div>
   </div>
 </main>
 
 <section class="more" aria-label="More projects">
   <div class="more-head"><span>More projects</span><a href="archive.html">See all in Archive →</a></div>
   <div class="more-grid">
-    <a class="more-card" href="project-01.html">
-      <div class="media"><img src="images/project-01/01-cover-2.jpg" alt="FÖRSTA" loading="lazy"></div>
-      <div class="more-meta"><span>FÖRSTA</span><span class="cats">Packaging Design - Brand Identity - 3D Motion</span></div>
-    </a>
-    <a class="more-card" href="project-02.html">
+    <a class="more-card" href="new-museum.html">
       <div class="media"><img src="images/project-02/cover.jpg" alt="New Museum" loading="lazy"></div>
       <div class="more-meta"><span>New Museum</span><span class="cats">Brand Identity - Interaction Design - Editorial Design</span></div>
     </a>
-    <a class="more-card" href="project-03.html">
+    <a class="more-card" href="remova.html">
       <div class="media"><img src="images/project-03/01-cover-2.jpg" alt="REMOVA" loading="lazy"></div>
       <div class="more-meta"><span>REMOVA</span><span class="cats">Packaging Design - Brand Identity - 3D Motion</span></div>
+    </a>
+    <a class="more-card" href="art-trail.html">
+      <div class="media"><img src="images/project-04/01-cover.jpg" alt="Art Trail" loading="lazy"></div>
+      <div class="more-meta"><span>Art Trail</span><span class="cats">Brand Identity - UI/UX Design - Experience Design</span></div>
     </a>
   </div>
 </section>
@@ -541,20 +563,6 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 })();
 </script>
 <script>
-// Slideshows: each one fades to its next image every few seconds; the right side runs offset from the left
-(function () {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('.slides:not(.is-single)').forEach((box, n) => {
-    const imgs = [...box.querySelectorAll('img')];
-    imgs.slice(1).forEach(im => { im.loading = 'eager'; });
-    if (reduce || imgs.length < 2) return;
-    let i = 0;
-    const step = () => { imgs[i].classList.remove('is-on'); i = (i + 1) % imgs.length; imgs[i].classList.add('is-on'); };
-    setTimeout(() => setInterval(step, 3200), (n % 2) * 1600);
-  });
-})();
-</script>
-<script>
 // No single word alone on a paragraph's last line: tie the last two words together
 // (backup for browsers without text-wrap: pretty)
 (function () {
@@ -586,8 +594,6 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   .lb img { max-width: calc(100vw - 32px); max-height: calc(100vh - 140px); }
   .lb-prev, .lb-next { top: auto; bottom: 12px; transform: none; }
 }
-.block-copy p.note { font-size: 13px; color: var(--muted); }
-@media (max-width: 640px) { .block-copy p.note { font-size: 12px; } }
 
 /* Phones: stacked images keep their own shape (the inline flex values are only for side-by-side rows);
    rows of 3+ stay side by side; rows of 4 become 2 × 2 */

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>FÖRSTA — Shiyao Wu</title>
+<title>CARGOS — Shiyao Wu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Newsreader:opsz,wght@6..72,400&display=swap">
@@ -311,6 +311,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* Footer always sits at the bottom of the screen, even on short pages */
 body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
 body > footer.footer { margin-top: auto; }
+
 </style>
 <style>
 /* ---------- Project page (after koto.com/projects/adobe) ----------
@@ -337,11 +338,6 @@ body > footer.footer { margin-top: auto; }
 .media { position: relative; background: var(--ph); border-radius: var(--radius); overflow: hidden; display: flex; align-items: flex-end; padding: 10px 12px; }
 .media span { font-size: 12px; color: var(--ph-ink); }
 .media img, .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }   /* real media fills its slot */
-.media iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.row { display: flex; gap: calc(var(--frame) / 2); }   /* items keep their shape and share one height */
-.row > .media { min-width: 0; }
-.proj-main > .media { flex: none !important; }
-@media (max-width: 640px) { .row { flex-direction: column; } .row > .media { flex: none !important; width: 100%; } }
 .media--wide { aspect-ratio: 16 / 9; }
 .media--tall { aspect-ratio: 4 / 5; }
 .media--square { aspect-ratio: 1 / 1; }
@@ -407,6 +403,15 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 
 /* Section title + text sit slightly in from the image edges (after koto.com), so the page breathes */
 .block { padding-inline: var(--frame); }
+
+/* Two slideshows side by side: each fades through its images on its own */
+.row { display: flex; gap: calc(var(--frame) / 2); }
+.row > .media { min-width: 0; flex: 1 1 0; }
+.proj-main > .media { flex: none !important; }
+.media img, .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.slides img { opacity: 0; transition: opacity 1s ease; }
+.slides img.is-on { opacity: 1; }
+@media (max-width: 640px) { .row { flex-direction: column; } .row > .media { flex: none; width: 100%; } }
 </style>
 </head>
 <body>
@@ -420,18 +425,15 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 
 <main class="proj" id="top">
   <aside class="proj-side">
-    <h1 class="proj-title"><a href="#top" class="to-cover">FÖRSTA</a></h1>
-    <p class="proj-lede">A home-care system that makes everyday living simpler for young adults setting up their first home.</p>
-    <p class="proj-tags">Packaging Design - Brand Identity - 3D Motion</p>
+    <h1 class="proj-title"><a href="#top" class="to-cover">CARGOS</a></h1>
+    <p class="proj-lede">A display typeface inspired by the structural language of airline cargo containers.</p>
+    <p class="proj-tags">Type Design - AI Design - Editorial Design</p>
     <ol class="proj-toc" id="toc">
-      <li><a href="#packaging-concept">Brand Concept</a></li>
-      <li><a href="#product-line">Product System</a></li>
-      <li><a href="#brand-identity">Brand Identity</a></li>
-      <li><a href="#product-lineup">Product Lineup</a></li>
-      <li><a href="#pop-display">Point-of-Purchase Display</a></li>
-      <li><a href="#advertising">Ad Campaign</a></li>
-      <li><a href="#assembly-instruction">Assembly Instructions</a></li>
-      <li><a href="#website">Website</a></li>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#ai-exploration">3D Exploration</a></li>
+      <li><a href="#ai-generated">AI-Rendered 3D Letterforms</a></li>
+      <li><a href="#specimen">Type Specimen</a></li>
+      <li><a href="#printed">3D-Printed Letterforms</a></li>
     </ol>
     <nav class="proj-back" aria-label="Back">
       <a href="index.html">← Back to homepage</a>
@@ -439,70 +441,52 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   </aside>
 
   <div class="proj-main">
-    <div class="media" style="aspect-ratio: 16 / 9; flex: 1.7778 1 0"><img src="images/project-01/01-cover-1.jpg" alt="FÖRSTA"></div>
-    <section class="block" id="packaging-concept">
-      <span class="block-label">Brand Concept</span>
-      <div class="block-copy"><p>Many first-time movers struggle to carry household supplies, remember which cleaning products they need, and understand how to look after a new home.</p><p>IKEA helps people furnish a home; FÖRSTA helps them learn how to live in it.</p></div>
+    <div class="media" style="aspect-ratio: 16 / 9"><img src="images/project-05/01-cover.jpg" alt="CARGOS"></div>
+    <section class="block" id="overview">
+      <span class="block-label">Overview</span>
+      <div class="block-copy"><p>CARGOS translates the structural language of airline cargo containers into type. Each glyph borrows the cut-out geometry of container construction, turning industrial precision into a cohesive display typeface that balances functional rigour with formal clarity.</p><p class="note">[3D process with AI available upon request.]</p></div>
     </section>
-    <div class="media" style="aspect-ratio: 16 / 9"><iframe src="https://player.vimeo.com/video/1219026152?badge=0&amp;autopause=0&amp;loop=1#t=5s" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="FÖRSTA | IKEA | Shiyao Wu" loading="lazy"></iframe></div>   <!-- Vimeo: starts at 0:05 -->
-    <section class="block" id="product-line">
-      <span class="block-label">Product System</span>
-      <div class="block-copy"><p>Six essentials in one kit: liquid dish soap, foam hand soap, multi-surface cleaner, 3-in-1 laundry pods, refill tablets and a microfiber cleaning cloth.</p></div>
+    <section class="block" id="ai-exploration">
+      <span class="block-label">3D Exploration</span>
+      <div class="block-copy"><p>A motion study testing how the letterforms behave as three-dimensional objects, with AI assisting the move from flat glyph to rendered form.</p></div>
     </section>
-    <div class="media" style="aspect-ratio: 2400 / 1350; flex: 1.7778 1 0"><img src="images/project-01/01-cover-2.jpg" alt="FÖRSTA product line" loading="lazy"></div>
-    <section class="block" id="brand-identity">
-      <span class="block-label">Brand Identity</span>
-      <div class="block-copy"><p>The logo borrows the visual language of the IKEA wordmark, and the name comes from Swedish — <em>första</em> means “first.” A small house sits within the letterforms, setting a friendly, practical tone.</p><p>The colour palette is drawn directly from IKEA’s products, keeping the brand warm and approachable for its audience of college students and young professionals.</p></div>
+    <div class="media" style="aspect-ratio: 16 / 9"><iframe src="https://player.vimeo.com/video/1187936467?h=18efb614cc&amp;badge=0&amp;autopause=0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="CARGOS | Shiyao Wu" loading="lazy"></iframe></div>
+    <section class="block" id="ai-generated">
+      <span class="block-label">AI-Rendered 3D Letterforms</span>
+      <div class="block-copy"><p>Each letter was drawn in 2D, then rendered with AI as a full-scale cargo container — complete with doors, panels and pallet base — placing the typeface back in the world that inspired it.</p></div>
     </section>
-    <div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/project-01/03-brand-identity-1.jpg" alt="FÖRSTA brand identity" loading="lazy"></div>
-    <div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/project-01/03-brand-identity-2.jpg" alt="FÖRSTA brand identity" loading="lazy"></div>
-    <section class="block" id="product-lineup">
-      <span class="block-label">Product Lineup</span>
-      <div class="block-copy"><p>Every product comes with its own refill tablet, so bottles are reused rather than replaced.</p><p>The familiar figure from IKEA’s instruction manuals appears on each product, customised into a different pose that shows how it is used.</p></div>
+    <div class="row"><div class="media" style="aspect-ratio: 1374 / 1375; flex: 0.9993 1 0"><img src="images/project-05/03-3d-typeface-1.jpg" alt="CARGOS 3D letterform" loading="lazy"></div><div class="media" style="aspect-ratio: 1374 / 1375; flex: 0.9993 1 0"><img src="images/project-05/03-3d-typeface-2.jpg" alt="CARGOS 3D letterform" loading="lazy"></div><div class="media" style="aspect-ratio: 1374 / 1375; flex: 0.9993 1 0"><img src="images/project-05/03-3d-typeface-3.jpg" alt="CARGOS 3D letterform" loading="lazy"></div></div>
+    <div class="row"><div class="media" style="aspect-ratio: 1374 / 1375; flex: 0.9993 1 0"><img src="images/project-05/03-3d-typeface-4.jpg" alt="CARGOS 3D letterform" loading="lazy"></div><div class="media" style="aspect-ratio: 1374 / 1375; flex: 0.9993 1 0"><img src="images/project-05/03-3d-typeface-5.jpg" alt="CARGOS 3D letterform" loading="lazy"></div><div class="media" style="aspect-ratio: 1374 / 1375; flex: 0.9993 1 0"><img src="images/project-05/03-3d-typeface-6.jpg" alt="CARGOS 3D letterform" loading="lazy"></div></div>
+    <section class="block" id="specimen">
+      <span class="block-label">Type Specimen</span>
+      <div class="block-copy"><p>A specimen book presenting the full alphabet, numerals and large display settings, photographed on diamond-plate steel that recalls the cargo hold.</p></div>
     </section>
-    <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-1.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-5.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
-    <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-2.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-3.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
-    <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-4.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-6.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-7.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
-    <div class="row"><div class="media" style="aspect-ratio: 3 / 2; flex: 1.5000 1 0"><img src="images/project-01/04-product-lineup-8.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 3 / 2; flex: 1.5000 1 0"><img src="images/project-01/04-product-lineup-9.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
-    <section class="block" id="pop-display">
-      <span class="block-label">Point-of-Purchase Display</span>
-      <div class="block-copy"><p>The display simulates how the shelf would appear in a real IKEA store, presenting the full kit and its refills just as shoppers would encounter them.</p></div>
+    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-1.jpg" alt="CARGOS typeface specimen" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-2.jpg" alt="CARGOS typeface specimen" loading="lazy"></div></div>
+    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-3.jpg" alt="CARGOS typeface specimen" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-4.jpg" alt="CARGOS typeface specimen" loading="lazy"></div></div>
+    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-5.jpg" alt="CARGOS typeface specimen" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-6.jpg" alt="CARGOS typeface specimen" loading="lazy"></div></div>
+    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-7.jpg" alt="CARGOS typeface specimen" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-05/04-typeface-specimen-8.jpg" alt="CARGOS typeface specimen" loading="lazy"></div></div>
+    <section class="block" id="printed">
+      <span class="block-label">3D-Printed Letterforms</span>
+      <div class="block-copy"><p>The container letterforms were 3D-printed as physical models, taking CARGOS off the screen and into real space.</p></div>
     </section>
-    <div class="media" style="aspect-ratio: 2400 / 1350; flex: 1.7778 1 0"><img src="images/project-01/05-pop-display-1.jpg" alt="FÖRSTA point-of-purchase display" loading="lazy"></div>
-    <div class="media" style="aspect-ratio: 2400 / 1351; flex: 1.7765 1 0"><img src="images/project-01/05-pop-display-2.jpg" alt="FÖRSTA point-of-purchase display in store" loading="lazy"></div>
-    <section class="block" id="advertising">
-      <span class="block-label">Ad Campaign</span>
-      <div class="block-copy"><p>A series of six posters follows the first days in a new home, pairing each product with a moment: “First Dinner. Then Dishes.” “First Load? Easy.” “Keep the Bottle. Refill the Rest.”</p></div>
-    </section>
-    <div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-01/06-advertising-1.jpg" alt="FÖRSTA advertising" loading="lazy"></div>
-    <div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-01/06-advertising-2.jpg" alt="FÖRSTA billboard" loading="lazy"></div>
-    <section class="block" id="assembly-instruction">
-      <span class="block-label">Assembly Instructions</span>
-      <div class="block-copy"><p>Drawn in the style of IKEA’s instruction manuals, the booklet shows what comes in the kit, how to fit each pump and nozzle, and where to use each product around the home.</p></div>
-    </section>
-    <div class="media" style="aspect-ratio: 2400 / 1767; flex: 1.3582 1 0"><img src="images/project-01/07-assembly-instruction-1.jpg" alt="FÖRSTA assembly instruction" loading="lazy"></div>
-    <section class="block" id="website">
-      <span class="block-label">Website</span>
-      <div class="block-copy"><p>FÖRSTA launches on IKEA’s website as a new collection, with a dedicated page where visitors can buy the Home Essentials Kit and its refill tablets — start with the kit, refill what you use.</p></div>
-    </section>
-    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1606; flex: 1.4944 1 0"><img src="images/project-01/08-website-1.jpg" alt="FÖRSTA website" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1606; flex: 1.4944 1 0"><img src="images/project-01/08-website-2.jpg" alt="FÖRSTA website" loading="lazy"></div></div>
+    <div class="media" style="aspect-ratio: 2295 / 1721"><img src="images/project-05/05-3d-printed.jpg" alt="CARGOS 3D-printed letterforms" loading="lazy"></div>
   </div>
 </main>
 
 <section class="more" aria-label="More projects">
   <div class="more-head"><span>More projects</span><a href="archive.html">See all in Archive →</a></div>
   <div class="more-grid">
-    <a class="more-card" href="project-02.html">
+    <a class="more-card" href="bento-of-memories.html">
+      <div class="media"><img src="images/project-06/01-cover-1.jpg" alt="Bento of Memories" loading="lazy"></div>
+      <div class="more-meta"><span>Bento of Memories: Four Years, Four Ingredients</span><span class="cats">Editorial Design - Bookmaking</span></div>
+    </a>
+    <a class="more-card" href="forsta.html">
+      <div class="media"><img src="images/project-01/01-cover-2.jpg" alt="FÖRSTA" loading="lazy"></div>
+      <div class="more-meta"><span>FÖRSTA</span><span class="cats">Packaging Design - Brand Identity - 3D Motion</span></div>
+    </a>
+    <a class="more-card" href="new-museum.html">
       <div class="media"><img src="images/project-02/cover.jpg" alt="New Museum" loading="lazy"></div>
       <div class="more-meta"><span>New Museum</span><span class="cats">Brand Identity - Interaction Design - Editorial Design</span></div>
-    </a>
-    <a class="more-card" href="project-03.html">
-      <div class="media"><img src="images/project-03/01-cover-2.jpg" alt="REMOVA" loading="lazy"></div>
-      <div class="more-meta"><span>REMOVA</span><span class="cats">Packaging Design - Brand Identity - 3D Motion</span></div>
-    </a>
-    <a class="more-card" href="project-04.html">
-      <div class="media"><img src="images/project-04/01-cover.jpg" alt="Art Trail" loading="lazy"></div>
-      <div class="more-meta"><span>Art Trail</span><span class="cats">Brand Identity - UI/UX Design - Experience Design</span></div>
     </a>
   </div>
 </section>
@@ -563,6 +547,20 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 })();
 </script>
 <script>
+// Slideshows: each one fades to its next image every few seconds; the right side runs offset from the left
+(function () {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.slides:not(.is-single)').forEach((box, n) => {
+    const imgs = [...box.querySelectorAll('img')];
+    imgs.slice(1).forEach(im => { im.loading = 'eager'; });
+    if (reduce || imgs.length < 2) return;
+    let i = 0;
+    const step = () => { imgs[i].classList.remove('is-on'); i = (i + 1) % imgs.length; imgs[i].classList.add('is-on'); };
+    setTimeout(() => setInterval(step, 3200), (n % 2) * 1600);
+  });
+})();
+</script>
+<script>
 // No single word alone on a paragraph's last line: tie the last two words together
 // (backup for browsers without text-wrap: pretty)
 (function () {
@@ -594,6 +592,9 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   .lb img { max-width: calc(100vw - 32px); max-height: calc(100vh - 140px); }
   .lb-prev, .lb-next { top: auto; bottom: 12px; transform: none; }
 }
+.block-copy p.note { font-size: 13px; color: var(--muted); }
+@media (max-width: 640px) { .block-copy p.note { font-size: 12px; } }
+.media iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 /* Phones: stacked images keep their own shape (the inline flex values are only for side-by-side rows);
    rows of 3+ stay side by side; rows of 4 become 2 × 2 */
