@@ -364,12 +364,18 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* Replay-intro button: on the left, on the same line as See all projects */
 .replay {
   justify-self: start;
-  height: 39px; padding: 0 18px; border-radius: 20px;
-  background: var(--pill);
-  font-size: 15px; font-weight: 500; color: var(--fg);
-  transition: background .2s, color .2s;
+  display: inline-flex; align-items: center; gap: 0;
+  height: 39px; padding: 0 10px; border-radius: 20px;
+  background: var(--pill); color: var(--fg);
+  font-size: 15px; font-weight: 500; overflow: hidden;
+  transition: background .25s, color .25s, gap .35s ease, padding .35s ease;
 }
-.replay:hover { background: var(--fg); color: var(--bg); }
+.replay svg { width: 19px; height: 19px; flex: none; transition: transform .6s cubic-bezier(.5,-0.4,.3,1.4); }
+.replay .rl { max-width: 0; opacity: 0; white-space: nowrap; transition: max-width .35s ease, opacity .25s ease; }
+.replay:hover { background: var(--fg); color: var(--bg); gap: 6px; padding: 0 16px 0 12px; }
+.replay:hover svg { transform: rotate(-360deg); }
+.replay:hover .rl { max-width: 80px; opacity: 1; }
+.replay:active svg { transform: rotate(-360deg) scale(.85); }
 
 /* Footer always sits at the bottom of the screen, even on short pages */
 body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
@@ -382,8 +388,8 @@ body > footer.footer { margin-top: auto; }
 /* Subtitle under the name in the opening */
 .splash-sub {
   position: absolute; left: 50%; top: 50%; z-index: 2; white-space: nowrap;
-  transform: translate(-50%, calc(clamp(39px, 9vw, 159px) * 0.5 + clamp(12px, 1.6vw, 26px)));
-  font-size: clamp(17px, 1.7vw, 26px); font-weight: 500; letter-spacing: 0.01em; color: #FFFFFF;
+  transform: translate(-50%, calc(clamp(39px, 9vw, 159px) * 0.5 + clamp(12px, 1.4vw, 24px)));
+  font-size: clamp(20px, 2.6vw, 42px); font-weight: 500; letter-spacing: 0.01em; color: #FFFFFF;
   text-shadow: 0 2px 16px rgba(0,0,0,.25); opacity: 0; transition: opacity .4s ease .15s;
 }
 .splash.is-on .splash-sub { opacity: 1; }
@@ -435,7 +441,7 @@ body > footer.footer { margin-top: auto; }
 
 <!-- ============ Footer ============ -->
 <footer class="footer frame" id="contact">
-  <div class="work-more"><button class="replay" id="replayIntro" type="button" aria-label="Replay opening">↺ Replay intro</button></div>
+  <div class="work-more"><button class="replay" id="replayIntro" type="button" aria-label="Replay intro" title="Replay intro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4v5h5"/></svg><span class="rl">Replay</span></button></div>
   <div class="foot-bottom">
     <span>© 2026 Shiyao Wu</span>
     <span>Los Angeles <span id="footClock" class="foot-time">--:--:--</span></span>
