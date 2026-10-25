@@ -602,13 +602,43 @@ document.getElementById('replayIntro').addEventListener('click', () => {
   run(); addEventListener('load', run);
 })();
 </script>
+<style>
+/* "Email copied" note that pops up after clicking Email */
+.mail-toast {
+  position: fixed; left: 50%; bottom: 28px; z-index: 9999;
+  display: flex; align-items: center; gap: 14px; max-width: calc(100vw - 32px);
+  padding: 12px 14px 12px 18px; border-radius: 26px;
+  background: #111; color: #fff; font-size: 14px; line-height: 1.3;
+  box-shadow: 0 8px 30px rgba(0,0,0,.18);
+  opacity: 0; transform: translate(-50%, 16px) scale(.96); pointer-events: none;
+  transition: opacity .25s ease, transform .35s cubic-bezier(.3,1.5,.5,1);
+}
+.mail-toast.is-on { opacity: 1; transform: translate(-50%, 0) scale(1); pointer-events: auto; }
+.mail-toast b { font-weight: 500; }
+.mail-toast .mt-addr { color: rgba(255,255,255,.6); }
+.mail-toast a { flex: none; padding: 6px 12px; border-radius: 16px; background: #fff; color: #111; font-size: 13px; font-weight: 500; white-space: nowrap; }
+.mail-toast a:hover { opacity: .8; }
+@media (max-width: 640px) { .mail-toast { font-size: 13px; bottom: 20px; } .mail-toast .mt-addr { display: block; } }
+</style>
 <script>
-// Email link: the label stays "Email"; clicking it shows (and copies) the address and opens a new email
-document.addEventListener('click', e => {
-  const a = e.target.closest('a[href^="mailto:"]'); if (!a) return;
-  const addr = a.getAttribute('href').slice(7);
-  const t = [...a.childNodes].find(n => n.nodeType === 3 && /Email/.test(n.textContent));
-  if (t) t.textContent = t.textContent.replace('Email', addr);
-  try { navigator.clipboard && navigator.clipboard.writeText(addr); } catch (_) {}
-});
+// Email link: clicking copies the address and shows a short note (with a button to open the mail app)
+(() => {
+  let toast, timer;
+  const copy = text => {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).catch(() => fallback(text));
+    fallback(text); return Promise.resolve();
+  };
+  const fallback = text => { const t = document.createElement('textarea'); t.value = text; t.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (_) {} t.remove(); };
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="mailto:"]');
+    if (!a || a.closest('.mail-toast')) return;
+    e.preventDefault();
+    const addr = a.getAttribute('href').slice(7);
+    copy(addr);
+    if (!toast) { toast = document.createElement('div'); toast.className = 'mail-toast'; toast.setAttribute('role', 'status'); document.body.appendChild(toast); }
+    toast.innerHTML = `<span><b>Email copied ✓</b> <span class="mt-addr">${addr}</span></span><a href="mailto:${addr}">Write to me ↗</a>`;
+    requestAnimationFrame(() => toast.classList.add('is-on'));
+    clearTimeout(timer); timer = setTimeout(() => toast.classList.remove('is-on'), 4000);
+  });
+})();
 </script>
