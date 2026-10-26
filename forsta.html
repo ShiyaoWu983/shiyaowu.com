@@ -604,10 +604,10 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 /* Phones: chosen images become one swipeable slider (desktop layout unchanged) */
 .m-slider { display: none; }
 @media (max-width: 640px) {
-  .m-slider { display: block; margin-inline: calc(var(--frame) * -1); }
-  .ms-track { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; padding-inline: var(--frame); scroll-padding-inline: var(--frame); scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .m-slider { display: block; }
+  .ms-track { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .ms-track::-webkit-scrollbar { display: none; }
-  .ms-track > .media { flex: 0 0 82% !important; width: 82% !important; scroll-snap-align: start; }
+  .ms-track > .media { flex: 0 0 100% !important; width: 100% !important; scroll-snap-align: start; }
   .ms-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
   .ms-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--fg); opacity: .2; transition: opacity .2s, width .2s; }
   .ms-dots span.is-on { opacity: 1; width: 16px; border-radius: 3px; }
