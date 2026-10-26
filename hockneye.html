@@ -449,8 +449,10 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
       <span class="block-label">Poster Series</span>
       <div class="block-copy"><p>A typographic series of ten posters. Headlines such as “The Constructed Eye,” “Fragments of Vision” and “Beyond the Frame” are broken apart and layered across multiple viewpoints, echoing the fractured perspective of Hockney’s Joiners.</p></div>
     </section>
+    <div class="pair-set">
     <div class="row"><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-01.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-02.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-03.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-04.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-05.jpg" alt="Hockneye poster" loading="lazy"></div></div>
     <div class="row"><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-06.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-07.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-08.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-09.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-10.jpg" alt="Hockneye poster" loading="lazy"></div></div>
+    </div>
     <section class="block" id="motion">
       <span class="block-label">Motion</span>
       <div class="block-copy"><p>Animated versions of the posters explore how machines see: images dissolve into pixels and fragments, then reassemble, setting computational vision against human perception.</p></div>
@@ -591,6 +593,13 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 @media (max-width: 640px) {
   .row, .row:has(> .media:nth-child(3)), .row:has(> .media:nth-child(4):last-child) { display: flex; flex-direction: column; }
   .row > .media { flex: none !important; width: 100% !important; }
+}
+/* Hockneye on phones: posters and motion pieces sit two per row */
+.pair-set { display: flex; flex-direction: column; gap: calc(var(--frame) / 2); }
+@media (max-width: 640px) {
+  .pair-set { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--frame) / 2); }
+  .pair-set > .row { display: contents; }
+  .proj-main > .row:has(> .media:nth-child(3)) { display: grid; grid-template-columns: 1fr 1fr; }
 }
 </style>
 <div class="lb" id="lb" aria-hidden="true"><img alt=""><button class="lb-close" type="button">Close</button><button class="lb-prev" type="button" aria-label="Previous image">&larr;</button><button class="lb-next" type="button" aria-label="Next image">&rarr;</button><div class="lb-count"></div></div>
