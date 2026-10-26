@@ -594,12 +594,11 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   .row, .row:has(> .media:nth-child(3)), .row:has(> .media:nth-child(4):last-child) { display: flex; flex-direction: column; }
   .row > .media { flex: none !important; width: 100% !important; }
 }
-/* Hockneye on phones: posters and motion pieces sit two per row */
+/* Hockneye on phones: posters sit two per row (motion pieces stay one per row) */
 .pair-set { display: flex; flex-direction: column; gap: calc(var(--frame) / 2); }
 @media (max-width: 640px) {
   .pair-set { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--frame) / 2); }
   .pair-set > .row { display: contents; }
-  .proj-main > .row:has(> .media:nth-child(3)) { display: grid; grid-template-columns: 1fr 1fr; }
 }
 </style>
 <div class="lb" id="lb" aria-hidden="true"><img alt=""><button class="lb-close" type="button">Close</button><button class="lb-prev" type="button" aria-label="Previous image">&larr;</button><button class="lb-next" type="button" aria-label="Next image">&rarr;</button><div class="lb-count"></div></div>
