@@ -461,8 +461,8 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
       <div class="block-copy"><p>Every product comes with its own refill tablet, so bottles are reused rather than replaced.</p><p>The familiar figure from IKEA’s instruction manuals appears on each product, customised into a different pose that shows how it is used.</p></div>
     </section>
     <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-1.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-5.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
-    <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-2.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-3.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
-    <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-4.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-6.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-7.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
+    <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-2.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" data-m-slide style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-3.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
+    <div class="row"><div class="media" data-m-slide style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-4.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" data-m-slide style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-6.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" data-m-slide style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-7.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
     <div class="row"><div class="media" style="aspect-ratio: 3 / 2; flex: 1.5000 1 0"><img src="images/project-01/04-product-lineup-8.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 3 / 2; flex: 1.5000 1 0"><img src="images/project-01/04-product-lineup-9.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
     <section class="block" id="pop-display">
       <span class="block-label">Point-of-Purchase Display</span>
@@ -595,13 +595,23 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   .lb-prev, .lb-next { top: auto; bottom: 12px; transform: none; }
 }
 
-/* Phones: stacked images keep their own shape (the inline flex values are only for side-by-side rows);
-   rows of 3+ stay side by side; rows of 4 become 2 × 2 */
+/* Phones: every image gets its own full-width row, at its own shape (no small thumbnails) */
 @media (max-width: 640px) {
-  .row:not(:has(> .media:nth-child(3))) > .media { flex: none !important; width: 100%; }   /* pairs stack, each at its own shape */
-  .row:has(> .media:nth-child(3)) { flex-direction: row; }                                 /* rows of 3 or 5 stay side by side, smaller */
-  .row:has(> .media:nth-child(3)) > .media { width: auto; }
-  .row:has(> .media:nth-child(4):last-child) { display: grid; grid-template-columns: 1fr 1fr; }   /* rows of 4 become 2 × 2 */
+  .row, .row:has(> .media:nth-child(3)), .row:has(> .media:nth-child(4):last-child) { display: flex; flex-direction: column; }
+  .row > .media { flex: none !important; width: 100% !important; }
+}
+
+/* Phones: chosen images become one swipeable slider (desktop layout unchanged) */
+.m-slider { display: none; }
+@media (max-width: 640px) {
+  .m-slider { display: block; margin-inline: calc(var(--frame) * -1); }
+  .ms-track { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; padding-inline: var(--frame); scroll-padding-inline: var(--frame); scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .ms-track::-webkit-scrollbar { display: none; }
+  .ms-track > .media { flex: 0 0 82% !important; width: 82% !important; scroll-snap-align: start; }
+  .ms-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+  .ms-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--fg); opacity: .2; transition: opacity .2s, width .2s; }
+  .ms-dots span.is-on { opacity: 1; width: 16px; border-radius: 3px; }
+  .row:empty { display: none; }
 }
 </style>
 <div class="lb" id="lb" aria-hidden="true"><img alt=""><button class="lb-close" type="button">Close</button><button class="lb-prev" type="button" aria-label="Previous image">&larr;</button><button class="lb-next" type="button" aria-label="Next image">&rarr;</button><div class="lb-count"></div></div>
@@ -624,6 +634,29 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   addEventListener('keydown', e => { if (!lb.classList.contains('is-open')) return;
     if (e.key === 'Escape') close(); if (e.key === 'ArrowLeft') show(i - 1); if (e.key === 'ArrowRight') show(i + 1); });
   if (imgs.length < 2) lb.querySelectorAll('.lb-prev,.lb-next,.lb-count').forEach(b => b.hidden = true);
+})();
+</script>
+<script>
+// Phones: move the marked images into a swipeable slider; move them back on wider screens
+(() => {
+  const items = [...document.querySelectorAll('[data-m-slide]')];
+  if (items.length < 2) return;
+  const homes = items.map(el => ({ el, parent: el.parentNode, next: el.nextSibling }));
+  const slider = document.createElement('div'); slider.className = 'm-slider';
+  slider.innerHTML = '<div class="ms-track"></div><div class="ms-dots"></div>';
+  const track = slider.firstChild, dots = slider.lastChild;
+  dots.innerHTML = items.map(() => '<span></span>').join('');
+  const last = items[items.length - 1].parentNode;           // slider sits where the last row was
+  last.parentNode.insertBefore(slider, last);
+  const mq = matchMedia('(max-width: 640px)');
+  const place = () => {
+    if (mq.matches) items.forEach(el => track.appendChild(el));
+    else for (let k = homes.length - 1; k >= 0; k--) { const h = homes[k]; h.parent.insertBefore(h.el, h.next && h.next.parentNode === h.parent ? h.next : null); }
+  };
+  const mark = () => { const w = track.firstElementChild ? track.firstElementChild.offsetWidth + 8 : 1;
+    const n = Math.round(track.scrollLeft / w); [...dots.children].forEach((d, k) => d.classList.toggle('is-on', k === n)); };
+  track.addEventListener('scroll', () => requestAnimationFrame(mark), { passive: true });
+  mq.addEventListener('change', place); place(); mark();
 })();
 </script>
 </body>
