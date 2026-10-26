@@ -9,13 +9,13 @@
 <style>
 /* No single word left alone on the last line of a paragraph */
 p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta span { text-wrap: pretty; }
-/* Phones: replay button on its own line above the copyright; Back to top in the right corner */
+/* Phones: footer stacks as before, with the replay button in the right corner */
 @media (max-width: 900px) {
-  .foot-bottom { grid-template-columns: 1fr auto !important; grid-template-areas: "replay replay" "copy top" "city city"; row-gap: 14px; align-items: center; }
+  .foot-bottom { grid-template-columns: 1fr auto !important; grid-template-areas: "copy replay" "city city" "top top"; align-items: center; }
   .foot-bottom .foot-end { display: contents; }
-  .foot-bottom .replay { grid-area: replay; justify-self: start; margin: 0; }
+  .foot-bottom .replay { grid-area: replay; justify-self: end; margin: 0; }
   .foot-bottom .foot-copy { grid-area: copy; }
-  .foot-bottom .foot-end > a { grid-area: top; justify-self: end; }
+  .foot-bottom .foot-end > a { grid-area: top; justify-self: start; }
   .foot-bottom .foot-city { grid-area: city; }
 }
 </style>
