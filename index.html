@@ -551,6 +551,25 @@ function heroMode(splash) {
   // click the opening to go down to the work
   splash.addEventListener('click', () => scrollTo({ top: innerHeight, behavior: 'smooth' }));
 }
+// Slide the page down to the work once the opening has played (stops if the visitor scrolls themselves)
+function autoDown(delay) {
+  let cancelled = false;
+  const stop = () => { cancelled = true; };
+  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(ev => addEventListener(ev, stop, { once: true, passive: true }));
+  setTimeout(() => {
+    if (cancelled || scrollY > 10) return;
+    const root = document.documentElement, prev = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    const from = scrollY, to = innerHeight, D = 1400, t0 = performance.now();
+    const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    (function step(now) {
+      if (cancelled) { root.style.scrollBehavior = prev; return; }
+      const t = Math.min(1, (now - t0) / D);
+      scrollTo(0, from + (to - from) * ease(t));
+      if (t < 1) requestAnimationFrame(step); else root.style.scrollBehavior = prev;
+    })(t0);
+  }, delay);
+}
 function playSplash(splash) {
   const root = document.documentElement;
   const frames = [...splash.querySelectorAll('.sf')];
@@ -571,6 +590,7 @@ function playSplash(splash) {
     splash.removeEventListener('click', finish);
     heroMode(splash);
     startReveal();
+    autoDown(150);
   }
   splash.addEventListener('click', finish);   // click to skip
 }
@@ -578,7 +598,7 @@ function playSplash(splash) {
   const splash = document.getElementById('splash');
   if (!splash) { startReveal(); return; }
   let seen = false; try { seen = sessionStorage.getItem('sw-splash-seen') === '1' && location.hash !== '#intro'; } catch (e) {}
-  if (seen) { splash.classList.add('is-on'); heroMode(splash); startReveal(); }
+  if (seen) { splash.classList.add('is-on'); heroMode(splash); startReveal(); autoDown(STEP * 2 * splash.querySelectorAll('.sf').length); }
   else playSplash(splash);
 })();
 // Replay button: back to the opening at the top
