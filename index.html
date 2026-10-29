@@ -419,7 +419,7 @@ body > footer.footer { margin-top: auto; }
 
 <header class="site-bar">
   <div class="bar-id"><a class="bar-name" href="#top">SHIYAO WU</a><p class="bar-intro">Graphic Designer based in Los Angeles, working across brand identity, packaging, type and editorial design.</p></div>
-  <div class="bar-col"><a href="archive.html">Archive</a>
+  <div class="bar-col"><a href="archive.html">Works</a>
     <p class="bar-contact"><a href="mailto:shiyaowu.design@gmail.com"><svg class="ic ic-o" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 6.5 12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><svg class="ic ic-f" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.5 4h15A2.5 2.5 0 0 1 22 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 17.5v-11A2.5 2.5 0 0 1 4.5 4Z"/><path d="M3.5 6.5 12 13l8.5-6.5" fill="none" stroke="var(--bg)" stroke-width="2" stroke-linejoin="round"/></svg>Email</a><a href="https://www.instagram.com/shiyao.design/" target="_blank" rel="noopener"><svg class="ic ic-o" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></svg><svg class="ic ic-f" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M8 3h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5Zm4 4.8a4.2 4.2 0 1 0 0 8.4 4.2 4.2 0 0 0 0-8.4Zm0 2a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4Z"/><circle cx="17.3" cy="6.7" r="1.3" fill="var(--bg)"/></svg>Instagram</a><a href="https://www.linkedin.com/in/shiyao-wu-design/" target="_blank" rel="noopener"><svg class="ic ic-o" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M7.2 10.4h2.2V17H7.2zM8.3 6.9a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6ZM11.2 10.4h2.1v.9c.4-.6 1.1-1.1 2.2-1.1 1.6 0 2.5 1 2.5 3V17h-2.2v-3.4c0-1-.3-1.6-1.2-1.6s-1.3.7-1.3 1.6V17h-2.1z"/></svg><svg class="ic ic-f" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm1.6 7.4V18h2.6v-7.6H6.6Zm1.3-4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm3.3 4V18h2.6v-4.1c0-1.1.4-1.9 1.5-1.9s1.4.9 1.4 2V18h2.6v-4.6c0-2.4-1.2-3.2-2.9-3.2-1.3 0-2.1.6-2.5 1.3v-1.1h-2.7Z"/></svg>LinkedIn</a></p></div>
   <a href="playground.html">Playground</a>
   <a class="bar-last" href="about.html">Info</a>
@@ -520,7 +520,7 @@ function playSplash(splash, first) {
   const root = document.documentElement;
   const frames = [...splash.querySelectorAll('.sf')];
   const path = splash.querySelector('path');
-  const STEP = 260;                       // ms per highlight image
+  const STEP = 520;                       // ms per highlight image
   let i = 0, timer, done = false;
   root.style.overflow = 'hidden';
   requestAnimationFrame(() => splash.classList.add('is-on'));
@@ -528,7 +528,7 @@ function playSplash(splash, first) {
   const ready = Promise.race([Promise.all([...splash.querySelectorAll('img')].map(im => im.decode().catch(() => {}))), new Promise(r => setTimeout(r, 1500))]);
   ready.then(() => setTimeout(() => {
     timer = setInterval(() => {
-      if (i >= frames.length - 1) { clearInterval(timer); setTimeout(finish, 380); return; }
+      if (i >= frames.length - 1) { clearInterval(timer); setTimeout(finish, 900); return; }
       frames[i].classList.remove('on'); i++; frames[i].classList.add('on');
     }, STEP);
   }, 350));
@@ -542,7 +542,7 @@ function playSplash(splash, first) {
     const clip = e => { const W = innerWidth, H = innerHeight, c = H * 0.22 * (1 - e);
       splash.style.clipPath = `path('M0 0 L${W} 0 L${W} ${H} Q${W / 2} ${H + 2 * c} 0 ${H} Z')`; };
     clip(0);
-    const D = 900, ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const D = 1400, ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     const t0 = performance.now();
     (function step(now) {
       const t = Math.min(1, (now - t0) / D), e = ease(t);
