@@ -7,6 +7,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Newsreader:opsz,wght@6..72,400&display=swap">
 <style>
+/* No visible scrollbar (the page still scrolls) */
+html { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; width: 0; height: 0; }
 /* No single word left alone on the last line of a paragraph */
 p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta span { text-wrap: pretty; }
 /* Phones: footer stacks as before, with the replay button in the right corner */
@@ -519,7 +522,7 @@ function startReveal() {
 // First visit: the images play through once, full screen. After that (and on later visits) the opening
 // sits at the top of the page and keeps cycling; scrolling down lifts it away with a curved edge,
 // scrolling back to the top brings it back.
-const STEP = 520;                         // ms per image
+const STEP = 380;                         // ms per image
 function heroMode(splash) {
   const root = document.documentElement;
   const frames = [...splash.querySelectorAll('.sf')];
@@ -560,7 +563,7 @@ function autoDown(delay) {
     if (cancelled || scrollY > 10) return;
     const root = document.documentElement, prev = root.style.scrollBehavior;
     root.style.scrollBehavior = 'auto';
-    const from = scrollY, to = innerHeight, D = 1400, t0 = performance.now();
+    const from = scrollY, to = innerHeight, D = 1100, t0 = performance.now();
     const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     (function step(now) {
       if (cancelled) { root.style.scrollBehavior = prev; return; }
@@ -580,7 +583,7 @@ function playSplash(splash) {
   const ready = Promise.race([Promise.all([...splash.querySelectorAll('img')].map(im => im.decode().catch(() => {}))), new Promise(r => setTimeout(r, 1500))]);
   ready.then(() => setTimeout(() => {
     timer = setInterval(() => {
-      if (i >= frames.length - 1) { clearInterval(timer); setTimeout(finish, 900); return; }
+      if (i >= frames.length - 1) { clearInterval(timer); setTimeout(finish, 600); return; }
       frames[i].classList.remove('on'); i++; frames[i].classList.add('on');
     }, STEP);
   }, 350));

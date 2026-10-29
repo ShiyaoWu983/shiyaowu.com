@@ -7,7 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Newsreader:opsz,wght@6..72,400&display=swap">
-<style>html.sw-hold body { opacity: 0; } body { transition: opacity .25s ease; }
+<style>h/* No visible scrollbar (the page still scrolls) */
+html { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; width: 0; height: 0; }
+tml.sw-hold body { opacity: 0; } body { transition: opacity .25s ease; }
 /* section index: part titles in bold with a little air above, sections under them */
 .proj-toc .toc-part a { font-weight: 700; }
 .proj-toc .toc-part:not(:first-child) { margin-top: 1.3em; }   /* one empty line before each group */
