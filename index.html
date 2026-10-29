@@ -352,7 +352,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .splash .sf:last-child img { object-position: 50% 41%; }
 .has-hero .splash .sf { bottom: -22vh; }   /* at the top of the page every image runs into the curved edge as you scroll */
 .splash-curve { display: none; }
-.splash .sf.on { opacity: 1; }
+.splash .sf { transition: opacity .35s ease; }
+.splash .sf.was { opacity: 1; z-index: 0; transition: none; }   /* the previous image stays underneath while the next fades in */
+.splash .sf.on { opacity: 1; z-index: 1; }
 .splash .sf span { font-size: 10px; color: rgba(255,255,255,.55); mix-blend-mode: difference; }
 .splash .sf:nth-child(1) { background: #4A4A4A; }
 .splash .sf:nth-child(2) { background: #B9B9B9; }
@@ -459,7 +461,7 @@ body > footer.footer { margin-top: auto; }
   <div class="foot-bottom">
     <span class="foot-copy">© 2026 Shiyao Wu</span>
     <span class="foot-city">Los Angeles <span id="footClock" class="foot-time">--:--:--</span></span>
-    <span class="foot-end"><button class="replay" id="replayIntro" type="button" aria-label="Replay intro" title="Replay intro"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4v5h5"/></svg></span><span class="rl">Replay intro</span></button><a href="#top">Back to top ↑</a></span>
+    <span class="foot-end"><a href="#top">Back to top ↑</a></span>
   </div>
 </footer>
 
@@ -522,7 +524,13 @@ function startReveal() {
 // First visit: the images play through once, full screen. After that (and on later visits) the opening
 // sits at the top of the page and keeps cycling; scrolling down lifts it away with a curved edge,
 // scrolling back to the top brings it back.
-const STEP = 380;                         // ms per image
+const STEP = 400;                         // ms per image
+// Swap images: the next one fades in on top of the current one
+function swapFrame(frames, from, to) {
+  frames.forEach(f => f.classList.remove('was'));
+  frames[from].classList.add('was'); frames[from].classList.remove('on');
+  frames[to].classList.add('on');
+}
 function heroMode(splash) {
   const root = document.documentElement;
   const frames = [...splash.querySelectorAll('.sf')];
@@ -549,7 +557,7 @@ function heroMode(splash) {
   // keep the images moving while the opening is on screen
   setInterval(() => {
     if (scrollY >= innerHeight || document.hidden) return;
-    frames[i].classList.remove('on'); i = (i + 1) % frames.length; frames[i].classList.add('on');
+    const n = (i + 1) % frames.length; swapFrame(frames, i, n); i = n;
   }, STEP * 2);
   // click the opening to go down to the work
   splash.addEventListener('click', () => scrollTo({ top: innerHeight, behavior: 'smooth' }));
@@ -584,7 +592,7 @@ function playSplash(splash) {
   ready.then(() => setTimeout(() => {
     timer = setInterval(() => {
       if (i >= frames.length - 1) { clearInterval(timer); setTimeout(finish, 600); return; }
-      frames[i].classList.remove('on'); i++; frames[i].classList.add('on');
+      swapFrame(frames, i, i + 1); i++;
     }, STEP);
   }, 350));
   function finish() {
@@ -604,11 +612,6 @@ function playSplash(splash) {
   if (seen) { splash.classList.add('is-on'); heroMode(splash); startReveal(); autoDown(STEP * 2 * splash.querySelectorAll('.sf').length); }
   else playSplash(splash);
 })();
-// Replay button: back to the opening at the top
-document.getElementById('replayIntro').addEventListener('click', () => {
-  const btn = document.getElementById('replayIntro'); btn.classList.add('spin'); setTimeout(() => btn.classList.remove('spin'), 900);
-  scrollTo({ top: 0, behavior: 'smooth' });
-});
 
 // Footer: current city + live local time
 (function () {
