@@ -14,6 +14,8 @@ tml.sw-hold body { opacity: 0; } body { transition: opacity .25s ease; }
 /* Project title: click to go back up to the cover */
 .proj-title a { color: inherit; transition: opacity .2s; }
 .proj-title a:hover { opacity: .45; }
+/* Order: title, tags right underneath, then the one-line description */
+.proj-side .proj-title + .proj-tags { margin-top: -20px; }
 </style>
 <script>document.documentElement.classList.add('sw-hold'); setTimeout(() => document.documentElement.classList.remove('sw-hold'), 2500);</script>
 <style>
@@ -423,8 +425,8 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 <main class="proj" id="top">
   <aside class="proj-side">
     <h1 class="proj-title"><a href="#top" class="to-cover">Art Trail</a></h1>
-    <p class="proj-lede">Your personalized guide to art, where exploration meets effortless discovery.</p>
     <p class="proj-tags">Brand Identity - UI/UX Design - Experience Design</p>
+    <p class="proj-lede">Your personalized guide to art, where exploration meets effortless discovery.</p>
     <ol class="proj-toc" id="toc">
       <li><a href="#brand-concept">Brand Concept</a></li>
       <li><a href="#business-strategy">Research &amp; Strategy</a></li>

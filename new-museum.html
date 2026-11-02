@@ -28,6 +28,8 @@ tml.sw-hold body { opacity: 0; } body { transition: opacity .25s ease; }
 /* Project title: click to go back up to the cover */
 .proj-title a { color: inherit; transition: opacity .2s; }
 .proj-title a:hover { opacity: .45; }
+/* Order: title, tags right underneath, then the one-line description */
+.proj-side .proj-title + .proj-tags { margin-top: -20px; }
 </style>
 <script>document.documentElement.classList.add('sw-hold'); setTimeout(() => document.documentElement.classList.remove('sw-hold'), 2500);</script>
 <style>
@@ -436,8 +438,8 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 <main class="proj" id="top">
   <aside class="proj-side">
     <h1 class="proj-title"><a href="#top" class="to-cover">New Museum</a></h1>
-    <p class="proj-lede">Rebranding the New Museum around the one thing that never changes: its building.</p>
     <p class="proj-tags">Brand Identity - Interaction Design - Editorial Design</p>
+    <p class="proj-lede">Rebranding the New Museum around the one thing that never changes: its building.</p>
     <ol class="proj-toc" id="toc">
       <li class="toc-part"><a href="#new-museum">New Museum</a></li>
       <li><a href="#nm-concept">Brand Concept</a></li>
