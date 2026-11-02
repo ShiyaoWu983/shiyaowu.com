@@ -316,7 +316,7 @@ body > footer.footer { margin-top: auto; }
 .coll { padding-block: 49px 0; }   /* clears the fixed header bar */
 .coll-top { margin: 64px 0; }   /* same white space above the filter (from the header) and below it (to the images) */
 /* Big filter words (after serious.business/work): one typeface throughout; the selected word is black,
-   the rest grey and turn black on hover. The small number is how many projects each one holds. */
+   the rest grey and turn black on hover. */
 .filters {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 28px;
   font-size: clamp(31px, 4.4vw, 63px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.1;
@@ -419,7 +419,7 @@ const tiles = [...list.children];
 const inGroup = (el, g) => !g.tags || el.dataset.cats.split('|').some(t => g.tags.includes(t));
 const filterHTML = GROUPS.map((g, i) => {
   const n = tiles.filter(t => inGroup(t, g)).length;
-  return `<button type="button" aria-pressed="${i === 0}" data-i="${i}"><span class="w">${esc(g.name)}</span><sup>${String(n).padStart(2, '0')}</sup></button>`;
+  return `<button type="button" aria-pressed="${i === 0}" data-i="${i}"><span class="w">${esc(g.name)}</span></button>`;
 }).join('');
 const bars = [$('filters'), $('filtersMini')];   // the big filter and its compact copy stay in sync
 bars.forEach(el => { el.innerHTML = filterHTML; });
