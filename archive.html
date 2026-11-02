@@ -337,6 +337,9 @@ body > footer.footer { margin-top: auto; }
 .grid-arch { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px var(--frame); }
 .tile { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .tile[hidden] { display: none; }
+.tile { transition: opacity .35s ease; }
+.tile.is-dim { opacity: .2; }   /* projects outside the chosen category stay in place, faded */
+.tile.is-dim:hover { opacity: .45; }
 .tile .ph { aspect-ratio: 5 / 3;   /* same shape as the homepage covers */ max-width: 100%; transition: border-radius .3s ease; }
 @media (hover: hover) and (pointer: fine) and (min-width: 901px) { .tile:hover .ph { border-radius: 24px; } }   /* no corner change on phones, tablets or touch screens */
 .tile-meta { display: flex; flex-direction: column; gap: 2px; font-size: 15px; font-weight: 500; line-height: 1.3; }
@@ -424,7 +427,7 @@ const filterHTML = GROUPS.map((g, i) => {
 const bars = [$('filters'), $('filtersMini')];   // the big filter and its compact copy stay in sync
 bars.forEach(el => { el.innerHTML = filterHTML; });
 function applyFilter(i) {
-  tiles.forEach(t => { t.hidden = !inGroup(t, GROUPS[i]); });
+  tiles.forEach(t => { t.classList.toggle('is-dim', !inGroup(t, GROUPS[i])); });   // every project stays; ones outside the category fade back
   bars.forEach(el => [...el.children].forEach(x => x.setAttribute('aria-pressed', String(+x.dataset.i === i))));
 }
 bars.forEach(el => el.addEventListener('click', e => {
