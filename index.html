@@ -374,8 +374,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .splash.is-on .splash-name { opacity: 1; }
 
 /* After the logo, the page settles in: header first, then the cards one by one */
-.is-intro .site-bar { opacity: 0; transform: translateY(10px); }
-.is-revealed .site-bar { opacity: 1; transform: none; transition: opacity .6s ease, transform .6s ease; }
+/* The header stays on top of the opening, in white; it turns back to black once the opening has scrolled away */
+.site-bar { transition: background-color .3s ease, color .3s ease; }
+.over-hero .site-bar { z-index: 250; background-color: transparent; color: #FFFFFF; }
+.over-hero .site-bar .bar-intro, .over-hero .site-bar .bar-contact, .over-hero .site-bar .bar-contact a:hover { color: #FFFFFF; }
+.over-hero .site-bar .bar-contact .ic path[stroke="var(--bg)"] { stroke: #141414; }
 .foot-time { font-variant-numeric: tabular-nums; margin-left: .4em; }
 
 /* Replay-intro button: on the left, on the same line as See all projects */
@@ -552,6 +555,8 @@ function heroMode(splash) {
     splash.style.transform = `translateY(${-y}px)`;
     splash.style.clipPath = `path('M0 0 L${W} 0 L${W} ${H} Q${W / 2} ${H + 2 * c} 0 ${H} Z')`;
     splash.style.visibility = y >= H * 1.25 ? 'hidden' : '';
+    const bar = document.querySelector('.site-bar');
+    root.classList.toggle('over-hero', H - y > (bar ? bar.offsetHeight : 0));
   };
   addEventListener('scroll', () => requestAnimationFrame(follow), { passive: true });
   addEventListener('resize', () => { size(); follow(); });
@@ -588,6 +593,7 @@ function playSplash(splash) {
   const frames = [...splash.querySelectorAll('.sf')];
   let i = 0, timer, done = false;
   root.style.overflow = 'hidden';
+  root.classList.add('over-hero');
   requestAnimationFrame(() => splash.classList.add('is-on'));
   // wait (max 1.5s) for the images so each one is ready before it shows
   const ready = Promise.race([Promise.all([...splash.querySelectorAll('img')].map(im => im.decode().catch(() => {}))), new Promise(r => setTimeout(r, 1500))]);
