@@ -391,6 +391,13 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 /* One friendly line above the work */
 .pg-intro { margin: 12px 0 36px; max-width: calc(50% - var(--frame) / 2);   /* the left half of the page, like the intro in the header */ font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--fg); text-wrap: pretty; }
 @media (max-width: 640px) { .pg-intro { font-size: 13px; margin: 4px 0 24px; max-width: none; } }
+/* "Welcome in, and enjoy exploring!" — letters hop in a little wave every few seconds, and when you hover */
+.pg-wave { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.2em; white-space: nowrap; }
+.pg-wave .l { display: inline-block; animation: pgHop 4.2s cubic-bezier(.3,1.6,.5,1) infinite; animation-delay: calc(var(--i) * 45ms); }
+.pg-wave .sp { display: inline-block; width: .28em; }
+.pg-wave:hover .l { animation: pgHop .7s cubic-bezier(.3,1.6,.5,1) 1; animation-delay: calc(var(--i) * 25ms); color: var(--fg); }
+@keyframes pgHop { 0%, 12%, 100% { transform: none; } 6% { transform: translateY(-.32em) rotate(-4deg); } }
+@media (prefers-reduced-motion: reduce) { .pg-wave .l { animation: none !important; } }
 </style>
 </head>
 <body>
@@ -403,7 +410,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 </header>
 
 <main class="pg" id="top">
-  <p class="pg-intro">Beyond my main projects, this is where I play: side projects, experiments and things I make just for fun. Welcome in, and enjoy exploring!</p>
+  <p class="pg-intro">Beyond my main projects, this is where I play: side projects, experiments and things I make just for fun. <span class="pg-wave" id="pgWave">Welcome in, and enjoy exploring!</span></p>
   <div class="pg-grid" id="pgGrid"></div>
 </main>
 
@@ -535,6 +542,12 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   const run = () => document.querySelectorAll(sel).forEach(fix);
   run(); addEventListener('load', run);
 })();
+</script>
+<script>
+// Split the welcome line into letters for the wave
+(() => { const el = document.getElementById('pgWave'); if (!el) return;
+  let k = 0; el.innerHTML = [...el.textContent].map(ch => ch === ' ' ? '<span class="sp"> </span>' : `<span class="l" style="--i:${k++}">${ch}</span>`).join('');
+  el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ')); })();
 </script>
 </body>
 </html>
