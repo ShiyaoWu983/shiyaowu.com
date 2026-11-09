@@ -611,6 +611,19 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 .vid-ctrl svg { width: 16px; height: 16px; }
 .vid-hit { position: absolute; inset: 0; z-index: 2; cursor: pointer; }
 @media (max-width: 640px) { .vid-ctrl { left: 8px; bottom: 8px; } .vid-ctrl button { width: 32px; height: 32px; } }
+/* Computers: each section's text shows in the left column, under its name, while you read that section */
+.toc-copy { display: none; }
+@media (min-width: 901px) {
+  .proj-side { overflow-y: auto; scrollbar-width: none; }
+  .proj-side::-webkit-scrollbar { display: none; }
+  .proj.text-left .proj-main .block.moved { margin: 0 !important; padding: 0 !important; height: 0; overflow: hidden; }
+  .proj.text-left .toc-copy { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .45s ease, opacity .3s ease, margin .45s ease; margin: 0; }
+  .proj.text-left .toc-copy > div { overflow: hidden; display: flex; flex-direction: column; gap: 12px; }
+  .proj.text-left .proj-toc li.is-open .toc-copy { grid-template-rows: 1fr; opacity: 1; margin: 8px 0 14px; }
+  .toc-copy p, .toc-copy h2 { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--fg); }
+  .toc-copy h2 { font-weight: 700; line-height: 1.3; }
+  .toc-copy .note { color: var(--muted); }
+}
 </style>
 <div class="lb" id="lb" aria-hidden="true"><img alt=""><button class="lb-close" type="button">Close</button><button class="lb-prev" type="button" aria-label="Previous image">&larr;</button><button class="lb-next" type="button" aria-label="Next image">&rarr;</button><div class="lb-count"></div></div>
 <script>
@@ -675,6 +688,29 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     // YouTube needs a hello before it takes commands
     if (yt) f.addEventListener('load', () => f.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1 }), '*'));
   });
+})();
+</script>
+<script>
+// Computers: move each section's text into the left column, under its name in the index; the section you're on opens
+(() => {
+  const proj = document.querySelector('.proj'), toc = document.getElementById('toc');
+  if (!proj || !toc) return;
+  const items = [...toc.querySelectorAll('li')].map(li => {
+    const a = li.querySelector('a'), sec = a && document.querySelector(a.getAttribute('href'));
+    const copy = sec && sec.classList.contains('block') && sec.querySelector('.block-copy');
+    if (!copy || !copy.textContent.trim()) return null;
+    const box = document.createElement('div'); box.className = 'toc-copy';
+    const inner = document.createElement('div'); inner.innerHTML = copy.innerHTML; box.appendChild(inner);
+    li.appendChild(box); sec.classList.add('moved');
+    return { li, a };
+  }).filter(Boolean);
+  if (!items.length) return;
+  proj.classList.add('text-left');
+  const sync = () => items.forEach(({ li, a }) => li.classList.toggle('is-open', a.classList.contains('is-active')));
+  addEventListener('scroll', () => requestAnimationFrame(() => requestAnimationFrame(sync)), { passive: true });
+  toc.addEventListener('click', e => { const a = e.target.closest('a'); if (!a) return;
+    toc.querySelectorAll('a').forEach(x => x.classList.toggle('is-active', x === a)); sync(); });
+  setTimeout(sync, 50);
 })();
 </script>
 </body>
