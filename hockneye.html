@@ -446,11 +446,11 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 
   <div class="proj-main">
     <div class="media" style="aspect-ratio: 16 / 9"><img src="images/project-07/01-cover.jpg" alt="Hockneye"></div>
-    <section class="block" id="brand-concept">
+    <section class="block" id="brand-concept" data-short="An exhibition on how we see, drawn from David Hockney.">
       <span class="block-label">Brand Concept</span>
       <div class="block-copy"><p>Hockneye is an exhibition identity and immersive installation exploring the convergence of art and science. It draws on David Hockney’s ideas about perception — his multi-perspective Joiners collages, his theory that Renaissance painters relied on optical devices, and his embrace of the iPad and digital drawing — to argue that seeing is never neutral.</p><p>From concave mirrors and the camera obscura to AI and computational vision, the exhibition traces how tools have shaped what we see, inviting visitors to question their own perception.</p></div>
     </section>
-    <section class="block" id="poster-series">
+    <section class="block" id="poster-series" data-short="Ten typographic posters broken across viewpoints.">
       <span class="block-label">Poster Series</span>
       <div class="block-copy"><p>A typographic series of ten posters. Headlines such as “The Constructed Eye,” “Fragments of Vision” and “Beyond the Frame” are broken apart and layered across multiple viewpoints, echoing the fractured perspective of Hockney’s Joiners.</p></div>
     </section>
@@ -458,12 +458,12 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
     <div class="row"><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-01.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-02.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-03.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-04.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-05.jpg" alt="Hockneye poster" loading="lazy"></div></div>
     <div class="row"><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-06.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-07.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-08.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-09.jpg" alt="Hockneye poster" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1800; flex: 0.6667 1 0"><img src="images/project-07/03-poster-10.jpg" alt="Hockneye poster" loading="lazy"></div></div>
     </div>
-    <section class="block" id="motion">
+    <section class="block" id="motion" data-short="Posters animated to show how machines see.">
       <span class="block-label">Motion</span>
       <div class="block-copy"><p>Animated versions of the posters explore how machines see: images dissolve into pixels and fragments, then reassemble, setting computational vision against human perception.</p></div>
     </section>
     <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><video src="images/project-07/04-motion-1.mp4" poster="images/project-07/04-motion-1-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Hockneye motion poster"></video></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><video src="images/project-07/04-motion-2.mp4" poster="images/project-07/04-motion-2-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Hockneye motion poster"></video></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><video src="images/project-07/04-motion-3.mp4" poster="images/project-07/04-motion-3-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Hockneye motion poster"></video></div></div>
-    <section class="block" id="spatial-application">
+    <section class="block" id="spatial-application" data-short="Wall graphics that make looking an active experience.">
       <span class="block-label">Spatial Application</span>
       <div class="block-copy"><p>In the gallery, the identity scales up to wall graphics and large-format posters, surrounding visitors with layered, multi-perspective views that turn looking into an active experience.</p></div>
     </section>
@@ -605,12 +605,11 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   .pair-set { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--frame) / 2); }
   .pair-set > .row { display: contents; }
 }
-/* Computers: each section's text shows in the left column, under its name, while you read that section */
+/* Computers: a one-line summary of each section shows in the left column, under its name; the full text stays on the right */
 .toc-copy { display: none; }
 @media (min-width: 901px) {
   .proj-side { overflow-y: auto; scrollbar-width: none; }
   .proj-side::-webkit-scrollbar { display: none; }
-  .proj.text-left .proj-main .block.moved .block-copy { display: none; }   /* the section name stays between the images; its text moves to the left */
   .proj-toc a.is-active { font-weight: 700; }
   .proj.text-left .toc-copy { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .45s ease, opacity .3s ease, margin .45s ease; margin: 0; }
   .proj.text-left .toc-copy > div { overflow: hidden; display: flex; flex-direction: column; gap: 12px; }
@@ -650,9 +649,9 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   const items = [...toc.querySelectorAll('li')].map(li => {
     const a = li.querySelector('a'), sec = a && document.querySelector(a.getAttribute('href'));
     const copy = sec && sec.classList.contains('block') && sec.querySelector('.block-copy');
-    if (!copy || !copy.textContent.trim()) return null;
+    if (!copy || !copy.textContent.trim() || !sec.dataset.short) return null;
     const box = document.createElement('div'); box.className = 'toc-copy';
-    const inner = document.createElement('div'); inner.innerHTML = copy.innerHTML; box.appendChild(inner);
+    const inner = document.createElement('div'); const p = document.createElement('p'); p.textContent = sec.dataset.short || ''; inner.appendChild(p); box.appendChild(inner);
     li.appendChild(box); sec.classList.add('moved');
     return { li, a };
   }).filter(Boolean);

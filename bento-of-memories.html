@@ -448,26 +448,26 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 
   <div class="proj-main">
     <div class="media" style="aspect-ratio: 16 / 9"><img src="images/project-06/01-cover-2.jpg" alt="Bento of Memories"></div>
-    <section class="block" id="overview">
+    <section class="block" id="overview" data-short="Four handmade books, four years, four ingredients.">
       <span class="block-label">Overview</span>
       <div class="block-copy"><p>Bento of Memories is a set of four handmade books, each built around an ingredient and a year of my life. Together they pair personal stories with recipes — from farewells in 2020 to a family reunion in 2023.</p></div>
     </section>
-    <section class="block" id="tomato">
+    <section class="block" id="tomato" data-short="2020: farewells, and recipes that felt like home.">
       <span class="block-label">Tomato</span>
       <div class="block-copy"><p>Tomato reflects on 2020 — another year abroad, full of farewells and longing for family. The book’s deckled edges recall the skin of a real tomato, and its pages pair memories with the recipes that brought me closer to home.</p></div>
     </section>
     <div class="row slide-row"><div class="media slides is-single" style="aspect-ratio: 3 / 2"><img src="images/project-06/02-tomato-1.jpg" alt="Tomato book" loading="lazy" class=is-on></div><div class="media slides" style="aspect-ratio: 3 / 2"><img src="images/project-06/02-tomato-2.jpg" alt="Tomato book" loading="lazy" class=is-on><img src="images/project-06/02-tomato-3.jpg" alt="Tomato book" loading="lazy"><img src="images/project-06/02-tomato-4.jpg" alt="Tomato book" loading="lazy"><img src="images/project-06/02-tomato-5.jpg" alt="Tomato book" loading="lazy"></div></div>
-    <section class="block" id="maitake">
+    <section class="block" id="maitake" data-short="2021: a quiet omakase dinner and Japan's forests.">
       <span class="block-label">Maitake</span>
       <div class="block-copy"><p>Maitake recalls a summer 2021 omakase dinner where I was the only guest. A plate of tempura maitake opened a story about Japan’s quiet forests, and the book is designed to carry readers into the place where these mushrooms grow.</p></div>
     </section>
     <div class="row slide-row"><div class="media slides" style="aspect-ratio: 3 / 2"><img src="images/project-06/03-maitake-1.jpg" alt="Maitake book" loading="lazy" class=is-on><img src="images/project-06/03-maitake-2.jpg" alt="Maitake book" loading="lazy"><img src="images/project-06/03-maitake-3.jpg" alt="Maitake book" loading="lazy"></div><div class="media slides" style="aspect-ratio: 3 / 2"><img src="images/project-06/03-maitake-4.jpg" alt="Maitake book" loading="lazy" class=is-on><img src="images/project-06/03-maitake-5.jpg" alt="Maitake book" loading="lazy"><img src="images/project-06/03-maitake-6.jpg" alt="Maitake book" loading="lazy"><img src="images/project-06/03-maitake-7.jpg" alt="Maitake book" loading="lazy"><img src="images/project-06/03-maitake-8.jpg" alt="Maitake book" loading="lazy"><img src="images/project-06/03-maitake-9.jpg" alt="Maitake book" loading="lazy"><img src="images/project-06/03-maitake-10.jpg" alt="Maitake book" loading="lazy"></div></div>
-    <section class="block" id="truffle">
+    <section class="block" id="truffle" data-short="2022: a birthday dinner, told by touch.">
       <span class="block-label">Truffle</span>
       <div class="block-copy"><p>Truffle marks my 22nd birthday dinner in 2022. The semi-handmade book mimics the texture of a truffle and includes the recipe for the evening’s centrepiece dish, so readers experience it by touch as well as sight.</p></div>
     </section>
     <div class="row slide-row"><div class="media slides" style="aspect-ratio: 3 / 2"><img src="images/project-06/04-truffle-1.jpg" alt="Truffle book" loading="lazy" class=is-on><img src="images/project-06/04-truffle-2.jpg" alt="Truffle book" loading="lazy"><img src="images/project-06/04-truffle-3.jpg" alt="Truffle book" loading="lazy"></div><div class="media slides" style="aspect-ratio: 3 / 2"><img src="images/project-06/04-truffle-4.jpg" alt="Truffle book" loading="lazy" class=is-on><img src="images/project-06/04-truffle-5.jpg" alt="Truffle book" loading="lazy"><img src="images/project-06/04-truffle-6.jpg" alt="Truffle book" loading="lazy"><img src="images/project-06/04-truffle-7.jpg" alt="Truffle book" loading="lazy"><img src="images/project-06/04-truffle-8.jpg" alt="Truffle book" loading="lazy"><img src="images/project-06/04-truffle-9.jpg" alt="Truffle book" loading="lazy"><img src="images/project-06/04-truffle-10.jpg" alt="Truffle book" loading="lazy"></div></div>
-    <section class="block" id="salmon">
+    <section class="block" id="salmon" data-short="2023: a scroll-shaped book about family reunion.">
       <span class="block-label">Salmon</span>
       <div class="block-copy"><p>Salmon is a scroll-shaped book about reunion, capturing 2023, when I saw my family again after four years apart. Short stories unfold alongside a recipe for a salmon poke bowl.</p></div>
     </section>
@@ -600,12 +600,11 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   .row, .row:has(> .media:nth-child(3)), .row:has(> .media:nth-child(4):last-child) { display: flex; flex-direction: column; }
   .row > .media { flex: none !important; width: 100% !important; }
 }
-/* Computers: each section's text shows in the left column, under its name, while you read that section */
+/* Computers: a one-line summary of each section shows in the left column, under its name; the full text stays on the right */
 .toc-copy { display: none; }
 @media (min-width: 901px) {
   .proj-side { overflow-y: auto; scrollbar-width: none; }
   .proj-side::-webkit-scrollbar { display: none; }
-  .proj.text-left .proj-main .block.moved .block-copy { display: none; }   /* the section name stays between the images; its text moves to the left */
   .proj-toc a.is-active { font-weight: 700; }
   .proj.text-left .toc-copy { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .45s ease, opacity .3s ease, margin .45s ease; margin: 0; }
   .proj.text-left .toc-copy > div { overflow: hidden; display: flex; flex-direction: column; gap: 12px; }
@@ -645,9 +644,9 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   const items = [...toc.querySelectorAll('li')].map(li => {
     const a = li.querySelector('a'), sec = a && document.querySelector(a.getAttribute('href'));
     const copy = sec && sec.classList.contains('block') && sec.querySelector('.block-copy');
-    if (!copy || !copy.textContent.trim()) return null;
+    if (!copy || !copy.textContent.trim() || !sec.dataset.short) return null;
     const box = document.createElement('div'); box.className = 'toc-copy';
-    const inner = document.createElement('div'); inner.innerHTML = copy.innerHTML; box.appendChild(inner);
+    const inner = document.createElement('div'); const p = document.createElement('p'); p.textContent = sec.dataset.short || ''; inner.appendChild(p); box.appendChild(inner);
     li.appendChild(box); sec.classList.add('moved');
     return { li, a };
   }).filter(Boolean);

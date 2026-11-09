@@ -446,23 +446,23 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 
   <div class="proj-main">
     <div class="media" style="aspect-ratio: 16 / 9"><img src="images/project-08/01-cover-1.jpg" alt="Citrus Time"></div>
-    <section class="block" id="brand-concept">
+    <section class="block" id="brand-concept" data-short="A botanical sparkling water with Japanese citrus.">
       <span class="block-label">Brand Concept</span>
       <div class="block-copy"><p>Citrus Time is a botanical sparkling water rooted in the clarity of Japanese citrus and layered with plant-based ingredients. Each bottle is made not only to quench, but to soothe — a small pause in the day.</p><p>The identity pairs minimalist calm with natural warmth, sitting between natural purity and everyday elegance for people who value simplicity with depth.</p><p class="note">[Design process and AI workflow available upon request.]</p></div>
     </section>
-    <section class="block" id="brand-identity">
+    <section class="block" id="brand-identity" data-short="A soft olive wordmark and a citrus palette.">
       <span class="block-label">Brand Identity</span>
       <div class="block-copy"><p>A soft, rounded wordmark in olive green is paired with a palette drawn from citrus: yuzu yellow, orange and cream. The yuzu label combines botanical illustration with clean typography, guided by five values: purity, botanical, fresh, tactile and sensory.</p></div>
     </section>
     <div class="row"><div class="media" style="aspect-ratio: 2400 / 1543; flex: 1.5554 1 0"><img src="images/project-08/02-brand-identity-1.jpg" alt="Citrus Time brand identity" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1543; flex: 1.5554 1 0"><img src="images/project-08/02-brand-identity-2.jpg" alt="Citrus Time brand identity" loading="lazy"></div></div>
     <div class="row"><div class="media" style="aspect-ratio: 2400 / 1543; flex: 1.5554 1 0"><img src="images/project-08/02-brand-identity-3.jpg" alt="Citrus Time brand identity" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1543; flex: 1.5554 1 0"><img src="images/project-08/02-brand-identity-4.jpg" alt="Citrus Time brand identity" loading="lazy"></div></div>
-    <section class="block" id="photography">
+    <section class="block" id="photography" data-short="Sunlit still lifes and poolside scenes.">
       <span class="block-label">Photography</span>
       <div class="block-copy"><p>Studio still lifes with citrus and calla lilies, alongside a poolside series in bright summer light, place the bottle in calm, sunlit moments.</p></div>
     </section>
     <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-08/03-photography-1.jpg" alt="Citrus Time photography" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1601; flex: 1.4991 1 0"><img src="images/project-08/03-photography-2.jpg" alt="Citrus Time photography" loading="lazy"></div></div>
     <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-08/03-photography-3.jpg" alt="Citrus Time photography" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-08/03-photography-4.jpg" alt="Citrus Time photography" loading="lazy"></div></div>
-    <section class="block" id="working-with-ai">
+    <section class="block" id="working-with-ai" data-short="AI-generated lifestyle scenes for social media.">
       <span class="block-label">AI Imagery</span>
       <div class="block-copy"><p>AI-generated lifestyle scenes — a picnic, a poolside afternoon, a stocked fridge — carry the brand into social media, showing the drink in everyday moments.</p></div>
     </section>
@@ -599,12 +599,11 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   .row, .row:has(> .media:nth-child(3)), .row:has(> .media:nth-child(4):last-child) { display: flex; flex-direction: column; }
   .row > .media { flex: none !important; width: 100% !important; }
 }
-/* Computers: each section's text shows in the left column, under its name, while you read that section */
+/* Computers: a one-line summary of each section shows in the left column, under its name; the full text stays on the right */
 .toc-copy { display: none; }
 @media (min-width: 901px) {
   .proj-side { overflow-y: auto; scrollbar-width: none; }
   .proj-side::-webkit-scrollbar { display: none; }
-  .proj.text-left .proj-main .block.moved .block-copy { display: none; }   /* the section name stays between the images; its text moves to the left */
   .proj-toc a.is-active { font-weight: 700; }
   .proj.text-left .toc-copy { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .45s ease, opacity .3s ease, margin .45s ease; margin: 0; }
   .proj.text-left .toc-copy > div { overflow: hidden; display: flex; flex-direction: column; gap: 12px; }
@@ -644,9 +643,9 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   const items = [...toc.querySelectorAll('li')].map(li => {
     const a = li.querySelector('a'), sec = a && document.querySelector(a.getAttribute('href'));
     const copy = sec && sec.classList.contains('block') && sec.querySelector('.block-copy');
-    if (!copy || !copy.textContent.trim()) return null;
+    if (!copy || !copy.textContent.trim() || !sec.dataset.short) return null;
     const box = document.createElement('div'); box.className = 'toc-copy';
-    const inner = document.createElement('div'); inner.innerHTML = copy.innerHTML; box.appendChild(inner);
+    const inner = document.createElement('div'); const p = document.createElement('p'); p.textContent = sec.dataset.short || ''; inner.appendChild(p); box.appendChild(inner);
     li.appendChild(box); sec.classList.add('moved');
     return { li, a };
   }).filter(Boolean);
