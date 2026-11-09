@@ -449,7 +449,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
       <span class="block-label">Brand Concept</span>
       <div class="block-copy"><p>Many first-time movers struggle to carry household supplies, remember which cleaning products they need, and understand how to look after a new home.</p><p>IKEA helps people furnish a home; FÖRSTA helps them learn how to live in it.</p></div>
     </section>
-    <div class="media" style="aspect-ratio: 16 / 9"><iframe src="https://player.vimeo.com/video/1219026152?badge=0&amp;autopause=0&amp;loop=1#t=5s" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="FÖRSTA | IKEA | Shiyao Wu" loading="lazy"></iframe></div>   <!-- Vimeo: starts at 0:05 -->
+    <div class="media" style="aspect-ratio: 16 / 9"><iframe src="https://player.vimeo.com/video/1219026152?background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;autopause=0&amp;dnt=1#t=5s" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="FÖRSTA | IKEA | Shiyao Wu"></iframe></div>   <!-- Vimeo: starts at 0:05 -->
     <section class="block" id="product-line">
       <span class="block-label">Product System</span>
       <div class="block-copy"><p>Six essentials in one kit: liquid dish soap, foam hand soap, multi-surface cleaner, 3-in-1 laundry pods, refill tablets and a microfiber cleaning cloth.</p></div>
@@ -618,6 +618,16 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   .ms-dots span.is-on { opacity: 1; width: 16px; border-radius: 3px; }
   .row:empty { display: none; }
 }
+/* Embedded films: play on their own, muted, no Vimeo/YouTube controls; just our own play and sound buttons */
+.media.vid-embed iframe { pointer-events: none; }
+.vid-ctrl { position: absolute; left: 12px; bottom: 12px; z-index: 3; display: flex; gap: 8px; }
+.vid-ctrl button { width: 36px; height: 36px; border-radius: 50%; border: 0; padding: 0; display: grid; place-items: center;
+  background: rgba(0,0,0,.45); color: #fff; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: background .2s, transform .2s; }
+.vid-ctrl button:hover { background: rgba(0,0,0,.7); }
+.vid-ctrl button:active { transform: scale(.92); }
+.vid-ctrl svg { width: 16px; height: 16px; }
+.vid-hit { position: absolute; inset: 0; z-index: 2; cursor: pointer; }
+@media (max-width: 640px) { .vid-ctrl { left: 8px; bottom: 8px; } .vid-ctrl button { width: 32px; height: 32px; } }
 </style>
 <div class="lb" id="lb" aria-hidden="true"><img alt=""><button class="lb-close" type="button">Close</button><button class="lb-prev" type="button" aria-label="Previous image">&larr;</button><button class="lb-next" type="button" aria-label="Next image">&rarr;</button><div class="lb-count"></div></div>
 <script>
@@ -662,6 +672,49 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     const n = Math.round(track.scrollLeft / w); [...dots.children].forEach((d, k) => d.classList.toggle('is-on', k === n)); };
   track.addEventListener('scroll', () => requestAnimationFrame(mark), { passive: true });
   mq.addEventListener('change', place); place(); mark();
+})();
+</script>
+<script>
+// Embedded films (Vimeo / YouTube): autoplay muted, our own Play/Pause and Sound buttons; click the film to pause or play
+(() => {
+  const I = {
+    pause: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>',
+    play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>',
+    off: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5Z" fill="currentColor"/><path d="m22 9-6 6M16 9l6 6"/></svg>',
+    on: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5Z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>'
+  };
+  document.querySelectorAll('.media iframe').forEach(f => {
+    const src = f.getAttribute('src') || '';
+    const vimeo = /player\.vimeo\.com/.test(src), yt = /youtube(-nocookie)?\.com/.test(src);
+    if (!vimeo && !yt) return;
+    const box = f.parentNode; box.classList.add('vid-embed');
+    const send = (vm, ytFunc) => {
+      if (!f.contentWindow) return;
+      f.contentWindow.postMessage(vimeo ? JSON.stringify(vm) : JSON.stringify({ event: 'command', func: ytFunc, args: [] }), '*');
+    };
+    let playing = true, muted = true;
+    const hit = document.createElement('div'); hit.className = 'vid-hit';
+    const ctrl = document.createElement('div'); ctrl.className = 'vid-ctrl';
+    ctrl.innerHTML = `<button type="button" class="vc-play" aria-label="Pause">${I.pause}</button><button type="button" class="vc-sound" aria-label="Turn sound on">${I.off}</button>`;
+    box.append(hit, ctrl);
+    const bPlay = ctrl.querySelector('.vc-play'), bSound = ctrl.querySelector('.vc-sound');
+    const togglePlay = () => {
+      playing = !playing;
+      playing ? send({ method: 'play' }, 'playVideo') : send({ method: 'pause' }, 'pauseVideo');
+      bPlay.innerHTML = playing ? I.pause : I.play; bPlay.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    };
+    const toggleSound = () => {
+      muted = !muted;
+      if (muted) send({ method: 'setVolume', value: 0 }, 'mute');
+      else { send({ method: 'setMuted', value: false }); send({ method: 'setVolume', value: 1 }, 'unMute'); if (!playing) togglePlay(); }
+      bSound.innerHTML = muted ? I.off : I.on; bSound.setAttribute('aria-label', muted ? 'Turn sound on' : 'Turn sound off');
+    };
+    bPlay.addEventListener('click', e => { e.stopPropagation(); togglePlay(); });
+    bSound.addEventListener('click', e => { e.stopPropagation(); toggleSound(); });
+    hit.addEventListener('click', togglePlay);
+    // YouTube needs a hello before it takes commands
+    if (yt) f.addEventListener('load', () => f.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1 }), '*'));
+  });
 })();
 </script>
 </body>
