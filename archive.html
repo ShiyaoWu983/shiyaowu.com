@@ -358,6 +358,11 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 /* Tags under a title: one step smaller than the title (13px, 12px on phone) */
 .card .card-tags, .tile-meta .cats, .more-meta .cats { font-size: 13px; }
 @media (max-width: 640px) { .card .card-tags, .tile-meta .cats, .more-meta .cats { font-size: 12px; } }
+/* Categories follow the page's 6-column grid (the same columns as the header: Works, Playground and Info sit on them) */
+.filters, .filters--mini { display: grid !important; grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: var(--frame); row-gap: 4px; justify-content: stretch; }
+.filters button { justify-self: start; white-space: nowrap; }
+@media (max-width: 900px) { .filters, .filters--mini { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .filters--mini { display: grid !important; overflow: visible; } }
 </style>
 </head>
 <body>
