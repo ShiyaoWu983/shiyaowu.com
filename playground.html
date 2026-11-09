@@ -389,7 +389,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   .pv-info { max-height: 40vh; overflow-y: auto; }
 }
 /* One friendly line above the work */
-.pg-intro { margin: 12px 0 36px; max-width: calc(50% - var(--frame) / 2);   /* the left half of the page, like the intro in the header */ font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--fg); text-wrap: pretty; }
+.pg-intro { margin: 12px 0 36px; max-width: calc(50% - var(--frame) / 4);   /* exactly two of the four image columns */ font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--fg); text-wrap: pretty; }
 @media (max-width: 640px) { .pg-intro { font-size: 13px; margin: 4px 0 24px; max-width: none; } }
 /* "Welcome in, and enjoy exploring!" — letters hop in a little wave every few seconds, and when you hover */
 .pg-wave { display: block; margin-top: .2em; font: inherit; white-space: nowrap; }   /* always on its own line, same typeface and size */
@@ -398,7 +398,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 .pg-wave:hover .l { animation: pgHop .7s cubic-bezier(.3,1.6,.5,1) 1; animation-delay: calc(var(--i) * 25ms); color: var(--fg); }
 @keyframes pgHop { 0%, 12%, 100% { transform: none; -webkit-text-stroke-width: 0; } 6% { transform: translateY(-.32em) rotate(-4deg); -webkit-text-stroke-width: .045em; } }   /* each letter turns bold while it jumps */
 @media (prefers-reduced-motion: reduce) { .pg-wave .l { animation: none !important; } }
-.pg-lead { display: block; text-wrap: balance; }   /* even lines, no word left alone */
+.pg-lead { display: block; text-wrap: pretty; }   /* no word left alone */
 </style>
 </head>
 <body>
@@ -411,7 +411,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 </header>
 
 <main class="pg" id="top">
-  <p class="pg-intro"><span class="pg-lead">Beyond my main projects, this is where I play: side projects, experiments and things I make just for fun.</span> <span class="pg-wave" id="pgWave">Welcome in, and enjoy exploring!</span></p>
+  <p class="pg-intro"><span class="pg-lead">Beyond my main projects, this is where I play: side projects, experiments and things I make just&nbsp;for&nbsp;fun.</span> <span class="pg-wave" id="pgWave">Welcome in, and enjoy exploring!</span></p>
   <div class="pg-grid" id="pgGrid"></div>
 </main>
 
