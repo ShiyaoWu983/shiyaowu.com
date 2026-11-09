@@ -318,7 +318,7 @@ body > footer.footer { margin-top: auto; }
 /* Big filter words (after serious.business/work): one typeface throughout; the selected word is black,
    the rest grey and turn black on hover. */
 .filters {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 4px .3em;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 28px;
   font-size: clamp(31px, 4.4vw, 63px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.1;
 }
 .filters button { display: inline-flex; align-items: flex-start; gap: 4px; color: var(--fg); }
@@ -329,12 +329,10 @@ body > footer.footer { margin-top: auto; }
 /* Compact copy of the filter: slides in under the header once the big one scrolls away */
 .filters--mini { position: fixed; z-index: 25; left: 0; right: 0; top: calc(var(--bar-h, 50px) - 1px);   /* tucks 1px under the header: no hairline gap */
   padding: 8px var(--frame) 18px; background: var(--bg);
-  font-size: clamp(31px, 4.4vw, 63px); gap: 4px .3em;   /* same size as the big filter */
+  font-size: clamp(31px, 4.4vw, 63px); gap: 4px 28px;   /* same size as the big filter */
   opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
 .filters--mini.is-on { opacity: 1; transform: none; pointer-events: auto; }
 .filters--mini sup { font-size: 12px; }
-/* commas between the categories */
-.filters button:not(:last-child) .w::after { content: ','; }
 
 .grid-arch { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px var(--frame); }
 .tile { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
@@ -351,7 +349,7 @@ body > footer.footer { margin-top: auto; }
   .grid-arch { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) { .filters--mini { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; } .filters--mini::-webkit-scrollbar { display: none; } .filters--mini button { flex: none; }
-  .filters sup, .tile-meta { font-size: 13px; } .filters { gap: 2px .3em; } .grid-arch { grid-template-columns: 1fr; gap: 28px; } }
+  .filters sup, .tile-meta { font-size: 13px; } .filters { gap: 2px 18px; } .grid-arch { grid-template-columns: 1fr; gap: 28px; } }
 </style>
 <style>
 /* No single word left alone on the last line of a paragraph */
