@@ -345,7 +345,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   opacity: 0; transition: opacity .4s ease;
 }
 .splash.is-on .splash-stage { opacity: 1; }
-.splash .sf::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.38); pointer-events: none; }   /* dims the images so the name stands out */
+.splash .sf::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,0) 32%), rgba(0,0,0,.1); pointer-events: none; }   /* images stay bright; a soft shade at the top keeps the white header readable */
 .splash .sf { position: absolute; inset: 0; opacity: 0; display: flex; align-items: flex-end; padding: var(--frame); }
 .splash .sf img, .splash .sf video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .splash .sf:last-child { bottom: -22vh; }   /* only the last image runs down into the curved edge */
@@ -442,8 +442,6 @@ body > footer.footer { margin-top: auto; }
 <!-- Opening preloader: name in the center, project highlight images cutting behind it, then a curved lift-off. Once per visit. -->
 <div class="splash" id="splash" aria-hidden="true">
   <div class="splash-stage"><div class="sf on"><img src="images/project-02/cover.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-04/04-arttrail-kiosk-2.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-06/02-tomato-1.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-02/09-sl-cover.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-06/01-cover-1.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-01/01-cover-1.jpg" alt="" decoding="async"></div></div>
-  <div class="splash-name">Shiyao Wu</div>
-  <div class="splash-sub">Graphic Designer</div>
   <svg class="splash-curve" id="splashCurve" viewBox="0 0 1000 200" preserveAspectRatio="none"><path id="splashPath" d="M0 0 L1000 0 Q500 200 0 0 Z"/></svg>
 </div>
 <script>
