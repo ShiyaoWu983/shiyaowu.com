@@ -389,8 +389,8 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   .pv-info { max-height: 40vh; overflow-y: auto; }
 }
 /* One friendly line above the work */
-.pg-intro { margin: 12px 0 36px; max-width: 46ch; font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--fg); text-wrap: pretty; }
-@media (max-width: 640px) { .pg-intro { font-size: 13px; margin: 4px 0 24px; } }
+.pg-intro { margin: 12px 0 36px; max-width: calc(50% - var(--frame) / 2);   /* the left half of the page, like the intro in the header */ font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--fg); text-wrap: pretty; }
+@media (max-width: 640px) { .pg-intro { font-size: 13px; margin: 4px 0 24px; max-width: none; } }
 </style>
 </head>
 <body>
