@@ -318,7 +318,7 @@ body > footer.footer { margin-top: auto; }
 /* Big filter words (after serious.business/work): one typeface throughout; the selected word is black,
    the rest grey and turn black on hover. */
 .filters {
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 22px;   /* spread across the full page width */
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 22px;
   font-size: clamp(20px, 1.9vw, 27px); font-weight: 500; letter-spacing: -0.01em; line-height: 1.2;   /* the compact size, everywhere */
 }
 .filters button { display: inline-flex; align-items: flex-start; gap: 4px; color: var(--fg); }
@@ -349,7 +349,7 @@ body > footer.footer { margin-top: auto; }
   .grid-arch { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) { .filters--mini { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; } .filters--mini::-webkit-scrollbar { display: none; } .filters--mini button { flex: none; }
-  .filters sup, .tile-meta { font-size: 13px; } .filters { gap: 2px 16px; justify-content: flex-start; } .grid-arch { grid-template-columns: 1fr; gap: 28px; } }
+  .filters sup, .tile-meta { font-size: 13px; } .filters { gap: 2px 16px; } .grid-arch { grid-template-columns: 1fr; gap: 28px; } }
 </style>
 <style>
 /* No single word left alone on the last line of a paragraph */
@@ -358,11 +358,6 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 /* Tags under a title: one step smaller than the title (13px, 12px on phone) */
 .card .card-tags, .tile-meta .cats, .more-meta .cats { font-size: 13px; }
 @media (max-width: 640px) { .card .card-tags, .tile-meta .cats, .more-meta .cats { font-size: 12px; } }
-/* Categories follow the page's 6-column grid (the same columns as the header: Works, Playground and Info sit on them) */
-.filters, .filters--mini { display: grid !important; grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: var(--frame); row-gap: 4px; justify-content: stretch; }
-.filters button { justify-self: start; white-space: nowrap; }
-@media (max-width: 900px) { .filters, .filters--mini { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 640px) { .filters--mini { display: grid !important; overflow: visible; } }
 </style>
 </head>
 <body>
