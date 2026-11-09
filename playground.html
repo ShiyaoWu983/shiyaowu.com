@@ -388,6 +388,9 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   .pv-nav { margin-top: 4px; }
   .pv-info { max-height: 40vh; overflow-y: auto; }
 }
+/* One friendly line above the work */
+.pg-intro { margin: 12px 0 36px; max-width: 46ch; font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--fg); text-wrap: pretty; }
+@media (max-width: 640px) { .pg-intro { font-size: 13px; margin: 4px 0 24px; } }
 </style>
 </head>
 <body>
@@ -400,6 +403,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 </header>
 
 <main class="pg" id="top">
+  <p class="pg-intro">Beyond my main projects, this is where I play: side projects, experiments and things I make just for fun. Welcome in, and enjoy exploring!</p>
   <div class="pg-grid" id="pgGrid"></div>
 </main>
 
