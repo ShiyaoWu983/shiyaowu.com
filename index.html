@@ -677,6 +677,12 @@ function playSplash(splash) {
 .mail-toast a:hover { opacity: .8; }
 @media (max-width: 640px) { .mail-toast { font-size: 13px; bottom: 20px; } .mail-toast .mt-addr { display: block; } }
 .intro-lead { font-weight: 700; }   /* the first sentence of the intro stands out */
+/* "It's all in how things come together." — letters hop in a little wave every few seconds, and when you hover */
+.intro-lead { white-space: nowrap; }
+.intro-lead .l { display: inline-block; -webkit-text-stroke: 0 currentColor; animation: leadHop 4.2s cubic-bezier(.3,1.6,.5,1) infinite; animation-delay: calc(var(--i) * 45ms); }   /* same wave as on Playground */
+.intro-lead:hover .l { animation: leadHop .7s cubic-bezier(.3,1.6,.5,1) 1; animation-delay: calc(var(--i) * 25ms); }
+@keyframes leadHop { 0%, 12%, 100% { transform: none; -webkit-text-stroke-width: 0; } 6% { transform: translateY(-.32em) rotate(-4deg); -webkit-text-stroke-width: .045em; } }
+@media (prefers-reduced-motion: reduce) { .intro-lead .l { animation: none !important; } }
 </style>
 <script>
 // Email link: clicking copies the address and shows a short note (with a button to open the mail app)
@@ -699,4 +705,12 @@ function playSplash(splash) {
     clearTimeout(timer); timer = setTimeout(() => toast.classList.remove('is-on'), 4000);
   });
 })();
+</script>
+<script>
+// Split the first intro sentence into letters for the wave (header copy and the phone copy)
+function splitLead() { document.querySelectorAll('.intro-lead').forEach(el => { if (el.dataset.split) return; el.dataset.split = '1';
+  const txt = el.textContent; let k = 0;
+  el.innerHTML = txt.split(' ').map(w => [...w].map(ch => `<span class="l" style="--i:${k++}">${ch}</span>`).join('')).join(' ');
+  el.setAttribute('aria-label', txt); }); }
+splitLead(); addEventListener('DOMContentLoaded', splitLead); addEventListener('load', splitLead);
 </script>
