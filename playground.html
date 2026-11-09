@@ -394,24 +394,28 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 /* "Welcome in, and enjoy exploring!" — letters hop in a little wave every few seconds, and when you hover */
 .pg-wave { font: inherit; white-space: nowrap; }   /* follows straight after the first sentence, same typeface and size */
 .pg-wave .l { display: inline-block; -webkit-text-stroke: 0 currentColor; animation: pgHop 4.2s cubic-bezier(.3,1.6,.5,1) infinite; animation-delay: calc(var(--i) * 45ms); }
-.pg-wave .sp { display: inline-block; width: .25em; }
 .pg-wave:hover .l { animation: pgHop .7s cubic-bezier(.3,1.6,.5,1) 1; animation-delay: calc(var(--i) * 25ms); color: var(--fg); }
 @keyframes pgHop { 0%, 12%, 100% { transform: none; -webkit-text-stroke-width: 0; } 6% { transform: translateY(-.32em) rotate(-4deg); -webkit-text-stroke-width: .045em; } }   /* each letter turns bold while it jumps */
 @media (prefers-reduced-motion: reduce) { .pg-wave .l { animation: none !important; } }
 .pg-lead { }
+/* The Playground intro sits under the name in the header, exactly like the homepage intro */
+.site-bar .pg-bar-intro { margin: 20px 0 0; font-size: 15px; font-weight: 400; line-height: 1.3; color: var(--fg); text-wrap: pretty; }
+.site-bar .pg-bar-intro .pg-wave { color: var(--fg); }
+.pg-intro { display: none; }
+@media (max-width: 900px) { .pg-intro { display: block; max-width: none; } }
 </style>
 </head>
 <body>
 
 <header class="site-bar">
-  <div class="bar-id"><a class="bar-name" href="index.html">SHIYAO WU</a></div>
+  <div class="bar-id"><a class="bar-name" href="index.html">SHIYAO WU</a><p class="bar-intro pg-bar-intro">Beyond my main projects, this is where I play: side projects, experiments and things I make just for fun. <span class="pg-wave">Welcome in, and enjoy exploring!</span></p></div>
   <a href="archive.html">Works</a>
   <a href="playground.html" aria-current="page">Playground</a>
   <a class="bar-last" href="about.html">Info</a>
 </header>
 
 <main class="pg" id="top">
-  <p class="pg-intro"><span class="pg-lead">Beyond my main projects, this is where I play: side projects, experiments and things I make just for fun.</span> <span class="pg-wave" id="pgWave">Welcome in, and enjoy exploring!</span></p>
+  <p class="pg-intro">Beyond my main projects, this is where I play: side projects, experiments and things I make just for fun. <span class="pg-wave">Welcome in, and enjoy exploring!</span></p>
   <div class="pg-grid" id="pgGrid"></div>
 </main>
 
@@ -546,9 +550,11 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 </script>
 <script>
 // Split the welcome line into letters for the wave
-(() => { const el = document.getElementById('pgWave'); if (!el) return;
-  let k = 0; el.innerHTML = [...el.textContent].map(ch => ch === ' ' ? '<span class="sp"> </span>' : `<span class="l" style="--i:${k++}">${ch}</span>`).join('');
-  el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ')); })();
+document.querySelectorAll('.pg-wave').forEach(el => {
+  const txt = el.textContent; let k = 0;
+  el.innerHTML = txt.split(' ').map(w => [...w].map(ch => `<span class="l" style="--i:${k++}">${ch}</span>`).join('')).join(' ');
+  el.setAttribute('aria-label', txt);
+});
 </script>
 </body>
 </html>
