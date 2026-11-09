@@ -437,9 +437,10 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
       <li><a href="#advertising">Ad Campaign</a></li>
       <li><a href="#assembly-instruction">Assembly Instructions</a></li>
       <li><a href="#website">Website</a></li>
+      <li class="toc-extra"><a href="forsta-process.html">See the process →</a></li>
     </ol>
     <nav class="proj-back" aria-label="Back">
-      <a href="forsta-process.html">See the process →</a>
+      <a class="m-only" href="forsta-process.html">See the process →</a>
       <a href="index.html">← Back to homepage</a>
     </nav>
   </aside>
@@ -634,7 +635,8 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 @media (min-width: 901px) {
   .proj-side { overflow-y: auto; scrollbar-width: none; }
   .proj-side::-webkit-scrollbar { display: none; }
-  .proj.text-left .proj-main .block.moved { margin: 0 !important; padding: 0 !important; height: 0; overflow: hidden; }
+  .proj.text-left .proj-main .block.moved .block-copy { display: none; }   /* the section name stays between the images; its text moves to the left */
+  .proj-toc a.is-active { font-weight: 700; }
   .proj.text-left .toc-copy { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .45s ease, opacity .3s ease, margin .45s ease; margin: 0; }
   .proj.text-left .toc-copy > div { overflow: hidden; display: flex; flex-direction: column; gap: 12px; }
   .proj.text-left .proj-toc li.is-open .toc-copy { grid-template-rows: 1fr; opacity: 1; margin: 8px 0 14px; }
@@ -642,6 +644,11 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   .toc-copy h2 { font-weight: 700; line-height: 1.3; }
   .toc-copy .note { color: var(--muted); }
 }
+.proj-toc .toc-extra { margin-top: 1.3em; }   /* one empty line after Website */
+.proj-toc .toc-extra a { color: var(--fg); }
+.proj-toc .toc-extra a:hover { opacity: .45; }
+.proj-back .m-only { display: none; }
+@media (max-width: 900px) { .proj-back .m-only { display: block; } }
 </style>
 <div class="lb" id="lb" aria-hidden="true"><img alt=""><button class="lb-close" type="button">Close</button><button class="lb-prev" type="button" aria-label="Previous image">&larr;</button><button class="lb-next" type="button" aria-label="Next image">&rarr;</button><div class="lb-count"></div></div>
 <script>
@@ -749,7 +756,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   proj.classList.add('text-left');
   const sync = () => items.forEach(({ li, a }) => li.classList.toggle('is-open', a.classList.contains('is-active')));
   addEventListener('scroll', () => requestAnimationFrame(() => requestAnimationFrame(sync)), { passive: true });
-  toc.addEventListener('click', e => { const a = e.target.closest('a'); if (!a) return;
+  toc.addEventListener('click', e => { const a = e.target.closest('a[href^="#"]'); if (!a) return;
     toc.querySelectorAll('a').forEach(x => x.classList.toggle('is-active', x === a)); sync(); });
   setTimeout(sync, 50);
 })();

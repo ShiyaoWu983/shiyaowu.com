@@ -610,7 +610,8 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 @media (min-width: 901px) {
   .proj-side { overflow-y: auto; scrollbar-width: none; }
   .proj-side::-webkit-scrollbar { display: none; }
-  .proj.text-left .proj-main .block.moved { margin: 0 !important; padding: 0 !important; height: 0; overflow: hidden; }
+  .proj.text-left .proj-main .block.moved .block-copy { display: none; }   /* the section name stays between the images; its text moves to the left */
+  .proj-toc a.is-active { font-weight: 700; }
   .proj.text-left .toc-copy { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .45s ease, opacity .3s ease, margin .45s ease; margin: 0; }
   .proj.text-left .toc-copy > div { overflow: hidden; display: flex; flex-direction: column; gap: 12px; }
   .proj.text-left .proj-toc li.is-open .toc-copy { grid-template-rows: 1fr; opacity: 1; margin: 8px 0 14px; }
@@ -659,7 +660,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   proj.classList.add('text-left');
   const sync = () => items.forEach(({ li, a }) => li.classList.toggle('is-open', a.classList.contains('is-active')));
   addEventListener('scroll', () => requestAnimationFrame(() => requestAnimationFrame(sync)), { passive: true });
-  toc.addEventListener('click', e => { const a = e.target.closest('a'); if (!a) return;
+  toc.addEventListener('click', e => { const a = e.target.closest('a[href^="#"]'); if (!a) return;
     toc.querySelectorAll('a').forEach(x => x.classList.toggle('is-active', x === a)); sync(); });
   setTimeout(sync, 50);
 })();
