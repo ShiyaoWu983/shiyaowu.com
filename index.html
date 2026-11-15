@@ -442,6 +442,7 @@ body > footer.footer { margin-top: auto; }
 <!-- Opening preloader: name in the center, project highlight images cutting behind it, then a curved lift-off. Once per visit. -->
 <div class="splash" id="splash" aria-hidden="true">
   <div class="splash-stage"><div class="sf on"><img src="images/project-02/cover.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-04/04-arttrail-kiosk-2.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-06/02-tomato-1.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-02/09-sl-cover.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-06/01-cover-1.jpg" alt="" decoding="async"></div><div class="sf"><img src="images/project-01/01-cover-1.jpg" alt="" decoding="async"></div></div>
+  <div class="splash-caps"><a class="splash-cap on" href="new-museum.html"><span class="sc-t">New Museum</span><span class="sc-g">Brand Identity - Interaction Design - Editorial Design</span></a><a class="splash-cap" href="art-trail.html"><span class="sc-t">Art Trail</span><span class="sc-g">Brand Identity - UI/UX Design - Experience Design</span></a><a class="splash-cap" href="bento-of-memories.html"><span class="sc-t">Bento of Memories: Four Years, Four Ingredients</span><span class="sc-g">Editorial Design - Bookmaking</span></a><a class="splash-cap" href="new-museum.html"><span class="sc-t">New Museum</span><span class="sc-g">Brand Identity - Interaction Design - Editorial Design</span></a><a class="splash-cap" href="bento-of-memories.html"><span class="sc-t">Bento of Memories: Four Years, Four Ingredients</span><span class="sc-g">Editorial Design - Bookmaking</span></a><a class="splash-cap" href="forsta.html"><span class="sc-t">FÖRSTA</span><span class="sc-g">Packaging Design - Brand Identity - 3D Motion</span></a></div>
   <svg class="splash-curve" id="splashCurve" viewBox="0 0 1000 200" preserveAspectRatio="none"><path id="splashPath" d="M0 0 L1000 0 Q500 200 0 0 Z"/></svg>
 </div>
 <script>
@@ -533,6 +534,7 @@ function swapFrame(frames, from, to) {
   frames.forEach(f => f.classList.remove('was'));
   frames[from].classList.add('was'); frames[from].classList.remove('on');
   frames[to].classList.add('on');
+  document.querySelectorAll('.splash-cap').forEach((c, k) => c.classList.toggle('on', k === to));
 }
 function heroMode(splash) {
   const root = document.documentElement;
@@ -607,7 +609,6 @@ function playSplash(splash) {
     splash.removeEventListener('click', finish);
     heroMode(splash);
     startReveal();
-    autoDown(150);
   }
   splash.addEventListener('click', finish);   // click to skip
 }
@@ -615,7 +616,7 @@ function playSplash(splash) {
   const splash = document.getElementById('splash');
   if (!splash) { startReveal(); return; }
   let seen = false; try { seen = sessionStorage.getItem('sw-splash-seen') === '1' && location.hash !== '#intro'; } catch (e) {}
-  if (seen) { splash.classList.add('is-on'); heroMode(splash); startReveal(); autoDown(STEP * 2 * splash.querySelectorAll('.sf').length); }
+  if (seen) { splash.classList.add('is-on'); heroMode(splash); startReveal(); }
   else playSplash(splash);
 })();
 
@@ -683,6 +684,16 @@ function playSplash(splash) {
 .intro-lead:hover .l { animation: leadHop .7s cubic-bezier(.3,1.6,.5,1) 1; animation-delay: calc(var(--i) * 25ms); }
 @keyframes leadHop { 0%, 12%, 100% { transform: none; -webkit-text-stroke-width: 0; } 6% { transform: translateY(-.32em) rotate(-4deg); -webkit-text-stroke-width: .045em; } }
 @media (prefers-reduced-motion: reduce) { .intro-lead .l { animation: none !important; } }
+/* Project name and tags in the bottom-left corner of each image in the opening */
+.splash-caps { position: absolute; left: 0; right: 0; bottom: 0; height: 30vh; z-index: 3; pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0)); }
+.splash-cap { position: absolute; left: var(--frame); bottom: var(--frame); display: flex; flex-direction: column; gap: 2px;
+  color: #FFFFFF; opacity: 0; transform: translateY(6px); transition: opacity .45s ease, transform .45s ease; pointer-events: none; }
+.splash-cap.on { opacity: 1; transform: none; pointer-events: auto; }
+.splash-cap .sc-t { font-size: 15px; font-weight: 700; line-height: 1.3; }
+.splash-cap .sc-g { font-size: 13px; font-weight: 500; line-height: 1.3; color: rgba(255,255,255,.75); }
+.splash-cap:hover .sc-t { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 640px) { .splash-cap .sc-t { font-size: 13px; } .splash-cap .sc-g { font-size: 12px; } }
 </style>
 <script>
 // Email link: clicking copies the address and shows a short note (with a button to open the mail app)
