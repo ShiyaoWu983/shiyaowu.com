@@ -358,6 +358,17 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 /* Tags under a title: one step smaller than the title (13px, 12px on phone) */
 .card .card-tags, .tile-meta .cats, .more-meta .cats { font-size: 13px; }
 @media (max-width: 640px) { .card .card-tags, .tile-meta .cats, .more-meta .cats { font-size: 12px; } }
+/* Collapsed filter (stays under the header while you scroll) */
+.filters--mini { display: none !important; }
+.coll-top { position: sticky; top: var(--bar-h, 50px); z-index: 20; background: var(--bg); margin: 40px 0 24px; padding: 12px 0 16px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.ftoggle { display: inline-flex; align-items: center; gap: 8px; font-size: clamp(20px, 1.9vw, 27px); font-weight: 500; letter-spacing: -0.01em; color: var(--fg); }
+.ftoggle .car { font-size: .7em; transition: transform .25s ease; }
+.coll-top.is-open .ftoggle .car { transform: rotate(180deg); }
+.ftoggle:hover { opacity: .6; }
+.coll-top .filters { display: none; }
+.coll-top.is-open .filters { display: flex; }
+@media (max-width: 640px) { .coll-top { margin: 24px 0 16px; } }
 </style>
 </head>
 <body>
@@ -371,7 +382,8 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 
 <div class="filters filters--mini" id="filtersMini" role="group" aria-label="Filter projects" aria-hidden="true"></div>
 <main class="coll frame" id="top">
-  <div class="coll-top">
+  <div class="coll-top" id="collTop">
+    <button class="ftoggle" id="fToggle" type="button" aria-expanded="false" aria-controls="filters"><span id="fCur">All projects</span><span class="car" aria-hidden="true">▾</span></button>
     <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
   </div>
   <div class="grid-arch" id="index"></div>
@@ -437,6 +449,19 @@ bars.forEach(el => el.addEventListener('click', e => {
   if (el.id === 'filtersMini') window.scrollTo({ top: $('filters').getBoundingClientRect().bottom + scrollY - document.querySelector('.site-bar').offsetHeight + 2, behavior: 'smooth' });
 }));
 applyFilter(0);
+
+// Collapsed filter: one button shows the current category; click to open the list, pick one and it closes
+(function () {
+  const top = $('collTop'), tog = $('fToggle'), cur = $('fCur');
+  const setOpen = on => { top.classList.toggle('is-open', on); tog.setAttribute('aria-expanded', String(on)); };
+  tog.addEventListener('click', e => { e.stopPropagation(); setOpen(!top.classList.contains('is-open')); });
+  $('filters').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
+    cur.textContent = GROUPS[+b.dataset.i].name; setOpen(false);
+    const y = top.getBoundingClientRect().top + scrollY - document.querySelector('.site-bar').offsetHeight;   // back to the first results
+    if (scrollY > y) window.scrollTo({ top: y, behavior: 'smooth' }); });
+  document.addEventListener('click', e => { if (!top.contains(e.target)) setOpen(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+})();
 
 // Header height, and show the compact filter once the big one has scrolled under the header
 (function () {
