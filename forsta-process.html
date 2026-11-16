@@ -441,32 +441,10 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
     </nav>
   </aside>
 
-  <div class="proj-main">
-    <section class="block" id="sketches">
-      <span class="block-label">Sketches</span>
-      <div class="block-copy"><p>Bottle forms explored by hand, then refined in&nbsp;detail.</p></div>
-    </section>
-    <div class="row"><div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/forsta-process/01-hero-sketch.jpg" alt="FÖRSTA hero sketches" loading="lazy"></div><div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/forsta-process/02-detailed-sketch.jpg" alt="FÖRSTA detailed sketches" loading="lazy"></div></div>
-    <section class="block" id="ai-workflow">
-      <span class="block-label">AI Workflow</span>
-      <div class="block-copy"><p>References, sketches and prompts on one&nbsp;board.</p></div>
-    </section>
-    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1365; flex: 1.7582 1 0"><img src="images/forsta-process/03-ai-process.jpg" alt="AI workflow board" loading="lazy"></div><div class="media-spacer" style="flex: 1.7582 1 0"></div></div>
-    <section class="block" id="prototyping">
-      <span class="block-label">Prototyping</span>
-      <div class="block-copy"><p>Built by hand: cut, sanded, laser-cut and UV&nbsp;printed.</p></div>
-    </section>
-    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/forsta-process/04-prototype-parts.jpg" alt="Prototype parts" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1600; flex: 0.7500 1 0"><img src="images/forsta-process/05-sanding.jpg" alt="Sanding a prototype" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1600; flex: 0.7500 1 0"><img src="images/forsta-process/06-laser-cutting.jpg" alt="Laser cutting" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1600; flex: 0.7500 1 0"><img src="images/forsta-process/07-uv-printing.jpg" alt="UV printing a bottle" loading="lazy"></div></div>
-    <section class="block" id="label-tests">
-      <span class="block-label">Label Tests</span>
-      <div class="block-copy"><p>Labels printed and compared side by&nbsp;side.</p></div>
-    </section>
-    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/forsta-process/08-label-tests.jpg" alt="Label print tests" loading="lazy"></div><div class="media-spacer" style="flex: 1.5 1 0"></div></div>
-    <section class="block" id="final-review">
-      <span class="block-label">Final Review</span>
-      <div class="block-copy"><p>The finished kit on&nbsp;display.</p></div>
-    </section>
-    <div class="row"><div class="media" style="aspect-ratio: 1200 / 1600; flex: 0.7500 1 0"><img src="images/forsta-process/09-final-review.jpg" alt="Final review" loading="lazy"></div><div class="media-spacer" style="flex: 2.25 1 0"></div></div>
+  <div class="proj-main collage">
+    <div class="row"><div class="cap-tile" id="sketches" style="flex: .8 1 0"><span class="block-label">Sketches</span><p>Bottle forms explored by hand, then refined in&nbsp;detail.</p></div><div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/forsta-process/01-hero-sketch.jpg" alt="FÖRSTA hero sketches" loading="lazy"></div><div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/forsta-process/02-detailed-sketch.jpg" alt="FÖRSTA detailed sketches" loading="lazy"></div></div>
+    <div class="row"><div class="cap-tile" id="ai-workflow" style="flex: .8 1 0"><span class="block-label">AI Workflow</span><p>References, sketches and prompts on one&nbsp;board.</p></div><div class="media" style="aspect-ratio: 2400 / 1365; flex: 1.7582 1 0"><img src="images/forsta-process/03-ai-process.jpg" alt="AI workflow board" loading="lazy"></div><div class="cap-tile" id="prototyping" style="flex: .8 1 0"><span class="block-label">Prototyping</span><p>Built by hand: cut, sanded, laser-cut and UV&nbsp;printed.</p></div><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/forsta-process/04-prototype-parts.jpg" alt="Prototype parts" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1600; flex: 0.7500 1 0"><img src="images/forsta-process/05-sanding.jpg" alt="Sanding a prototype" loading="lazy"></div></div>
+    <div class="row"><div class="media" style="aspect-ratio: 1200 / 1600; flex: 0.7500 1 0"><img src="images/forsta-process/06-laser-cutting.jpg" alt="Laser cutting" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1600; flex: 0.7500 1 0"><img src="images/forsta-process/07-uv-printing.jpg" alt="UV printing a bottle" loading="lazy"></div><div class="cap-tile" id="label-tests" style="flex: .8 1 0"><span class="block-label">Label Tests</span><p>Labels printed and compared side by&nbsp;side.</p></div><div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/forsta-process/08-label-tests.jpg" alt="Label print tests" loading="lazy"></div><div class="cap-tile" id="final-review" style="flex: .8 1 0"><span class="block-label">Final Review</span><p>The finished kit on&nbsp;display.</p></div><div class="media" style="aspect-ratio: 1200 / 1600; flex: 0.7500 1 0"><img src="images/forsta-process/09-final-review.jpg" alt="Final review" loading="lazy"></div></div>
   </div>
 </main>
 
@@ -599,6 +577,19 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   .proj-main .row > .media:first-child:nth-last-child(2) { grid-column: 1 / -1; }   /* one wide image + spacer: full width */
   .proj-main .row > .media[style*="1200 / 1600"]:first-child:nth-last-child(2) { grid-column: auto; }   /* a single tall image stays half width */
   .proj-main .row > .media-spacer { display: none; }
+}
+/* Process collage: caption tiles sit inside the image rows */
+.collage { margin-top: 0; }
+.cap-tile { min-width: 0; display: flex; flex-direction: column; gap: 6px; padding: 2px 4px; scroll-margin-top: calc(var(--bar-h, 69px) + var(--frame)); }
+.cap-tile p { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.4; }
+@media (max-width: 640px) {
+  .collage .row { display: grid !important; grid-template-columns: 1fr 1fr; gap: 6px; align-items: start; }
+  .collage .row > * { width: 100% !important; }
+  .collage .cap-tile { grid-column: 1 / -1; padding: 10px 0 2px; flex-direction: row; gap: 10px; }
+  .collage .cap-tile p { font-size: 13px; }
+  .collage .row:nth-child(2) > .media[style*="2400 / 1365"] { grid-column: 1 / -1; }
+  .collage .row > .media[style*="08-label"], .collage .row > .media:has(img[src*="08-label"]) { grid-column: 1 / -1; }
+  .collage .cap-tile .block-label { flex: none; width: 84px; white-space: nowrap; }
 }
 </style>
 <div class="lb" id="lb" aria-hidden="true"><img alt=""><button class="lb-close" type="button">Close</button><button class="lb-prev" type="button" aria-label="Previous image">&larr;</button><button class="lb-next" type="button" aria-label="Next image">&rarr;</button><div class="lb-count"></div></div>
