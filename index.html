@@ -353,8 +353,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .splash .sf:last-child img { object-position: 50% 41%; }
 .has-hero .splash .sf { bottom: -22vh; }   /* at the top of the page every image runs into the curved edge as you scroll */
 .splash-curve { display: none; }
-.splash .sf { transition: opacity .6s cubic-bezier(.4,0,.2,1); }
-.splash .sf img, .splash .sf video { transform: scale(1.06); transition: transform 1.8s cubic-bezier(.2,.6,.2,1); will-change: transform; }   /* each image settles in with a slow, gentle zoom */
+.splash .sf { transition: opacity .9s cubic-bezier(.4,0,.2,1); }
+.splash .sf img, .splash .sf video { transform: scale(1.06); transition: transform 3s cubic-bezier(.2,.6,.2,1); will-change: transform; }   /* each image settles in with a slow, gentle zoom */
 .splash .sf.on img, .splash .sf.was img, .splash .sf.on video, .splash .sf.was video { transform: scale(1); }
 .splash .sf.was { opacity: 1; z-index: 0; transition: none; }   /* the previous image stays underneath while the next fades in */
 .splash .sf.on { opacity: 1; z-index: 1; }
@@ -529,7 +529,7 @@ function startReveal() {
 // First visit: the images play through once, full screen. After that (and on later visits) the opening
 // sits at the top of the page and keeps cycling; scrolling down lifts it away with a curved edge,
 // scrolling back to the top brings it back.
-const STEP = 800;                         // ms per image
+const STEP = 1100;                         // ms per image
 // Swap images: the next one fades in on top of the current one
 function swapFrame(frames, from, to) {
   frames.forEach(f => f.classList.remove('was'));
@@ -567,7 +567,7 @@ function heroMode(splash) {
   setInterval(() => {
     if (scrollY >= innerHeight || document.hidden) return;
     const n = (i + 1) % frames.length; swapFrame(frames, i, n); i = n;
-  }, 2600);   // a slower pace once the opening sits at the top
+  }, 4000);   // a slower pace once the opening sits at the top
   // click the opening to go down to the work
   splash.addEventListener('click', () => scrollTo({ top: innerHeight, behavior: 'smooth' }));
 }
