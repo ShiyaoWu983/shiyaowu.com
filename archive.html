@@ -358,6 +358,9 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 /* Tags under a title: one step smaller than the title (13px, 12px on phone) */
 .card .card-tags, .tile-meta .cats, .more-meta .cats { font-size: 13px; }
 @media (max-width: 640px) { .card .card-tags, .tile-meta .cats, .more-meta .cats { font-size: 12px; } }
+/* Phones: keep every header item on one line (About Me is longer than Info) */
+@media (max-width: 640px) { .site-bar a { white-space: nowrap; } .site-bar { gap: 0 12px !important; } }
+@media (max-width: 380px) { .site-bar { font-size: 15px !important; gap: 0 10px !important; } }
 </style>
 </head>
 <body>
@@ -366,7 +369,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   <div class="bar-id"><a class="bar-name" href="index.html">SHIYAO WU</a></div>
   <a href="archive.html" aria-current="page">Works</a>
   <a href="playground.html">Playground</a>
-  <a class="bar-last" href="about.html">Info</a>
+  <a class="bar-last" href="about.html">About Me</a>
 </header>
 
 <div class="filters filters--mini" id="filtersMini" role="group" aria-label="Filter projects" aria-hidden="true"></div>

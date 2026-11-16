@@ -420,7 +420,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   <div class="bar-id"><a class="bar-name" href="index.html">SHIYAO WU</a></div>
   <a href="archive.html">Works</a>
   <a href="playground.html">Playground</a>
-  <a class="bar-last" href="about.html">Info</a>
+  <a class="bar-last" href="about.html">About Me</a>
 </header>
 
 <main class="proj" id="top">
@@ -559,6 +559,9 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 .vid-ctrl svg { width: 16px; height: 16px; }
 .vid-hit { position: absolute; inset: 0; z-index: 2; cursor: pointer; }
 @media (max-width: 640px) { .vid-ctrl { left: 8px; bottom: 8px; } .vid-ctrl button { width: 32px; height: 32px; } }
+/* Phones: keep every header item on one line (About Me is longer than Info) */
+@media (max-width: 640px) { .site-bar a { white-space: nowrap; } .site-bar { gap: 0 12px !important; } }
+@media (max-width: 380px) { .site-bar { font-size: 15px !important; gap: 0 10px !important; } }
 </style>
 <div class="lb" id="lb" aria-hidden="true"><img alt=""><button class="lb-close" type="button">Close</button><button class="lb-prev" type="button" aria-label="Previous image">&larr;</button><button class="lb-next" type="button" aria-label="Next image">&rarr;</button><div class="lb-count"></div></div>
 <script>

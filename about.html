@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Info — Shiyao Wu</title>
+<title>About Me — Shiyao Wu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Newsreader:opsz,wght@6..72,400&display=swap">
@@ -393,7 +393,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   <div class="bar-id"><a class="bar-name" href="index.html">SHIYAO WU</a></div>
   <a href="archive.html">Works</a>
   <a href="playground.html">Playground</a>
-  <a class="bar-last" href="about.html" aria-current="page">Info</a>
+  <a class="bar-last" href="about.html" aria-current="page">About Me</a>
 </header>
 
 <main class="ab" id="top">
@@ -572,6 +572,9 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 .mail-toast a { flex: none; padding: 6px 12px; border-radius: 16px; background: #fff; color: #111; font-size: 13px; font-weight: 500; white-space: nowrap; }
 .mail-toast a:hover { opacity: .8; }
 @media (max-width: 640px) { .mail-toast { font-size: 13px; bottom: 20px; } .mail-toast .mt-addr { display: block; } }
+/* Phones: keep every header item on one line (About Me is longer than Info) */
+@media (max-width: 640px) { .site-bar a { white-space: nowrap; } .site-bar { gap: 0 12px !important; } }
+@media (max-width: 380px) { .site-bar { font-size: 15px !important; gap: 0 10px !important; } }
 </style>
 <script>
 // Email link: clicking copies the address and shows a short note (with a button to open the mail app)

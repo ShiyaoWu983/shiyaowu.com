@@ -403,6 +403,9 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 .site-bar .pg-bar-intro .pg-wave { color: var(--fg); }
 .pg-intro { display: none; }
 @media (max-width: 900px) { .pg-intro { display: block; max-width: none; } }
+/* Phones: keep every header item on one line (About Me is longer than Info) */
+@media (max-width: 640px) { .site-bar a { white-space: nowrap; } .site-bar { gap: 0 12px !important; } }
+@media (max-width: 380px) { .site-bar { font-size: 15px !important; gap: 0 10px !important; } }
 </style>
 </head>
 <body>
@@ -411,7 +414,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   <div class="bar-id"><a class="bar-name" href="index.html">SHIYAO WU</a><p class="bar-intro pg-bar-intro">Beyond my main projects, this is where I play: side projects, experiments and things I make just for fun. <span class="pg-wave">Welcome in, and enjoy exploring!</span></p></div>
   <a href="archive.html">Works</a>
   <a href="playground.html" aria-current="page">Playground</a>
-  <a class="bar-last" href="about.html">Info</a>
+  <a class="bar-last" href="about.html">About Me</a>
 </header>
 
 <main class="pg" id="top">
