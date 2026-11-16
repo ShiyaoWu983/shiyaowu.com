@@ -428,6 +428,13 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
     <h1 class="proj-title"><a href="forsta.html">FÖRSTA</a></h1>
     <p class="proj-tags">Design Process</p>
     <p class="proj-lede">How the FÖRSTA home-care system took shape, from first research to the final kit.</p>
+    <ol class="proj-toc" id="toc">
+      <li><a href="#sketches">Sketches</a></li>
+      <li><a href="#ai-workflow">AI Workflow</a></li>
+      <li><a href="#prototyping">Prototyping</a></li>
+      <li><a href="#label-tests">Label Tests</a></li>
+      <li><a href="#final-review">Final Review</a></li>
+    </ol>
     <nav class="proj-back" aria-label="Back">
       <a href="forsta.html">← Back to FÖRSTA</a>
       <a href="index.html">← Back to homepage</a>
@@ -435,10 +442,33 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   </aside>
 
   <div class="proj-main">
-    <section class="block">
-      <span class="block-label">Process</span>
-      <div class="block-copy"><p>The process page is being put together. Check back soon.</p></div>
+    <section class="block" id="sketches">
+      <span class="block-label">Sketches</span>
+      <div class="block-copy"><p>Exploration started on paper. Dozens of bottle silhouettes were sketched to find forms that feel familiar yet distinct, before the strongest directions were developed in detail, from pump mechanisms to refill openings.</p></div>
     </section>
+    <div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/forsta-process/01-hero-sketch.jpg" alt="FÖRSTA hero sketches" loading="lazy"></div>
+    <div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/forsta-process/02-detailed-sketch.jpg" alt="FÖRSTA detailed sketches" loading="lazy"></div>
+    <section class="block" id="ai-workflow">
+      <span class="block-label">AI Workflow</span>
+      <div class="block-copy"><p>AI was used as a visual research tool rather than a shortcut. References, sketches and prompts were organised on one board to test materials, lighting and scenes before any final render was made.</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2400 / 1365; flex: 1.7582 1 0"><img src="images/forsta-process/03-ai-process.jpg" alt="AI workflow board" loading="lazy"></div>
+    <section class="block" id="prototyping">
+      <span class="block-label">Prototyping</span>
+      <div class="block-copy"><p>To make sure the kit works in the hand, the bottles were built as physical prototypes. Parts were cut, sanded and assembled in the studio, with a laser cutter for components and a UV printer to apply graphics directly onto the bottles.</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/forsta-process/04-prototype-parts.jpg" alt="Prototype parts" loading="lazy"></div>
+    <div class="row"><div class="media" style="aspect-ratio: 1200 / 1600; flex: 0.7500 1 0"><img src="images/forsta-process/05-sanding.jpg" alt="Sanding a prototype" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1600; flex: 0.7500 1 0"><img src="images/forsta-process/06-laser-cutting.jpg" alt="Laser cutting" loading="lazy"></div><div class="media" style="aspect-ratio: 1200 / 1600; flex: 0.7500 1 0"><img src="images/forsta-process/07-uv-printing.jpg" alt="UV printing a bottle" loading="lazy"></div></div>
+    <section class="block" id="label-tests">
+      <span class="block-label">Label Tests</span>
+      <div class="block-copy"><p>Labels were printed and compared side by side to refine hierarchy, colour and the scale of the IKEA figure across every product.</p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/forsta-process/08-label-tests.jpg" alt="Label print tests" loading="lazy"></div>
+    <section class="block" id="final-review">
+      <span class="block-label">Final Review</span>
+      <div class="block-copy"><p>The finished kit, display and posters came together for the final review.</p></div>
+    </section>
+    <div class="row"><div class="media" style="aspect-ratio: 1200 / 1600; flex: 0.7500 1 0"><img src="images/forsta-process/09-final-review.jpg" alt="Final review" loading="lazy"></div><div class="media-spacer" style="flex: 0.75 1 0"></div></div>
   </div>
 </main>
 
@@ -562,6 +592,8 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 /* Phones: keep every header item on one line (About Me is longer than Info) */
 @media (max-width: 640px) { .site-bar a { white-space: nowrap; } .site-bar { gap: 0 12px !important; } }
 @media (max-width: 380px) { .site-bar { font-size: 15px !important; gap: 0 10px !important; } }
+.media-spacer { min-width: 0; }
+@media (max-width: 640px) { .media-spacer { display: none; } }
 </style>
 <div class="lb" id="lb" aria-hidden="true"><img alt=""><button class="lb-close" type="button">Close</button><button class="lb-prev" type="button" aria-label="Previous image">&larr;</button><button class="lb-next" type="button" aria-label="Next image">&rarr;</button><div class="lb-count"></div></div>
 <script>
