@@ -2,12 +2,10 @@
    Live type in ABC Monument Grotesk Medium (falls back to Inter). The i's mark is drawn as one
    rectangle so it can change between the font's i-dot and the first-tone bar of shī.
    Static: shīyao wu.
-   Motion: only after the visitor leaves the mouse still for a while — the name hops as a wave,
-   the tone bar jumps and lands as a dot (shiyao), then jumps again and lands back as the bar (shīyao).
+   Motion: hops as a wave on the same 4.2s beat as the intro text; the tone bar lands as a dot (shiyao)
+   on one beat and back as the bar (shīyao) on the next.
    Usage: any <a class="bar-name"> in the header is replaced by the logo. */
 (function () {
-  const IDLE_MS = 6000;        // how long the page must be still before the logo plays
-  const REPEAT_MS = 12000;     // if it stays still, play again this often
   const L = { s: 0, h: 49.6, i: 106.8, y: 131.2, a: 180.0, o: 233.5, w: 310.8, u: 386.4 };
   const ORDER = ['s', 'h', 'i', 'y', 'a', 'o', 'w', 'u'], TRACK = -1;
   const ADV = { s: 49.6, h: 57.2, i: 24.4, y: 50.3, a: 53.5, o: 57.7, w: 75.6, u: 57.1 };   // advance widths
@@ -92,8 +90,8 @@
     const all = [];
     logos.forEach(({ letters, mark }) => {
       letters.forEach((t, k) => {
-        const delay = k * 55 + (k > 5 ? 70 : 0);
-        all.push(t.animate(hop(k < 3 ? 12 : 10), { duration: 540, delay, fill: 'none' }));
+        const delay = k * 45 + (k > 5 ? 45 : 0);   // same 45ms wave step as the intro text
+        all.push(t.animate(hop(k < 3 ? 12 : 10), { duration: 504, delay, fill: 'none' }));
       });
       all.push(mark.animate(markJump(from, to), { duration: 1150, delay: 80, fill: 'forwards' }));
     });
@@ -102,20 +100,16 @@
       mark.getAnimations().forEach(a => a.cancel());
     }));
   }
+  // Same rhythm as the hopping intro text (a 4.2s loop that starts with the page):
+  // one jump per beat, the tone bar turning into the dot and back on alternate beats.
+  const BEAT = 4200;
+  let state = 'bar';
   function play() {
     if (busy || reduce || document.hidden) return;
     busy = true;
-    jump('bar', 'dot')                                   // shīyao → shiyao
-      .then(() => new Promise(r => setTimeout(r, 650)))
-      .then(() => jump('dot', 'bar'))                    // shiyao → shīyao
-      .finally(() => { busy = false; });
+    const to = state === 'bar' ? 'dot' : 'bar';
+    jump(state, to).then(() => { state = to; }).finally(() => { busy = false; });
   }
-
-  // play only when the page has been left still
-  let idle = null;
-  function arm(delay) { clearTimeout(idle); idle = setTimeout(() => { play(); arm(REPEAT_MS); }, delay); }
-  ['mousemove', 'pointerdown', 'keydown', 'scroll', 'wheel', 'touchstart'].forEach(ev =>
-    addEventListener(ev, () => arm(IDLE_MS), { passive: true }));
-  arm(IDLE_MS);
+  setTimeout(() => { play(); setInterval(play, BEAT); }, BEAT - (performance.now() % BEAT));
   }
 })();
