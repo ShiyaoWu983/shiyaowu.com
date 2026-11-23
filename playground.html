@@ -67,12 +67,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* ---------- Shared bits ---------- */
 .mixed { display: flex; flex-direction: column; align-items: center; text-align: center; line-height: 1; text-wrap: balance; }
-.mixed .main { font-family: var(--sans); font-weight: 500; letter-spacing: -0.01em; }
+.mixed .main { font-family: var(--sans); font-weight: 400; letter-spacing: -0.01em; }
 .mixed .sub { font-family: var(--serif); font-weight: 400; }
 
 .pill {
   display: inline-flex; align-items: center; height: 39px;
-  font-size: 15px; font-weight: 500;   /* same size as header + project text */
+  font-size: 15px; font-weight: 400;   /* same size as header + project text */
 }
 @media (max-width: 640px) { .pill, .replay { font-size: 13px; } }
 .pill .label { background: var(--pill); border-radius: 20px; padding: 0 18px; height: 100%; display: flex; align-items: center; }
@@ -88,7 +88,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .ph-label { position: absolute; left: 12px; bottom: 10px; font-size: var(--fs-xs); color: var(--ph-ink); font-variant-numeric: tabular-nums; }
 .ph img, .ph video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
-.section-label { font-size: var(--fs-s); font-weight: 500; }
+.section-label { font-size: var(--fs-s); font-weight: 400; }
 
 /* ---------- Fixed nav (pills) ---------- */
 .nav {
@@ -111,9 +111,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: flex; flex-direction: column; justify-content: space-between;
 }
 [hidden] { display: none !important; }
-.menu .menu-close { align-self: flex-end; font-size: var(--fs-s); font-weight: 500; border: 1px solid currentColor; border-radius: 20px; height: 39px; padding: 0 18px; }
+.menu .menu-close { align-self: flex-end; font-size: var(--fs-s); font-weight: 400; border: 1px solid currentColor; border-radius: 20px; height: 39px; padding: 0 18px; }
 .menu nav { display: flex; flex-direction: column; }
-.menu nav a { font-size: var(--fs-xl); font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; }
+.menu nav a { font-size: var(--fs-xl); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em; }
 .menu nav a:hover { font-family: var(--serif); font-weight: 400; }
 .menu .menu-foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: var(--fs-s); }
 
@@ -130,7 +130,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   pointer-events: none;
 }
 .hero-name .wordmark text { fill: #FFFFFF; }
-.hero-role { color: #FFFFFF; font-size: var(--fs-m); font-weight: 500; margin-top: 12px; }
+.hero-role { color: #FFFFFF; font-size: var(--fs-m); font-weight: 400; margin-top: 12px; }
 .reel-stage { position: relative; }   /* spacer: height set in JS so content starts below the reel */
 /* Reel slides up behind the name, pins, then shrinks into the bottom-left corner as you keep scrolling */
 /* Reel is fixed behind the name; on scroll it shrinks into the bottom-left corner until it's gone,
@@ -149,7 +149,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .reel .ph { height: min(calc((100vw - 2 * var(--frame)) * 9 / 16), calc(100vh - 2 * var(--frame))); border-radius: var(--radius); }
 .reel-play {
   position: absolute; right: 16px; bottom: 12px;
-  font-size: var(--fs-xs); font-weight: 500;
+  font-size: var(--fs-xs); font-weight: 400;
   background: var(--pill); border-radius: 20px; padding: 8px 14px;
 }
 
@@ -159,11 +159,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .ticker-track { display: flex; gap: 24px; width: max-content; animation: tick 28s linear infinite; }
 .ticker:hover .ticker-track { animation-play-state: paused; }
 .stat { width: 200px; display: flex; flex-direction: column; gap: 6px; }
-.stat .num { font-size: 39px; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.stat .num { font-size: 39px; font-weight: 400; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 .stat .cap { font-size: var(--fs-xs); color: var(--muted); }
 @keyframes tick { to { transform: translateX(-50%); } }
 .statement { display: flex; flex-direction: column; gap: 28px; align-items: flex-start; }
-.statement h2 { font-size: var(--fs-l); line-height: 1; letter-spacing: -0.02em; font-weight: 500; text-wrap: balance; max-width: 18ch; }
+.statement h2 { font-size: var(--fs-l); line-height: 1; letter-spacing: -0.02em; font-weight: 400; text-wrap: balance; max-width: 18ch; }
 .statement h2 em { font-family: var(--serif); font-style: normal; font-weight: 400; }
 
 /* ---------- Services (stacked bands) ---------- */
@@ -177,7 +177,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .band-head {
   width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center;
   padding: 0 var(--frame); min-height: 1.4em;
-  font-size: var(--fs-xl); font-weight: 500; letter-spacing: -0.03em; line-height: 1;
+  font-size: var(--fs-xl); font-weight: 400; letter-spacing: -0.03em; line-height: 1;
 }
 .band-head .plus { font-size: 0.4em; font-weight: 400; transition: transform .3s ease; }
 .band.is-open .band-head .plus { transform: rotate(45deg); }
@@ -212,13 +212,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* ---------- Work ---------- */
 .work { padding-block: 200px 0; }
 .work .mixed { font-size: var(--fs-l); margin-bottom: 64px; }
-.work .mixed .main { font-weight: 500; letter-spacing: -0.02em; }
+.work .mixed .main { font-weight: 400; letter-spacing: -0.02em; }
 .work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--frame); }   /* same as the site's outer margin */
 .card { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .card .ph { aspect-ratio: 689 / 460; max-width: 100%; transition: border-radius .3s ease; }
 @media (hover: hover) and (pointer: fine) and (min-width: 901px) { .card:hover .ph { border-radius: 24px; } }   /* no corner change on phones, tablets or touch screens */
 .card-meta { display: flex; flex-direction: column; gap: 4px; }
-.card-title { font-size: 17px; font-weight: 500; }
+.card-title { font-size: 17px; font-weight: 400; }
 .card-title span { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .3s ease; }
 .card-tags { font-size: var(--fs-xs); color: var(--muted); }
 .work-more { display: flex; justify-content: center; margin-top: var(--frame); }
@@ -227,7 +227,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .recog { padding-block: 200px 0; }
 .recog .mixed { font-size: var(--fs-l); margin-bottom: 48px; }
 .recog-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px var(--gap); align-items: start; }
-.recog-col h3 { font-size: var(--fs-s); font-weight: 500; margin-bottom: 12px; }
+.recog-col h3 { font-size: var(--fs-s); font-weight: 400; margin-bottom: 12px; }
 .recog-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--fg); }
 .recog-list li {
   display: grid; grid-template-columns: 1fr auto; gap: 4px var(--gap); align-items: baseline;
@@ -243,7 +243,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .cta { display: flex; flex-direction: column; align-items: center; gap: 28px; }
 .cta .mixed { font-size: var(--fs-l); }
 .foot-cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); margin-top: 180px; }
-.foot-cols h4 { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 10px; font-weight: 500; }
+.foot-cols h4 { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 10px; font-weight: 400; }
 .foot-cols a { display: block; font-size: var(--fs-m); line-height: 1.2; }
 .foot-cols a:hover { font-family: var(--serif); }
 .foot-bottom {
@@ -286,10 +286,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .site-bar a { transition: opacity .2s; }
 .site-bar .bar-id { grid-column: span 3; display: flex; flex-direction: column; align-items: flex-start; }   /* name with a short intro underneath */
 .site-bar .bar-last { grid-column: 6; justify-self: end; }   /* About Me on the right edge */
-.site-bar .bar-intro { margin: 0; font-weight: 500; color: var(--muted); }   /* short intro under the name */
+.site-bar .bar-intro { margin: 0; font-weight: 400; color: var(--muted); }   /* short intro under the name */
 .site-bar { align-items: start; }
 .site-bar a:hover, .site-bar a[aria-current="page"] { opacity: .45; }
-.intro { padding-top: calc(env(safe-area-inset-top, 0px) + 50px); font-size: 12px; font-weight: 500; line-height: 1.3; }
+.intro { padding-top: calc(env(safe-area-inset-top, 0px) + 50px); font-size: 12px; font-weight: 400; line-height: 1.3; }
 .intro hr { border: 0; border-top: 1px solid var(--fg); margin: 0; }
 .intro-row { display: grid; grid-template-columns: 34% 34% 1fr; gap: 0; padding-block: 20px 22px; }
 .intro-row > div { padding-right: var(--frame); max-width: 62ch; }
@@ -316,8 +316,8 @@ body > footer.footer { margin-top: auto; }
 /* ---------- Playground: placeholder until the work is ready ---------- */
 .soon { position: fixed; inset: 0; display: grid; place-items: center; padding: 0 var(--frame); text-align: center; pointer-events: none; }   /* centered on the screen */
 .soon > div { pointer-events: auto; }
-.soon h1 { margin: 0; font-size: clamp(31px, 4.4vw, 63px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
-.soon p { margin: 16px 0 0; font-size: 15px; font-weight: 500; color: var(--muted); }
+.soon h1 { margin: 0; font-size: clamp(31px, 4.4vw, 63px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; }
+.soon p { margin: 16px 0 0; font-size: 15px; font-weight: 400; color: var(--muted); }
 @media (max-width: 640px) { .soon p { font-size: 13px; } }
 </style>
 <style>
@@ -327,7 +327,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 /* ---------- Playground: a loose grid of single pieces. Click one to see it large with its title and description ---------- */
 .pg { padding: calc(var(--bar-h, 56px) + 12px) var(--frame) 120px; }
 .pg-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin: 0 0 32px; }
-.pg-head h1 { margin: 0; font-size: clamp(31px, 4.4vw, 63px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+.pg-head h1 { margin: 0; font-size: clamp(31px, 4.4vw, 63px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; }
 .pg-head p { margin: 0; max-width: 36ch; font-size: 15px; color: var(--muted); text-align: right; }
 .pg-grid { columns: 4; column-gap: calc(var(--frame) / 2); }
 .pg-item { display: block; width: 100%; margin: 0 0 calc(var(--frame) / 2); padding: 0; border: 0; background: none; cursor: zoom-in; break-inside: avoid; text-align: left; font: inherit; color: inherit; }
@@ -357,7 +357,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 .pv-nav { display: flex; gap: 20px; align-items: center; margin-top: 12px; font-size: 13px; color: var(--muted); }
 .pv button { background: none; border: 0; padding: 4px 0; font: inherit; color: var(--fg); cursor: pointer; }
 .pv-nav button { font-size: 20px; line-height: 1; }
-.pv-close { position: absolute; top: 16px; right: var(--frame); font-size: 13px !important; font-weight: 500; }
+.pv-close { position: absolute; top: 16px; right: var(--frame); font-size: 13px !important; font-weight: 400; }
 @media (max-width: 800px) {
   .pv { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; gap: 20px; padding: 56px 16px 24px; }
   .pv-stage img, .pv-stage video { max-height: calc(100vh - 260px); }
@@ -390,7 +390,7 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   .pv-info { max-height: 40vh; overflow-y: auto; }
 }
 /* One friendly line above the work */
-.pg-intro { margin: 12px 0 36px; max-width: calc(50% - var(--frame) / 4);   /* exactly two of the four image columns */ font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--fg); text-wrap: pretty; }
+.pg-intro { margin: 12px 0 36px; max-width: calc(50% - var(--frame) / 4);   /* exactly two of the four image columns */ font-size: 15px; font-weight: 400; line-height: 1.5; color: var(--fg); text-wrap: pretty; }
 @media (max-width: 640px) { .pg-intro { font-size: 13px; margin: 4px 0 24px; max-width: none; } }
 /* "Welcome in, and enjoy exploring!" — letters hop in a little wave every few seconds, and when you hover */
 .pg-wave { font: inherit; white-space: nowrap; }   /* follows straight after the first sentence, same typeface and size */
