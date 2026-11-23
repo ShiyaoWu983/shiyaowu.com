@@ -1,5 +1,5 @@
 /* Shiyao Wu — personal logo (shīyao wu)
-   Live type in ABC Monument Grotesk Medium (falls back to Inter). The i's mark is drawn as one
+   Live type in Hanken Grotesk Medium (falls back to Inter). The i's mark is drawn as one
    rectangle so it can change between the font's i-dot and the first-tone bar of shī.
    Static: Shīyao Wu.
    Motion: hops as a wave on the same 8.4s beat as the intro text; the tone bar lands as a dot (shiyao)
@@ -27,8 +27,7 @@
     return e;
   }
 
-  // Letters are measured from whichever font is loaded: Monument Grotesk where it is available,
-  // Inter for everyone else (until the Monument web licence is installed).
+  // Letters are measured from the loaded font, so spacing always fits.
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(init);
 
   function init() {
@@ -40,7 +39,7 @@
 
   document.querySelectorAll('a.bar-name').forEach(a => {
     const svg = el('svg', { viewBox: '-2 -80 440 104', class: 'sw-logo', 'aria-hidden': 'true' });
-    svg.style.cssText = "display:inline-block;vertical-align:-0.24em;height:1.04em;width:auto;overflow:visible;fill:currentColor;font-family:'Monument Grotesk','Inter',-apple-system,sans-serif;font-weight:500";
+    svg.style.cssText = "display:inline-block;vertical-align:-0.24em;height:1.04em;width:auto;overflow:visible;fill:currentColor;font-family:'Hanken Grotesk','Inter',-apple-system,sans-serif;font-weight:500";
     a.textContent = ''; a.appendChild(svg);
     // set each letter, measure its width in the real font, then place them one after another
     const letters = ORDER.map(ch => {
