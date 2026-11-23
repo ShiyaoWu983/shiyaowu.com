@@ -18,6 +18,8 @@ tml.sw-hold body { opacity: 0; } body { transition: opacity .25s ease; }
 /* Order: title, tags right underneath, then the one-line description */
 .proj-side .proj-title + .proj-tags { margin-top: -10px; }   /* 4px under the title, as on About Me */
 .proj-side .proj-lede { margin-bottom: 1.4em; }   /* toc-after-lede: one empty line after the intro, on desktop and phone */
+.read-more { background: none; border: 0; padding: 0; font: inherit; color: var(--muted); cursor: pointer; white-space: nowrap; }
+.read-more:hover { color: var(--fg); }
 </style>
 <script>document.documentElement.classList.add('sw-hold'); setTimeout(() => document.documentElement.classList.remove('sw-hold'), 2500);</script>
 <style>
@@ -429,16 +431,17 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
   <aside class="proj-side">
     <h1 class="proj-title"><a href="#top" class="to-cover">FÖRSTA</a></h1>
     <p class="proj-tags">Packaging Design - Brand Identity - 3D Motion</p>
-    <p class="proj-lede">A home-care system that makes everyday living simpler for young adults setting up their first home.</p>
+    <p class="proj-facts" style="margin:0;font-size:inherit;color:var(--muted)">Package Design 2 · ArtCenter · Summer 2026 · Instructor: Daniel&nbsp;Hoy</p>
+    <p class="proj-lede">A home-care kit for young adults setting up their first home, designed as a new IKEA&nbsp;collection.</p>
     <ol class="proj-toc" id="toc">
       <li><a href="#packaging-concept">Brand Concept</a></li>
-      <li><a href="#product-line">Product System</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#process">Process</a></li>
       <li><a href="#brand-identity">Brand Identity</a></li>
-      <li><a href="#product-lineup">Product Lineup</a></li>
-      <li><a href="#pop-display">Point-of-Purchase Display</a></li>
-      <li><a href="#advertising">Ad Campaign</a></li>
+      <li><a href="#the-kit">The Kit</a></li>
       <li><a href="#assembly-instruction">Assembly Instructions</a></li>
-      <li><a href="#website">Website</a></li>
+      <li><a href="#in-store-online">In Store and Online</a></li>
+      <li><a href="#advertising">Ad Campaign</a></li>
       <li class="toc-extra"><a href="forsta-process.html">See the process →</a></li>
     </ol>
     <nav class="proj-back" aria-label="Back">
@@ -449,52 +452,59 @@ p, h1, h2, h3, dd, li, .block-copy, .card-title, .tile-meta span, .more-meta spa
 
   <div class="proj-main">
     <div class="media" style="aspect-ratio: 16 / 9; flex: 1.7778 1 0"><img src="images/project-01/01-cover-1.jpg" alt="FÖRSTA"></div>
-    <section class="block" id="packaging-concept" data-short="A starter kit that teaches first-time movers how to care for a home.">
+    <section class="block" id="packaging-concept" data-short="A home-care kit for life after the furniture.">
       <span class="block-label">Brand Concept</span>
-      <div class="block-copy"><p>What does it actually take to look after your first home? I designed FÖRSTA around that question. IKEA already helps people furnish a space; FÖRSTA picks up where furniture ends, turning household care into something simple enough to get right from day one.</p></div>
+      <div class="block-copy"><p>IKEA helps people furnish a first home, but not look after&nbsp;it.<span class="more-text" hidden> FÖRSTA picks up where furniture ends, with a home-care kit for young adults, from college students to young professionals, who are buying cleaning products for the first time. I designed it around one question: what does it actually take to look after your first&nbsp;home?</span>&nbsp;<button type="button" class="read-more" aria-expanded="false">Read more +</button></p></div>
     </section>
     <div class="media" style="aspect-ratio: 16 / 9"><iframe src="https://player.vimeo.com/video/1219026152?background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;autopause=0&amp;dnt=1#t=5s" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="FÖRSTA | IKEA | Shiyao Wu"></iframe></div>   <!-- Vimeo: starts at 0:05 -->
-    <section class="block" id="product-line" data-short="Six home essentials, packed in one kit.">
-      <span class="block-label">Product System</span>
-      <div class="block-copy"><p>My research kept pointing to two problems: there are too many cleaning products to choose from, and they are heavy to carry home. So I narrowed everything down to one light kit of six essentials.</p></div>
+    <section class="block" id="research" data-short="Four problems, each one a requirement for the kit.">
+      <span class="block-label">Research</span>
+      <div class="block-copy"><p>Research into first-time movers kept returning to four problems: supplies are heavy to carry home, there are too many products to choose from, cleaning routines are new, and first apartments have little&nbsp;storage.<span class="more-text" hidden> Each problem became a requirement for the kit. For references I looked to MUJI for compact form, Blueland for refills and Branch Basics for teaching people how to use what they&nbsp;buy.</span>&nbsp;<button type="button" class="read-more" aria-expanded="false">Read more +</button></p></div>
     </section>
-    <div class="media" style="aspect-ratio: 2400 / 1350; flex: 1.7778 1 0"><img src="images/project-01/01-cover-2.jpg" alt="FÖRSTA product line" loading="lazy"></div>
-    <section class="block" id="brand-identity" data-short="An IKEA-inspired logo with a small house inside “första,” Swedish for “first.”">
+    <div class="row"><div class="media" style="aspect-ratio: 16 / 9; flex: 1.7778 1 0"><img src="images/project-01/02-research-audience.jpg" alt="Target audience: college students and first-time movers" loading="lazy"></div><div class="media" style="aspect-ratio: 16 / 9; flex: 1.7778 1 0"><img src="images/project-01/02-research-persona-yuki.jpg" alt="FÖRSTA persona: Yuki, international freshman" loading="lazy"></div></div>
+    <div class="row"><div class="media" style="aspect-ratio: 16 / 9; flex: 1.7778 1 0"><img src="images/project-01/02-research-ref-muji.jpg" alt="Reference: MUJI" loading="lazy"></div><div class="media" style="aspect-ratio: 16 / 9; flex: 1.7778 1 0"><img src="images/project-01/02-research-ref-blueland.jpg" alt="Reference: Blueland" loading="lazy"></div><div class="media" style="aspect-ratio: 16 / 9; flex: 1.7778 1 0"><img src="images/project-01/02-research-ref-branch-basics.jpg" alt="Reference: Branch Basics" loading="lazy"></div></div>
+    <section class="block" id="process" data-short="From thirty names and five prototypes to the final kit.">
+      <span class="block-label">Process</span>
+      <div class="block-copy"><p>The bottle began as hand sketches and went through five prototypes, modeled in SolidWorks and 3D printed, then finished by hand: sanded, laser-cut and UV&nbsp;printed.<span class="more-text" hidden> Thirty names came before FÖRSTA, which means “first” in&nbsp;Swedish.</span>&nbsp;<button type="button" class="read-more" aria-expanded="false">Read more +</button></p><p><a href="forsta-process.html">See the process →</a></p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 16 / 9; flex: 1.7778 1 0"><img src="images/project-01/02-process-prototypes.jpg" alt="Five bottle prototypes" loading="lazy"></div>
+    <section class="block" id="brand-identity" data-short="Designed to read as IKEA’s own product.">
       <span class="block-label">Brand Identity</span>
-      <div class="block-copy"><p>I wanted FÖRSTA to feel at home inside IKEA. The name means “first” in Swedish, the logo borrows from the IKEA wordmark, and a small house sits within the letters. I took the colours from IKEA’s own products to keep it warm and approachable.</p></div>
+      <div class="block-copy"><p>FÖRSTA should read as IKEA’s own product, not a partner brand, since IKEA’s customers are already renters and first&#8209;time&nbsp;homeowners.<span class="more-text" hidden> The logo borrows from the IKEA wordmark, with a small house within the letters, and sits alongside Noto Sans, IKEA’s typeface. I took the eight colors from IKEA’s own products and gave each product its own&nbsp;color.</span>&nbsp;<button type="button" class="read-more" aria-expanded="false">Read more +</button></p></div>
     </section>
     <div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/project-01/03-brand-identity-1.jpg" alt="FÖRSTA brand identity" loading="lazy"></div>
     <div class="media" style="aspect-ratio: 1920 / 1080; flex: 1.7778 1 0"><img src="images/project-01/03-brand-identity-2.jpg" alt="FÖRSTA brand identity" loading="lazy"></div>
-    <section class="block" id="product-lineup" data-short="Refillable bottles, each with the IKEA figure showing how it's used.">
-      <span class="block-label">Product Lineup</span>
-      <div class="block-copy"><p>Dish soap, hand soap, multi-surface cleaner, laundry pods, refill tablets and a microfiber cloth. Each bottle comes with its own refill tablet, because I wanted the kit to last beyond the first week. I also borrowed the figure from IKEA’s instruction manuals and posed it on every product to show how it is used.</p></div>
+    <section class="block" id="the-kit" data-short="Five essentials and refills in one light carrier.">
+      <span class="block-label">The Kit</span>
+      <div class="block-copy"><p>Dish soap, hand soap, multi-surface cleaner, laundry pods and a microfiber cloth come packed in one light kraft carrier with a&nbsp;handle.<span class="more-text" hidden> Each liquid comes with a refill tablet, because I wanted the kit to last beyond the first week. The 250&nbsp;mL bottles, made from 100% recycled HDPE, fit a small first&nbsp;apartment.</span>&nbsp;<button type="button" class="read-more" aria-expanded="false">Read more +</button></p></div>
     </section>
+    <div class="media" style="aspect-ratio: 2400 / 1350; flex: 1.7778 1 0"><img src="images/project-01/01-cover-2.jpg" alt="FÖRSTA product line" loading="lazy"></div>
     <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-1.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-5.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
     <div class="row"><div class="media" style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-2.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" data-m-slide style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-3.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
     <div class="row"><div class="media" data-m-slide style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-4.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" data-m-slide style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-6.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" data-m-slide style="aspect-ratio: 2 / 3; flex: 0.6667 1 0"><img src="images/project-01/04-product-lineup-7.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
     <div class="row"><div class="media" style="aspect-ratio: 3 / 2; flex: 1.5000 1 0"><img src="images/project-01/04-product-lineup-8.jpg" alt="FÖRSTA product" loading="lazy"></div><div class="media" style="aspect-ratio: 3 / 2; flex: 1.5000 1 0"><img src="images/project-01/04-product-lineup-9.jpg" alt="FÖRSTA product" loading="lazy"></div></div>
-    <section class="block" id="pop-display" data-short="A shelf display modelled on a real IKEA store.">
-      <span class="block-label">Point-of-Purchase Display</span>
-      <div class="block-copy"><p>In store, the kit and its refills sit together on one shelf. I designed the display so shoppers can see everything at a glance: one kit to start, and refills to keep going.</p></div>
+    <section class="block" id="assembly-instruction" data-short="Packaging that explains itself.">
+      <span class="block-label">Assembly Instructions</span>
+      <div class="block-copy"><p>For someone new to cleaning, the packaging has to explain&nbsp;itself.<span class="more-text" hidden> The figure from IKEA’s instruction manuals appears on every product, posed to show how it is used, and the assembly booklet is drawn in the same style. It shows what comes in the kit, how to fit each pump and nozzle, and where to use each product around the&nbsp;home.</span>&nbsp;<button type="button" class="read-more" aria-expanded="false">Read more +</button></p></div>
+    </section>
+    <div class="media" style="aspect-ratio: 2400 / 1767; flex: 1.3582 1 0"><img src="images/project-01/07-assembly-instruction-1.jpg" alt="FÖRSTA assembly instruction" loading="lazy"></div>
+    <section class="block" id="in-store-online" data-short="Start with the kit, refill what you use.">
+      <span class="block-label">In Store and Online</span>
+      <div class="block-copy"><p>One idea runs through the launch: start with the kit, refill what you&nbsp;use.<span class="more-text" hidden> In store, the kit and its refills share one shelf, so shoppers see both at once. Online, FÖRSTA launches on IKEA’s website as a new collection, with the Home Essentials Kit and its refill tablets sold&nbsp;together.</span>&nbsp;<button type="button" class="read-more" aria-expanded="false">Read more +</button></p></div>
     </section>
     <div class="media" style="aspect-ratio: 2400 / 1350; flex: 1.7778 1 0"><img src="images/project-01/05-pop-display-1.jpg" alt="FÖRSTA point-of-purchase display" loading="lazy"></div>
     <div class="media" style="aspect-ratio: 2400 / 1351; flex: 1.7765 1 0"><img src="images/project-01/05-pop-display-2.jpg" alt="FÖRSTA point-of-purchase display in store" loading="lazy"></div>
+    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1606; flex: 1.4944 1 0"><img src="images/project-01/08-website-1.jpg" alt="FÖRSTA website" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1606; flex: 1.4944 1 0"><img src="images/project-01/08-website-2.jpg" alt="FÖRSTA website" loading="lazy"></div></div>
     <section class="block" id="advertising" data-short="Six posters, one for each first moment in a new home.">
       <span class="block-label">Ad Campaign</span>
-      <div class="block-copy"><p>I built the campaign around the small “firsts” of a new home: the first dinner, the first load of laundry. Each of the six posters pairs one product with one of those moments: “First Dinner. Then Dishes.” “First Load? Easy.” “Keep the Bottle. Refill the Rest.”</p></div>
+      <div class="block-copy"><p>The campaign is built around the small firsts of a new home: the first dinner, the first load of&nbsp;laundry.<span class="more-text" hidden> Each of the six posters pairs one product with one of those moments: “First Dinner. Then Dishes.” “First Load? Easy.” “Keep the Bottle. Refill the Rest.” The billboard carries the same idea: “Move-In Day Made&nbsp;Simple.”</span>&nbsp;<button type="button" class="read-more" aria-expanded="false">Read more +</button></p></div>
     </section>
     <div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-01/06-advertising-1.jpg" alt="FÖRSTA advertising" loading="lazy"></div>
     <div class="media" style="aspect-ratio: 2400 / 1600; flex: 1.5000 1 0"><img src="images/project-01/06-advertising-2.jpg" alt="FÖRSTA billboard" loading="lazy"></div>
-    <section class="block" id="assembly-instruction" data-short="An IKEA-style booklet for setting up and using the kit.">
-      <span class="block-label">Assembly Instructions</span>
-      <div class="block-copy"><p>Everyone who has built IKEA furniture knows its instruction manuals, so I drew the booklet in the same style. It shows what comes in the kit, how to fit each pump and nozzle, and where to use each product around the home.</p></div>
+    <section class="block" id="thanks">
+      <span class="block-label">Thanks</span>
+      <div class="block-copy"><p>Miguel&nbsp;Lee<br>Javier&nbsp;Palomares<br>Daniel&nbsp;Hoy</p></div>
     </section>
-    <div class="media" style="aspect-ratio: 2400 / 1767; flex: 1.3582 1 0"><img src="images/project-01/07-assembly-instruction-1.jpg" alt="FÖRSTA assembly instruction" loading="lazy"></div>
-    <section class="block" id="website" data-short="A launch page on IKEA's website for the kit and refills.">
-      <span class="block-label">Website</span>
-      <div class="block-copy"><p>FÖRSTA launches on IKEA’s website as a new collection, with a dedicated page where visitors can buy the Home Essentials Kit and its refill tablets — start with the kit, refill what you use.</p></div>
-    </section>
-    <div class="row"><div class="media" style="aspect-ratio: 2400 / 1606; flex: 1.4944 1 0"><img src="images/project-01/08-website-1.jpg" alt="FÖRSTA website" loading="lazy"></div><div class="media" style="aspect-ratio: 2400 / 1606; flex: 1.4944 1 0"><img src="images/project-01/08-website-2.jpg" alt="FÖRSTA website" loading="lazy"></div></div>
   </div>
 </main>
 
@@ -766,6 +776,12 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 })();
 </script>
 
+<script>
+// Read more: show the rest of a section's text
+document.addEventListener('click', e => { const b = e.target.closest('.read-more'); if (!b) return;
+  const t = b.previousElementSibling, open = t.hidden; t.hidden = !open;
+  b.textContent = open ? 'Less −' : 'Read more +'; b.setAttribute('aria-expanded', open); });
+</script>
 <script src="logo.js" defer></script>
 </body>
 </html>
