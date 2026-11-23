@@ -50,19 +50,19 @@
       if (ch === 'i') t.setAttribute('clip-path', 'url(#sw-cut-stem)');
       svg.appendChild(t); return t;
     });
-    let x = 0, iX = 0;
+    let x = 0, iX = 0, iW = 0;
     letters.forEach((t, k) => {
       const ch = ORDER[k], w = t.getComputedTextLength();
       if (ch === 'W') x += WORD_GAP;
       t.setAttribute('x', x);
-      if (ch === 'i') iX = x;
+      if (ch === 'i') { iX = x; iW = w; }
       t.style.transformBox = 'view-box'; t.style.transformOrigin = `${x + w / 2}px 0px`;   // bottom centre of the letter
       x += w + TRACK;
     });
     svg.setAttribute('viewBox', `-2 -80 ${x + 4} 104`);
     svg.style.width = (104 * (x + 4) / 440).toFixed(1) + 'px';   // same scale as before
     document.getElementById('sw-cut-stem').firstChild.setAttribute('x', iX - 20);
-    const dx = iX + (DOT.x - L.i);   // the dot keeps its place over the i
+    const dx = iX + iW / 2 - DOT.w / 2;   // the dot/bar is centred on the i (as in the font)
     const mark = el('rect', { x: dx, y: DOT.y, width: DOT.w, height: DOT.h });
     mark.style.transformBox = 'view-box'; mark.style.transformOrigin = `${dx + DOT.w / 2}px ${DOT_CY()}px`;   // centre of the i-dot
     mark.style.transform = tf(SHAPE.bar);
