@@ -689,9 +689,9 @@ function playSplash(splash) {
 .intro-lead { font-weight: 700; }   /* the first sentence of the intro stands out */
 /* "It's all in how things come together." — letters hop in a little wave every few seconds, and when you hover */
 .intro-lead { white-space: nowrap; }
-.intro-lead .l { display: inline-block; -webkit-text-stroke: 0 currentColor; animation: leadHop 4.2s cubic-bezier(.3,1.6,.5,1) infinite; animation-delay: calc(var(--i) * 45ms); }   /* same wave as on Playground */
+.intro-lead .l { display: inline-block; -webkit-text-stroke: 0 currentColor; animation: leadHop 8.4s cubic-bezier(.3,1.6,.5,1) infinite; animation-delay: calc(var(--i) * 45ms); }   /* same wave as on Playground */
 .intro-lead:hover .l { animation: leadHop .7s cubic-bezier(.3,1.6,.5,1) 1; animation-delay: calc(var(--i) * 25ms); }
-@keyframes leadHop { 0%, 12%, 100% { transform: none; -webkit-text-stroke-width: 0; } 6% { transform: translateY(-.32em) rotate(-4deg); -webkit-text-stroke-width: .045em; } }
+@keyframes leadHop { 0%, 6%, 100% { transform: none; -webkit-text-stroke-width: 0; } 3% { transform: translateY(-.32em) rotate(-4deg); -webkit-text-stroke-width: .045em; } }
 @media (prefers-reduced-motion: reduce) { .intro-lead .l { animation: none !important; } }
 /* Project name and tags in the bottom-left corner of each image in the opening */
 .splash-caps { position: absolute; left: 0; right: 0; bottom: -22vh; height: calc(52vh + 70vh * var(--lift, 0));   /* runs on into the curved edge */ z-index: 3; pointer-events: none;

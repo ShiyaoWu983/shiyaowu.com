@@ -2,7 +2,7 @@
    Live type in ABC Monument Grotesk Medium (falls back to Inter). The i's mark is drawn as one
    rectangle so it can change between the font's i-dot and the first-tone bar of shī.
    Static: Shīyao Wu.
-   Motion: hops as a wave on the same 4.2s beat as the intro text; the tone bar lands as a dot (shiyao)
+   Motion: hops as a wave on the same 8.4s beat as the intro text; the tone bar lands as a dot (shiyao)
    on one beat and back as the bar (shīyao) on the next.
    Usage: any <a class="bar-name"> in the header is replaced by the logo. */
 (function () {
@@ -111,9 +111,9 @@
       mark.getAnimations().forEach(a => a.cancel());
     }));
   }
-  // Same rhythm as the hopping intro text (a 4.2s loop that starts with the page):
+  // Same rhythm as the hopping intro text (an 8.4s loop that starts with the page):
   // one jump per beat, the tone bar turning into the dot and back on alternate beats.
-  const BEAT = 4200;
+  const BEAT = 8400;
   let state = 'bar';
   function play() {
     if (busy || reduce || document.hidden) return;
@@ -121,7 +121,7 @@
     const to = state === 'bar' ? 'dot' : 'bar';
     jump(state, to).then(() => { state = to; }).finally(() => { busy = false; });
   }
-  const EVERY = 2;   // the logo jumps on every 2nd beat of the text (every 8.4s), so it stays in step but calmer
+  const EVERY = 1;   // one jump per beat, together with the text
   const P = BEAT * EVERY;
   setTimeout(() => { play(); setInterval(play, P); }, P - (performance.now() % P));
   }
