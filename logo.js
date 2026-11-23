@@ -1,13 +1,13 @@
 /* Shiyao Wu — personal logo (shīyao wu)
    Live type in ABC Monument Grotesk Medium (falls back to Inter). The i's mark is drawn as one
    rectangle so it can change between the font's i-dot and the first-tone bar of shī.
-   Static: shīyao wu.
+   Static: Shīyao Wu.
    Motion: hops as a wave on the same 4.2s beat as the intro text; the tone bar lands as a dot (shiyao)
    on one beat and back as the bar (shīyao) on the next.
    Usage: any <a class="bar-name"> in the header is replaced by the logo. */
 (function () {
   const L = { s: 0, h: 49.6, i: 106.8, y: 131.2, a: 180.0, o: 233.5, w: 310.8, u: 386.4 };
-  const ORDER = ['s', 'h', 'i', 'y', 'a', 'o', 'w', 'u'], TRACK = -1;
+  const ORDER = ['S', 'h', 'i', 'y', 'a', 'o', 'W', 'u'], TRACK = -1, WORD_GAP = 19.6;   // capital S and W; letters are measured and placed at run time
   const ADV = { s: 49.6, h: 57.2, i: 24.4, y: 50.3, a: 53.5, o: 57.7, w: 75.6, u: 57.1 };   // advance widths
   // transform origins are given in the SVG's own units (view-box), which Safari, Chrome and Firefox all read the same way
   const DOT = { x: 111.1, y: -70.6, w: 11.8, h: 12.8 };     // Monument Grotesk Medium i-dot
@@ -37,25 +37,36 @@
   // one clip for the i's stem, shared by every logo on the page
   const defs = el('svg', { width: 0, height: 0, 'aria-hidden': 'true' });
   defs.style.position = 'absolute';
-  defs.innerHTML = '<defs><clipPath id="sw-cut-stem" clipPathUnits="userSpaceOnUse"><rect x="-50" y="-53" width="200" height="120"/></clipPath></defs>';
+  defs.innerHTML = '<defs><clipPath id="sw-cut-stem" clipPathUnits="userSpaceOnUse"><rect x="-50" y="-53" width="60" height="120"/></clipPath></defs>';
   document.body.appendChild(defs);
 
   document.querySelectorAll('a.bar-name').forEach(a => {
     const svg = el('svg', { viewBox: '-2 -80 440 104', class: 'sw-logo', 'aria-hidden': 'true' });
     svg.style.cssText = "display:block;width:104px;height:auto;overflow:visible;fill:currentColor;font-family:'Monument Grotesk','Inter',-apple-system,sans-serif;font-weight:500";
-    const letters = [];
-    ORDER.forEach((ch, k) => {
-      const x = L[ch] + k * TRACK;
-      const t = el('text', { x, y: 0, 'font-size': 100, style: 'font-kerning:none' }, ch);
+    a.textContent = ''; a.appendChild(svg);
+    // set each letter, measure its width in the real font, then place them one after another
+    const letters = ORDER.map(ch => {
+      const t = el('text', { x: 0, y: 0, 'font-size': 100, style: 'font-kerning:none' }, ch);
       if (ch === 'i') t.setAttribute('clip-path', 'url(#sw-cut-stem)');
-      t.style.transformBox = 'view-box'; t.style.transformOrigin = `${x + ADV[ch] / 2}px 0px`;   // bottom centre of the letter
-      svg.appendChild(t); letters.push(t);
+      svg.appendChild(t); return t;
     });
-    const mark = el('rect', { x: DOT.x, y: DOT.y, width: DOT.w, height: DOT.h });
-    mark.style.transformBox = 'view-box'; mark.style.transformOrigin = `${DOT_CX()}px ${DOT_CY()}px`;   // centre of the i-dot
+    let x = 0, iX = 0;
+    letters.forEach((t, k) => {
+      const ch = ORDER[k], w = t.getComputedTextLength();
+      if (ch === 'W') x += WORD_GAP;
+      t.setAttribute('x', x);
+      if (ch === 'i') iX = x;
+      t.style.transformBox = 'view-box'; t.style.transformOrigin = `${x + w / 2}px 0px`;   // bottom centre of the letter
+      x += w + TRACK;
+    });
+    svg.setAttribute('viewBox', `-2 -80 ${x + 4} 104`);
+    svg.style.width = (104 * (x + 4) / 440).toFixed(1) + 'px';   // same scale as before
+    document.getElementById('sw-cut-stem').firstChild.setAttribute('x', iX - 20);
+    const dx = iX + (DOT.x - L.i);   // the dot keeps its place over the i
+    const mark = el('rect', { x: dx, y: DOT.y, width: DOT.w, height: DOT.h });
+    mark.style.transformBox = 'view-box'; mark.style.transformOrigin = `${dx + DOT.w / 2}px ${DOT_CY()}px`;   // centre of the i-dot
     mark.style.transform = tf(SHAPE.bar);
     svg.appendChild(mark);
-    a.textContent = ''; a.appendChild(svg);
     a.setAttribute('aria-label', 'Shiyao Wu — home');
     logos.push({ letters, mark });
   });
