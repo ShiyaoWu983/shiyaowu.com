@@ -317,15 +317,14 @@ body > footer.footer { margin-top: auto; }
 .coll { padding-block: 49px 0; }   /* clears the fixed header bar */
 .coll-top { margin: 40px 0 32px; }
 /* Filter: a quiet text index at body size, on a hairline rule like the About Me sections.
-   The selected category is black and underlined, the rest grey and turn black on hover. */
+   The selected category is black, the rest grey and turn black on hover. */
 .filters {
   display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 4px 24px;
   border-top: 1px solid var(--fg); padding-top: 12px;
   font-size: 15px; font-weight: 400; letter-spacing: 0; line-height: 1.4;
 }
-.filters button { display: inline-flex; color: var(--fg); text-decoration: underline transparent; text-underline-offset: 4px; text-decoration-thickness: 1px; transition: color .2s, text-decoration-color .2s; }
+.filters button { display: inline-flex; color: var(--fg); transition: color .2s; }
 .filters button .w { font-family: var(--sans); }
-.filters button[aria-pressed="true"] { text-decoration-color: currentColor; }
 .filters button[aria-pressed="false"] { color: var(--muted); }
 .filters button[aria-pressed="false"]:hover { color: var(--fg); }
 .filters sup { display: none; }
