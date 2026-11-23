@@ -27,11 +27,9 @@
     return e;
   }
 
-  // The letter positions are measured from Monument Grotesk. If the font isn't available
-  // (e.g. a visitor before the web licence is installed), keep the plain text name instead.
-  const FONT = '500 100px "Monument Grotesk"';
-  const ready = document.fonts && document.fonts.load ? document.fonts.load(FONT).then(() => document.fonts.check(FONT)).catch(() => false) : Promise.resolve(false);
-  ready.then(ok => { if (ok) init(); });
+  // Letters are measured from whichever font is loaded: Monument Grotesk where it is available,
+  // Inter for everyone else (until the Monument web licence is installed).
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(init);
 
   function init() {
   // one clip for the i's stem, shared by every logo on the page
