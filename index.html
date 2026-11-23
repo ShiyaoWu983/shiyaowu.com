@@ -612,6 +612,7 @@ function playSplash(splash) {
     splash.removeEventListener('click', finish);
     heroMode(splash);
     startReveal();
+    autoDown(500);   // the opening plays once, then the page slides down to the work
   }
   splash.addEventListener('click', finish);   // click to skip
 }
@@ -619,7 +620,11 @@ function playSplash(splash) {
   const splash = document.getElementById('splash');
   if (!splash) { startReveal(); return; }
   let seen = false; try { seen = sessionStorage.getItem('sw-splash-seen') === '1' && location.hash !== '#intro'; } catch (e) {}
-  if (seen) { splash.classList.add('is-on'); heroMode(splash); startReveal(); }
+  if (seen) {   // already watched this visit: open straight on the work (scroll up to see the opening again)
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    splash.classList.add('is-on'); heroMode(splash); startReveal();
+    requestAnimationFrame(() => scrollTo({ top: innerHeight, behavior: 'instant' }));
+  }
   else playSplash(splash);
 })();
 
