@@ -315,25 +315,25 @@ body > footer.footer { margin-top: auto; }
 <style>
 /* ---------- Archive: every project as an image grid, filterable by tag ---------- */
 .coll { padding-block: 49px 0; }   /* clears the fixed header bar */
-.coll-top { margin: 64px 0; }   /* same white space above the filter (from the header) and below it (to the images) */
-/* Big filter words (after serious.business/work): one typeface throughout; the selected word is black,
-   the rest grey and turn black on hover. */
+.coll-top { margin: 40px 0 32px; }
+/* Filter: a quiet text index at body size, on a hairline rule like the About Me sections.
+   The selected category is black and underlined, the rest grey and turn black on hover. */
 .filters {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 22px;
-  font-size: clamp(20px, 1.9vw, 27px); font-weight: 500; letter-spacing: -0.01em; line-height: 1.2;   /* the compact size, everywhere */
+  display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 4px 24px;
+  border-top: 1px solid var(--fg); padding-top: 12px;
+  font-size: 15px; font-weight: 500; letter-spacing: 0; line-height: 1.4;
 }
-.filters button { display: inline-flex; align-items: flex-start; gap: 4px; color: var(--fg); }
+.filters button { display: inline-flex; color: var(--fg); text-decoration: underline transparent; text-underline-offset: 4px; text-decoration-thickness: 1px; transition: color .2s, text-decoration-color .2s; }
 .filters button .w { font-family: var(--sans); }
+.filters button[aria-pressed="true"] { text-decoration-color: currentColor; }
 .filters button[aria-pressed="false"] { color: var(--muted); }
 .filters button[aria-pressed="false"]:hover { color: var(--fg); }
-.filters sup { font-family: var(--sans); font-size: 15px; font-weight: 500; letter-spacing: 0; line-height: 1; margin-top: .35em; font-variant-numeric: tabular-nums; }
-/* Compact copy of the filter: slides in under the header once the big one scrolls away */
-.filters--mini { position: fixed; z-index: 25; left: 0; right: 0; top: calc(var(--bar-h, 50px) - 1px);   /* tucks 1px under the header: no hairline gap */
-  padding: 8px var(--frame) 18px; background: var(--bg);
-  font-size: clamp(20px, 1.9vw, 27px); gap: 2px 22px;   /* same size as the filter at the top */
+.filters sup { display: none; }
+/* Same filter, pinned under the header once the one above scrolls away */
+.filters--mini { position: fixed; z-index: 25; left: 0; right: 0; top: calc(var(--bar-h, 50px) - 1px);
+  padding: 12px var(--frame); border-top: 0; background: linear-gradient(var(--fg), var(--fg)) center bottom / calc(100% - 2 * var(--frame)) 1px no-repeat, var(--bg);   /* hairline inside the page margins */
   opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
 .filters--mini.is-on { opacity: 1; transform: none; pointer-events: auto; }
-.filters--mini sup { font-size: 12px; }
 
 .grid-arch { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px var(--frame); }
 .tile { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
@@ -350,7 +350,7 @@ body > footer.footer { margin-top: auto; }
   .grid-arch { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) { .filters--mini { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; } .filters--mini::-webkit-scrollbar { display: none; } .filters--mini button { flex: none; }
-  .filters sup, .tile-meta { font-size: 13px; } .filters { gap: 2px 16px; } .grid-arch { grid-template-columns: 1fr; gap: 28px; } }
+  .tile-meta, .filters { font-size: 13px; } .filters { gap: 4px 16px; } .grid-arch { grid-template-columns: 1fr; gap: 28px; } }
 </style>
 <style>
 /* No single word left alone on the last line of a paragraph */
