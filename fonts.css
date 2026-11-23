@@ -21,3 +21,23 @@
   src:local('ABC Monument Grotesk Black'),local('ABCMonumentGrotesk-Black'),
       local('ABC Monument Grotesk Unlicensed Trial Black'),local('ABCMonumentGroteskUnlicensedTrial-Black'),
       url('fonts/ABCMonumentGrotesk-Black.woff2') format('woff2');}
+
+/* Desktop: a little larger again */
+@media (min-width: 641px) {
+@font-face{font-family:'Monument Grotesk';font-weight:400;font-style:normal;font-display:swap;size-adjust:116%;
+  src:local('ABC Monument Grotesk Regular'),local('ABCMonumentGrotesk-Regular'),
+      local('ABC Monument Grotesk Unlicensed Trial Regular'),local('ABCMonumentGroteskUnlicensedTrial-Regular'),
+      url('fonts/ABCMonumentGrotesk-Regular.woff2') format('woff2');}
+@font-face{font-family:'Monument Grotesk';font-weight:500;font-style:normal;font-display:swap;size-adjust:116%;
+  src:local('ABC Monument Grotesk Medium'),local('ABCMonumentGrotesk-Medium'),
+      local('ABC Monument Grotesk Unlicensed Trial Medium'),local('ABCMonumentGroteskUnlicensedTrial-Medium'),
+      url('fonts/ABCMonumentGrotesk-Medium.woff2') format('woff2');}
+@font-face{font-family:'Monument Grotesk';font-weight:700;font-style:normal;font-display:swap;size-adjust:116%;
+  src:local('ABC Monument Grotesk Bold'),local('ABCMonumentGrotesk-Bold'),
+      local('ABC Monument Grotesk Unlicensed Trial Bold'),local('ABCMonumentGroteskUnlicensedTrial-Bold'),
+      url('fonts/ABCMonumentGrotesk-Bold.woff2') format('woff2');}
+@font-face{font-family:'Monument Grotesk';font-weight:800;font-style:normal;font-display:swap;size-adjust:116%;
+  src:local('ABC Monument Grotesk Black'),local('ABCMonumentGrotesk-Black'),
+      local('ABC Monument Grotesk Unlicensed Trial Black'),local('ABCMonumentGroteskUnlicensedTrial-Black'),
+      url('fonts/ABCMonumentGrotesk-Black.woff2') format('woff2');}
+}
