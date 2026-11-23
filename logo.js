@@ -110,6 +110,8 @@
     const to = state === 'bar' ? 'dot' : 'bar';
     jump(state, to).then(() => { state = to; }).finally(() => { busy = false; });
   }
-  setTimeout(() => { play(); setInterval(play, BEAT); }, BEAT - (performance.now() % BEAT));
+  const EVERY = 2;   // the logo jumps on every 2nd beat of the text (every 8.4s), so it stays in step but calmer
+  const P = BEAT * EVERY;
+  setTimeout(() => { play(); setInterval(play, P); }, P - (performance.now() % P));
   }
 })();
