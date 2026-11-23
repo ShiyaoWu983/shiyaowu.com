@@ -42,7 +42,7 @@
 
   document.querySelectorAll('a.bar-name').forEach(a => {
     const svg = el('svg', { viewBox: '-2 -80 440 104', class: 'sw-logo', 'aria-hidden': 'true' });
-    svg.style.cssText = "display:block;width:104px;height:auto;overflow:visible;fill:currentColor;font-family:'Monument Grotesk','Inter',-apple-system,sans-serif;font-weight:500";
+    svg.style.cssText = "display:inline-block;vertical-align:-0.24em;height:1.04em;width:auto;overflow:visible;fill:currentColor;font-family:'Monument Grotesk','Inter',-apple-system,sans-serif;font-weight:500";
     a.textContent = ''; a.appendChild(svg);
     // set each letter, measure its width in the real font, then place them one after another
     const letters = ORDER.map(ch => {
@@ -60,7 +60,7 @@
       x += w + TRACK;
     });
     svg.setAttribute('viewBox', `-2 -80 ${x + 4} 104`);
-    svg.style.width = (104 * (x + 4) / 440).toFixed(1) + 'px';   // same scale as before
+    svg.style.width = ((x + 4) / 100).toFixed(3) + 'em';   // 100 units = 1em: the logo is set at exactly the header's type size, on its baseline
     document.getElementById('sw-cut-stem').firstChild.setAttribute('x', iX - 20);
     const dx = iX + iW / 2 - DOT.w / 2;   // the dot/bar is centred on the i (as in the font)
     const mark = el('rect', { x: dx, y: DOT.y, width: DOT.w, height: DOT.h });
