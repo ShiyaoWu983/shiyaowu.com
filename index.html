@@ -453,7 +453,7 @@ body > footer.footer { margin-top: auto; }
 </div>
 <script>
   // Add #intro to the address to replay the opening any time
-  try { if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.getElementById('splash').remove(); else if (sessionStorage.getItem('sw-splash-seen') !== '1' || location.hash === '#intro') document.documentElement.classList.add('is-intro'); } catch (e) { document.documentElement.classList.add('is-intro'); }
+  try { if (matchMedia('(prefers-reduced-motion: reduce), (max-width: 640px)').matches) document.getElementById('splash').remove();   /* phones: no opening motion, straight to the homepage */ else if (sessionStorage.getItem('sw-splash-seen') !== '1' || location.hash === '#intro') document.documentElement.classList.add('is-intro'); } catch (e) { document.documentElement.classList.add('is-intro'); }
 </script>
 
 <!-- ============ Hero ============ -->
